@@ -1,0 +1,10 @@
+连接tgt: iscsiadm -m node -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260 -l
+usr/iscsiadm.c -> main
+  case 'l'
+  do_login = 1
+
+
+
+debug: debuginfo-install iscsi-initiator-utils-6.2.0.874-22.el7_9.x86_64
+iscsi_login_portals
+login_portals
