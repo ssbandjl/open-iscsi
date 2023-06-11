@@ -1,4 +1,5 @@
 源码分析: https://groups.google.com/g/open-iscsi/c/Z0FMQUxalcU
+iscsid: https://blog.csdn.net/kjtt_kjtt/article/details/38661329
 upstream: https://github.com/open-iscsi/open-iscsi.git
 
 
@@ -99,4 +100,25 @@ if [ $? -ne 0 ]; then echo "FAIL"; fi
 	    realloc(*sessions, *session_count * sizeof(struct iscsi_session *));
 
 /usr/include/openssl/evp.h
+
+netlink.c
+static struct iscsi_ipc nl_ipc
+ev.type =
+handler = mgmt_ipc_functions[command]
+
+iscsiadm -> main.c
+MODE_DISCOVERY
+exec_disc_op
+do_target_discovery
+sendtargets
+do_software_sendtargets
+discovery_sendtargets
+iscsi_create_session
+iscsi_create_leading_conn
+create_conn -> kcreate_conn
+  ev.type = ISCSI_UEVENT_CREATE_CONN
+  rc = __kipc_call(iov, 2) -> driver -> kernel -> drivers/scsi/scsi_transport_iscsi.c -> iscsi_if_recv_msg
+  	case ISCSI_UEVENT_CREATE_CONN:
+		err = iscsi_if_create_conn(transport, ev);
+
 
