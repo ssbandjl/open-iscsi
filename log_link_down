@@ -1,0 +1,2013 @@
+[root@node1 ~]# bpftrace -e 'kprobe:iscsi_conn_error_event { printf("bt:%s\n", kstack); }'
+Attaching 1 probe...
+bt:
+        iscsi_conn_error_event+1
+        call_timer_fn+41
+        run_timer_softirq+474
+        __softirqentry_text_start+268
+        asm_call_on_stack+18
+        do_softirq_own_stack+55
+        irq_exit_rcu+243
+        sysvec_apic_timer_interrupt+52
+        asm_sysvec_apic_timer_interrupt+18
+        native_safe_halt+14
+        acpi_idle_do_entry+75
+        acpi_idle_enter+90
+        cpuidle_enter_state+145
+        cpuidle_enter+41
+        do_idle+636
+        cpu_startup_entry+25
+        start_secondary+280
+        secondary_startup_64_no_verify+176
+
+
+
+Jun 12 14:28:33 node1 iscsid: iscsid: poll result 1
+Jun 12 14:28:33 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 14:28:33 node1 iscsid: iscsid: in nl_read
+Jun 12 14:28:33 node1 iscsid: iscsid: ctldev_handle got event type 102
+Jun 12 14:28:33 node1 iscsid: iscsid: get ev context 0x55a7c8888340
+Jun 12 14:28:33 node1 iscsid: iscsid: message real length is 72 bytes, recv_handle 0x55a7c8888388
+Jun 12 14:28:33 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 14:28:33 node1 iscsid: iscsid: sched conn context 0x55a7c8888340 event 3, tmo 0
+Jun 12 14:28:33 node1 iscsid: iscsid: thread 0x55a7c8888340 schedule: delay 0 state 3
+Jun 12 14:28:33 node1 iscsid: iscsid: current time 159041
+Jun 12 14:28:33 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 12 14:28:33 node1 iscsid: iscsid: exec thread 55a7c8888340 callback
+Jun 12 14:28:33 node1 iscsid: iscsid: Kernel reported iSCSI connection 28:0 error (1022 - ISCSI_ERR_NOP_TIMEDOUT: A NOP has timed out) state (3)
+Jun 12 14:28:33 node1 iscsid: iscsid: put ev context 0x55a7c8888340
+Jun 12 14:28:33 node1 iscsid: iscsid: re-opening session 28 (reopen_cnt 0)
+Jun 12 14:28:33 node1 iscsid: iscsid: thread 55a7c88837a8 delete: state 3
+Jun 12 14:28:33 node1 iscsid: iscsid: thread 55a7c88837d8 delete: state 0
+Jun 12 14:28:33 node1 iscsid: iscsid: disconnecting conn 0x55a7c88812e0, fd 7
+Jun 12 14:28:33 node1 iscsid: iscsid: in kstop_conn
+Jun 12 14:28:33 node1 iscsid: iscsid: in __kipc_call
+Jun 12 14:28:33 node1 iscsid: iscsid: in kwritev
+Jun 12 14:28:33 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 14:28:33 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 14:28:33 node1 iscsid: iscsid: connection 28:0 is stopped for recovery
+Jun 12 14:28:33 node1 iscsid: iscsid: Waiting 2 seconds before trying to reconnect.
+Jun 12 14:28:33 node1 iscsid: iscsid: Requeue reopen attempt in 2 secs
+Jun 12 14:28:33 node1 iscsid: iscsid: thread 55a7c88837a8 delete: state 3
+Jun 12 14:28:33 node1 iscsid: iscsid: thread 0x55a7c88837a8 schedule: delay 2 state 3
+Jun 12 14:28:33 node1 iscsid: iscsid: new thread 0x55a7c88837a8 due 159043 is first item on pend_list
+Jun 12 14:28:33 node1 iscsid: iscsid: new alarm set for 2 seconds, old alarm 0
+Jun 12 14:28:33 node1 iscsid: iscsid: thread 55a7c8888340 done
+Jun 12 14:28:35 node1 iscsid: iscsid: poll result 1
+Jun 12 14:28:35 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 14:28:35 node1 iscsid: iscsid: current time 159043
+Jun 12 14:28:35 node1 iscsid: iscsid: thread 55a7c88837a8 was scheduled for 159043, curtime 159043 q_forw 0x55a7c6e000a0 &pend_list 0x55a7c6e000a0
+Jun 12 14:28:35 node1 iscsid: iscsid: thread 55a7c88837a8 now in ready_list
+Jun 12 14:28:35 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 12 14:28:35 node1 iscsid: iscsid: exec thread 55a7c88837a8 callback
+Jun 12 14:28:35 node1 iscsid: iscsid: iscsi_login_eh
+Jun 12 14:28:35 node1 iscsid: iscsid: login failed ISCSI_CONN_STATE_XPT_WAIT/R_STAGE_SESSION_REOPEN 0
+Jun 12 14:28:35 node1 iscsid: iscsid: re-opening session 28 (reopen_cnt 0)
+Jun 12 14:28:35 node1 iscsid: iscsid: thread 55a7c88837a8 delete: state 3
+Jun 12 14:28:35 node1 iscsid: iscsid: thread 55a7c88837d8 delete: state 3
+Jun 12 14:28:35 node1 iscsid: iscsid: get ev context 0x55a7c8888340
+Jun 12 14:28:35 node1 iscsid: iscsid: set TCP recv window size to 524288, actually got 425984
+Jun 12 14:28:35 node1 iscsid: iscsid: set TCP send window size to 524288, actually got 425984
+Jun 12 14:28:35 node1 iscsid: iscsid: connecting to 172.17.136.132:3260
+Jun 12 14:28:35 node1 iscsid: iscsid: sched conn context 0x55a7c8888340 event 2, tmo 0
+Jun 12 14:28:35 node1 iscsid: iscsid: thread 0x55a7c8888340 schedule: delay 0 state 3
+Jun 12 14:28:35 node1 iscsid: iscsid: Setting login timer 0x55a7c88837a8 timeout 15
+Jun 12 14:28:35 node1 iscsid: iscsid: thread 55a7c88837a8 delete: state 3
+Jun 12 14:28:35 node1 iscsid: iscsid: thread 0x55a7c88837a8 schedule: delay 15 state 3
+Jun 12 14:28:35 node1 iscsid: iscsid: new thread 0x55a7c88837a8 due 159058 is first item on pend_list
+Jun 12 14:28:35 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 12 14:28:35 node1 iscsid: iscsid: thread 55a7c88837a8 done
+Jun 12 14:28:35 node1 iscsid: iscsid: exec thread 55a7c8888340 callback
+
+
+
+
+#其他参考日志:
+Jun 12 10:51:15 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 10:51:15 node1 iscsid: iscsid: connected local port 39006 to 172.17.136.132:3260
+Jun 12 10:53:29 node1 iscsid: iscsid: in kcreate_session
+Jun 12 11:02:05 node1 iscsid: iscsid: in __kipc_call
+
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: expecting event 11, got 106, handling...
+Jun 12 11:18:06 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 11:18:06 node1 iscsid: iscsid: in nl_read
+Jun 12 11:18:06 node1 iscsid: iscsid: ctldev_handle got event type 106
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/scsi_host/host14'/'proc_name'
+Jun 12 11:18:06 node1 iscsid: iscsid: in read_transports
+Jun 12 11:18:06 node1 iscsid: iscsid: Updating transport qla4xxx
+Jun 12 11:18:06 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'handle'
+Jun 12 11:18:06 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'caps'
+Jun 12 11:18:06 node1 iscsid: iscsid: Updating transport tcp
+Jun 12 11:18:06 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'handle'
+Jun 12 11:18:06 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'caps'
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: created new iSCSI session sid 26 host no 14
+Jun 12 11:18:06 node1 iscsid: iscsid: in kcreate_conn
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: created new iSCSI connection 26:0
+Jun 12 11:18:06 node1 iscsid: iscsid: in kbind_conn
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: bound iSCSI connection 26:0 to session 26
+Jun 12 11:18:06 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_connection/connection26:0'/'exp_statsn'
+Jun 12 11:18:06 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_connection/connection26:0'/'ping_tmo'
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 15 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 17 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: 172.17.136.132
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 18 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: 3260
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 19 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: 120
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 22 to:
+Jun 12 11:18:06 node1 iscsid: iscsid:
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 23 to:
+Jun 12 11:18:06 node1 iscsid: iscsid:
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 24 to:
+Jun 12 11:18:06 node1 iscsid: iscsid:
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 25 to:
+Jun 12 11:18:06 node1 iscsid: iscsid:
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 26 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: 1
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 27 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: 15
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 28 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: 30
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 35 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: 30
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 30 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: 5
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 31 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: 5
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 32 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: default
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 34 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: iqn.1994-05.com.redhat:461b38c9b3e6
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 39 to:
+Jun 12 11:18:06 node1 iscsid: iscsid:
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 40 to:
+Jun 12 11:18:06 node1 iscsid: iscsid:
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 41 to:
+Jun 12 11:18:06 node1 iscsid: iscsid:
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 43 to:
+Jun 12 11:18:06 node1 iscsid: iscsid: 0
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_host_param
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 2 to:
+Jun 12 11:18:06 node1 iscsid: iscsid:
+Jun 12 11:18:06 node1 iscsid: iscsid: in kset_host_param
+Jun 12 11:18:06 node1 iscsid: iscsid: set operational parameter 0 to:
+Jun 12 11:18:06 node1 iscsid: iscsid:
+Jun 12 11:18:06 node1 iscsid: iscsid: sending login PDU with current stage 1, next stage 3, transit 0x80, isid 0x00023d00001a exp_statsn 0
+Jun 12 11:18:06 node1 iscsid: iscsid: >    InitiatorName=iqn.1994-05.com.redhat:461b38c9b3e6
+Jun 12 11:18:06 node1 iscsid: iscsid: >    InitiatorAlias=node1
+Jun 12 11:18:06 node1 iscsid: iscsid: >    TargetName=iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+Jun 12 11:18:06 node1 iscsid: iscsid: >    SessionType=Normal
+Jun 12 11:18:06 node1 iscsid: iscsid: >    HeaderDigest=None
+Jun 12 11:18:06 node1 iscsid: iscsid: >    DataDigest=None
+Jun 12 11:18:06 node1 iscsid: iscsid: >    DefaultTime2Wait=2
+Jun 12 11:18:06 node1 iscsid: iscsid: >    DefaultTime2Retain=0
+Jun 12 11:18:06 node1 iscsid: iscsid: >    IFMarker=No
+Jun 12 11:18:06 node1 iscsid: iscsid: >    OFMarker=No
+Jun 12 11:18:06 node1 iscsid: iscsid: >    ErrorRecoveryLevel=0
+Jun 12 11:18:06 node1 iscsid: iscsid: >    InitialR2T=No
+Jun 12 11:18:06 node1 iscsid: iscsid: >    ImmediateData=Yes
+Jun 12 11:18:06 node1 iscsid: iscsid: >    MaxBurstLength=16776192
+Jun 12 11:18:06 node1 iscsid: iscsid: >    FirstBurstLength=262144
+Jun 12 11:18:06 node1 iscsid: iscsid: >    MaxOutstandingR2T=1
+Jun 12 11:18:06 node1 iscsid: iscsid: >    MaxConnections=1
+Jun 12 11:18:06 node1 iscsid: iscsid: >    DataPDUInOrder=Yes
+Jun 12 11:18:06 node1 iscsid: iscsid: >    DataSequenceInOrder=Yes
+Jun 12 11:18:06 node1 iscsid: iscsid: >    MaxRecvDataSegmentLength=262144
+Jun 12 11:18:06 node1 iscsid: iscsid: in ksend_pdu_begin
+Jun 12 11:18:06 node1 iscsid: iscsid: send PDU began for hdr 48 bytes and data 476 bytes
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: wrote 48 bytes of PDU header
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: wrote 476 bytes of PDU data
+Jun 12 11:18:06 node1 iscsid: iscsid: in ksend_pdu_end
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: send PDU finished for conn 26:0
+Jun 12 11:18:06 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:18:06 node1 iscsid: iscsid: poll result 1
+Jun 12 11:18:06 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:18:06 node1 iscsid: iscsid: current time 147614
+Jun 12 11:18:06 node1 iscsid: iscsid: thread 558f51f344d8 was scheduled for 146018, curtime 147614 q_forw 0x558f51e130a0 &pend_list 0x558f51e130a0
+Jun 12 11:18:06 node1 iscsid: iscsid: thread 558f51f344d8 now in ready_list
+Jun 12 11:18:06 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 12 11:18:06 node1 iscsid: iscsid: exec thread 558f51f344d8 callback
+Jun 12 11:18:06 node1 iscsid: iscsid: iscsi_login_eh
+Jun 12 11:18:06 node1 iscsid: iscsid: login failed ISCSI_CONN_STATE_IN_LOGIN/R_STAGE_NO_CHANGE 3
+Jun 12 11:18:06 node1 iscsid: iscsid: Giving up on initial login attempt after 120 seconds.
+Jun 12 11:18:06 node1 iscsid: iscsid: disconnect conn
+Jun 12 11:18:06 node1 iscsid: iscsid: disconnecting conn 0x558f51f32010, fd 7
+Jun 12 11:18:06 node1 iscsid: iscsid: stop conn (conn state 2)
+Jun 12 11:18:06 node1 iscsid: iscsid: in kstop_conn
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: kdestroy conn
+Jun 12 11:18:06 node1 iscsid: iscsid: in kdestroy_conn
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: kdestroy session 26
+Jun 12 11:18:06 node1 iscsid: iscsid: in kdestroy_session
+Jun 12 11:18:06 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:06 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: expecting event 12, got 105, handling...
+Jun 12 11:18:06 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 11:18:06 node1 iscsid: iscsid: in nl_read
+Jun 12 11:18:06 node1 iscsid: iscsid: ctldev_handle got event type 105
+Jun 12 11:18:06 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:18:06 node1 iscsid: iscsid: message real length is 72 bytes, recv_handle 0x558f51f390b8
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 5, tmo 0
+Jun 12 11:18:06 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: expecting event 12, got 104, handling...
+Jun 12 11:18:06 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 11:18:06 node1 iscsid: iscsid: in nl_read
+Jun 12 11:18:06 node1 iscsid: iscsid: ctldev_handle got event type 104
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: session destroyed sid 26 host no 14
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:06 node1 iscsid: iscsid: Connection26:0 to [target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] through [iface: default] is shutdown.
+Jun 12 11:18:06 node1 iscsid: iscsid: mgmt_ipc_write_rsp: rsp to fd 6
+Jun 12 11:18:06 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:18:06 node1 iscsid: iscsid: thread 558f51f34508 delete: state 0
+Jun 12 11:18:06 node1 iscsid: iscsid: destroying session
+Jun 12 11:18:06 node1 iscsid: iscsid: thread 558f51f39070 delete: state 2
+Jun 12 11:18:06 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 12 11:18:06 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 12 11:18:06 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:18:06 node1 iscsid: iscsid: Releasing session 0x558f51f2c570
+Jun 12 11:18:06 node1 iscsid: iscsid: thread 558f51f344d8 done
+Jun 12 11:18:28 node1 iscsid: iscsid: poll result 1
+Jun 12 11:18:28 node1 iscsid: iscsid: in read_transports
+Jun 12 11:18:28 node1 iscsid: iscsid: Updating transport qla4xxx
+Jun 12 11:18:28 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'handle'
+Jun 12 11:18:28 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'caps'
+Jun 12 11:18:28 node1 iscsid: iscsid: Updating transport tcp
+Jun 12 11:18:28 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'handle'
+Jun 12 11:18:28 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'caps'
+Jun 12 11:18:28 node1 iscsid: iscsid: Allocted session 0x558f51f2c570
+Jun 12 11:18:28 node1 iscsid: iscsid: no authentication configured...
+Jun 12 11:18:28 node1 iscsid: iscsid: resolved 172.17.136.132 to 172.17.136.132
+Jun 12 11:18:28 node1 iscsid: iscsid: setting iface default, dev , set ip , hw , transport tcp.
+Jun 12 11:18:28 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:18:28 node1 iscsid: iscsid: set TCP recv window size to 524288, actually got 425984
+Jun 12 11:18:28 node1 iscsid: iscsid: set TCP send window size to 524288, actually got 425984
+Jun 12 11:18:28 node1 iscsid: iscsid: connecting to 172.17.136.132:3260
+Jun 12 11:18:28 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 0
+Jun 12 11:18:28 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 11:18:28 node1 iscsid: iscsid: Setting login timer 0x558f51f344d8 timeout 15
+Jun 12 11:18:28 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:18:28 node1 iscsid: iscsid: thread 0x558f51f344d8 schedule: delay 15 state 3
+Jun 12 11:18:28 node1 iscsid: iscsid: new thread 0x558f51f344d8 due 147651 is first item on pend_list
+Jun 12 11:18:28 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 12 11:18:28 node1 iscsid: iscsid: current time 147636
+Jun 12 11:18:28 node1 iscsid: iscsid: thread 558f51f344d8 due 147651, wait 15 more
+Jun 12 11:18:28 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:18:28 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:18:28 node1 iscsid: iscsid: connected local port 45510 to 172.17.136.132:3260
+Jun 12 11:18:29 node1 iscsid: iscsid: in kcreate_session
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: expecting event 11, got 106, handling...
+Jun 12 11:18:29 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 11:18:29 node1 iscsid: iscsid: in nl_read
+Jun 12 11:18:29 node1 iscsid: iscsid: ctldev_handle got event type 106
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/scsi_host/host14'/'proc_name'
+Jun 12 11:18:29 node1 iscsid: iscsid: in read_transports
+Jun 12 11:18:29 node1 iscsid: iscsid: Updating transport qla4xxx
+Jun 12 11:18:29 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'handle'
+Jun 12 11:18:29 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'caps'
+Jun 12 11:18:29 node1 iscsid: iscsid: Updating transport tcp
+Jun 12 11:18:29 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'handle'
+Jun 12 11:18:29 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'caps'
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: created new iSCSI session sid 27 host no 14
+Jun 12 11:18:29 node1 iscsid: iscsid: in kcreate_conn
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: created new iSCSI connection 27:0
+Jun 12 11:18:29 node1 iscsid: iscsid: in kbind_conn
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: bound iSCSI connection 27:0 to session 27
+Jun 12 11:18:29 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_connection/connection27:0'/'exp_statsn'
+Jun 12 11:18:29 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_connection/connection27:0'/'ping_tmo'
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 15 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 17 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 172.17.136.132
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 18 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 3260
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 19 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 120
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 22 to:
+Jun 12 11:18:29 node1 iscsid: iscsid:
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 23 to:
+Jun 12 11:18:29 node1 iscsid: iscsid:
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 24 to:
+Jun 12 11:18:29 node1 iscsid: iscsid:
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 25 to:
+Jun 12 11:18:29 node1 iscsid: iscsid:
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 26 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 1
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 27 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 15
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 28 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 30
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 35 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 30
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 30 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 5
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 31 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 5
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 32 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: default
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 34 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: iqn.1994-05.com.redhat:461b38c9b3e6
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 39 to:
+Jun 12 11:18:29 node1 iscsid: iscsid:
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 40 to:
+Jun 12 11:18:29 node1 iscsid: iscsid:
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 41 to:
+Jun 12 11:18:29 node1 iscsid: iscsid:
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 43 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 0
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_host_param
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 2 to:
+Jun 12 11:18:29 node1 iscsid: iscsid:
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_host_param
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 0 to:
+Jun 12 11:18:29 node1 iscsid: iscsid:
+Jun 12 11:18:29 node1 iscsid: iscsid: sending login PDU with current stage 1, next stage 3, transit 0x80, isid 0x00023d00001b exp_statsn 0
+Jun 12 11:18:29 node1 iscsid: iscsid: >    InitiatorName=iqn.1994-05.com.redhat:461b38c9b3e6
+Jun 12 11:18:29 node1 iscsid: iscsid: >    InitiatorAlias=node1
+Jun 12 11:18:29 node1 iscsid: iscsid: >    TargetName=iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+Jun 12 11:18:29 node1 iscsid: iscsid: >    SessionType=Normal
+Jun 12 11:18:29 node1 iscsid: iscsid: >    HeaderDigest=None
+Jun 12 11:18:29 node1 iscsid: iscsid: >    DataDigest=None
+Jun 12 11:18:29 node1 iscsid: iscsid: >    DefaultTime2Wait=2
+Jun 12 11:18:29 node1 iscsid: iscsid: >    DefaultTime2Retain=0
+Jun 12 11:18:29 node1 iscsid: iscsid: >    IFMarker=No
+Jun 12 11:18:29 node1 iscsid: iscsid: >    OFMarker=No
+Jun 12 11:18:29 node1 iscsid: iscsid: >    ErrorRecoveryLevel=0
+Jun 12 11:18:29 node1 iscsid: iscsid: >    InitialR2T=No
+Jun 12 11:18:29 node1 iscsid: iscsid: >    ImmediateData=Yes
+Jun 12 11:18:29 node1 iscsid: iscsid: >    MaxBurstLength=16776192
+Jun 12 11:18:29 node1 iscsid: iscsid: >    FirstBurstLength=262144
+Jun 12 11:18:29 node1 iscsid: iscsid: >    MaxOutstandingR2T=1
+Jun 12 11:18:29 node1 iscsid: iscsid: >    MaxConnections=1
+Jun 12 11:18:29 node1 iscsid: iscsid: >    DataPDUInOrder=Yes
+Jun 12 11:18:29 node1 iscsid: iscsid: >    DataSequenceInOrder=Yes
+Jun 12 11:18:29 node1 iscsid: iscsid: >    MaxRecvDataSegmentLength=262144
+Jun 12 11:18:29 node1 iscsid: iscsid: in ksend_pdu_begin
+Jun 12 11:18:29 node1 iscsid: iscsid: send PDU began for hdr 48 bytes and data 476 bytes
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: wrote 48 bytes of PDU header
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: wrote 476 bytes of PDU data
+Jun 12 11:18:29 node1 iscsid: iscsid: in ksend_pdu_end
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: send PDU finished for conn 27:0
+Jun 12 11:18:29 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:18:29 node1 iscsid: iscsid: poll result 1
+Jun 12 11:18:29 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 11:18:29 node1 iscsid: iscsid: in nl_read
+Jun 12 11:18:29 node1 iscsid: iscsid: ctldev_handle got event type 101
+Jun 12 11:18:29 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:18:29 node1 iscsid: iscsid: message real length is 456 bytes, recv_handle 0x558f51f390b8
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 1, tmo 0
+Jun 12 11:18:29 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 11:18:29 node1 iscsid: iscsid: current time 147638
+Jun 12 11:18:29 node1 iscsid: iscsid: thread 558f51f344d8 due 147651, wait 13 more
+Jun 12 11:18:29 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:18:29 node1 iscsid: iscsid: in krecv_pdu_begin
+Jun 12 11:18:29 node1 iscsid: iscsid: recv PDU began, pdu handle 0x558f51f390f0
+Jun 12 11:18:29 node1 iscsid: iscsid: in kread 0 48 0x558f51f32048 0x558f51f390f0
+Jun 12 11:18:29 node1 iscsid: iscsid: read 48 bytes of PDU header
+Jun 12 11:18:29 node1 iscsid: iscsid: read 48 PDU header bytes, opcode 0x23, dlength 334, data 0x558f51f320b8, max 8192
+Jun 12 11:18:29 node1 iscsid: iscsid: in kread 48 334 0x558f51f320b8 0x558f51f390f0
+Jun 12 11:18:29 node1 iscsid: iscsid: read 334 bytes of PDU data
+Jun 12 11:18:29 node1 iscsid: iscsid: finished reading login PDU, 48 hdr, 0 ah, 334 data, 2 pad
+Jun 12 11:18:29 node1 iscsid: iscsid: login current stage 1, next stage 3, transit 0x80
+Jun 12 11:18:29 node1 iscsid: iscsid: >    TargetPortalGroupTag=1
+Jun 12 11:18:29 node1 iscsid: iscsid: >    HeaderDigest=None
+Jun 12 11:18:29 node1 iscsid: iscsid: >    DataDigest=None
+Jun 12 11:18:29 node1 iscsid: iscsid: >    DefaultTime2Wait=2
+Jun 12 11:18:29 node1 iscsid: iscsid: >    DefaultTime2Retain=0
+Jun 12 11:18:29 node1 iscsid: iscsid: >    IFMarker=No
+Jun 12 11:18:29 node1 iscsid: iscsid: >    OFMarker=No
+Jun 12 11:18:29 node1 iscsid: iscsid: >    ErrorRecoveryLevel=0
+Jun 12 11:18:29 node1 iscsid: iscsid: >    InitialR2T=Yes
+Jun 12 11:18:29 node1 iscsid: iscsid: >    ImmediateData=Yes
+Jun 12 11:18:29 node1 iscsid: iscsid: >    MaxBurstLength=1048576
+Jun 12 11:18:29 node1 iscsid: iscsid: >    FirstBurstLength=262144
+Jun 12 11:18:29 node1 iscsid: iscsid: >    MaxOutstandingR2T=1
+Jun 12 11:18:29 node1 iscsid: iscsid: >    MaxConnections=1
+Jun 12 11:18:29 node1 iscsid: iscsid: >    DataPDUInOrder=Yes
+Jun 12 11:18:29 node1 iscsid: iscsid: >    DataSequenceInOrder=Yes
+Jun 12 11:18:29 node1 iscsid: iscsid: >    MaxRecvDataSegmentLength=262144
+Jun 12 11:18:29 node1 iscsid: iscsid: in krecv_pdu_end
+Jun 12 11:18:29 node1 iscsid: iscsid: recv PDU finished for pdu handle 0x0x558f51f390f0
+Jun 12 11:18:29 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:18:29 node1 iscsid: iscsid: login response status 0000
+Jun 12 11:18:29 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 1
+Jun 12 11:18:29 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 12 11:18:29 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 0 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 262144
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 1 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 262144
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 2 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 0
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 3 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 0
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 4 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 1
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 5 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 1
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 6 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 1
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 7 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 262144
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 8 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 1048576
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 9 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 1
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 10 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 1
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 11 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 0
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 14 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 1
+Jun 12 11:18:29 node1 iscsid: iscsid: in kset_param
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: set operational parameter 16 to:
+Jun 12 11:18:29 node1 iscsid: iscsid: 1
+Jun 12 11:18:29 node1 iscsid: iscsid: in kstart_conn
+Jun 12 11:18:29 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:18:29 node1 iscsid: iscsid: in kwritev
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:18:29 node1 iscsid: iscsid: scanning host14 from pid 2688752
+Jun 12 11:18:29 node1 iscsid: iscsid: iscsid: Connection27:0 to [target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] through [iface: default] is operational now
+Jun 12 11:18:29 node1 iscsid: scanning host14iscsid:
+Jun 12 11:18:29 node1 iscsid: thread 558f51f39070 done
+Jun 12 11:18:29 node1 iscsid: iscsid: scanning host14 completed
+Jun 12 11:18:29 node1 iscsid: iscsid: mgmt_ipc_write_rsp: rsp to fd 6
+Jun 12 11:18:29 node1 iscsid: iscsid: set queue depth for 14:0:0:0 to 32
+Jun 12 11:18:29 node1 iscsid: iscsid: set queue depth for 14:0:0:1 to 32
+Jun 12 11:18:30 node1 iscsid: iscsid: reaped pid 2688752, reap_count now 0
+Jun 12 11:18:30 node1 iscsid: iscsid: current time 147639
+Jun 12 11:18:30 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+
+
+
+#异常点, 断网线, linkdown
+Jun 12 11:19:14 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:14 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 11:19:14 node1 iscsid: iscsid: in nl_read
+Jun 12 11:19:14 node1 iscsid: iscsid: ctldev_handle got event type 102
+Jun 12 11:19:14 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:14 node1 iscsid: iscsid: message real length is 72 bytes, recv_handle 0x558f51f390b8
+Jun 12 11:19:14 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:19:14 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 3, tmo 0
+Jun 12 11:19:14 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 11:19:14 node1 iscsid: iscsid: current time 147682
+Jun 12 11:19:14 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 12 11:19:14 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:14 node1 iscsid: iscsid: Kernel reported iSCSI connection 27:0 error (1022 - ISCSI_ERR_NOP_TIMEDOUT: A NOP has timed out) state (3)  # session_conn_error
+Jun 12 11:19:14 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:14 node1 iscsid: iscsid: re-opening session 27 (reopen_cnt 0)
+Jun 12 11:19:14 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:19:14 node1 iscsid: iscsid: thread 558f51f34508 delete: state 0
+Jun 12 11:19:14 node1 iscsid: iscsid: disconnecting conn 0x558f51f32010, fd 7
+Jun 12 11:19:14 node1 iscsid: iscsid: in kstop_conn
+Jun 12 11:19:14 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:19:14 node1 iscsid: iscsid: in kwritev
+Jun 12 11:19:14 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:19:14 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:19:14 node1 iscsid: iscsid: connection 27:0 is stopped for recovery
+Jun 12 11:19:14 node1 iscsid: iscsid: Waiting 2 seconds before trying to reconnect.
+Jun 12 11:19:14 node1 iscsid: iscsid: Requeue reopen attempt in 2 secs
+Jun 12 11:19:14 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:19:14 node1 iscsid: iscsid: thread 0x558f51f344d8 schedule: delay 2 state 3
+Jun 12 11:19:14 node1 iscsid: iscsid: new thread 0x558f51f344d8 due 147684 is first item on pend_list
+Jun 12 11:19:14 node1 iscsid: iscsid: new alarm set for 2 seconds, old alarm 0
+Jun 12 11:19:14 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:16 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:16 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:16 node1 iscsid: iscsid: current time 147684
+Jun 12 11:19:16 node1 iscsid: iscsid: thread 558f51f344d8 was scheduled for 147684, curtime 147684 q_forw 0x558f51e130a0 &pend_list 0x558f51e130a0
+Jun 12 11:19:16 node1 iscsid: iscsid: thread 558f51f344d8 now in ready_list
+Jun 12 11:19:16 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 12 11:19:16 node1 iscsid: iscsid: exec thread 558f51f344d8 callback
+Jun 12 11:19:16 node1 iscsid: iscsid: iscsi_login_eh
+Jun 12 11:19:16 node1 iscsid: iscsid: login failed ISCSI_CONN_STATE_XPT_WAIT/R_STAGE_SESSION_REOPEN 0
+Jun 12 11:19:16 node1 iscsid: iscsid: re-opening session 27 (reopen_cnt 0)
+Jun 12 11:19:16 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:19:16 node1 iscsid: iscsid: thread 558f51f34508 delete: state 3
+Jun 12 11:19:16 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:16 node1 iscsid: iscsid: set TCP recv window size to 524288, actually got 425984
+Jun 12 11:19:16 node1 iscsid: iscsid: set TCP send window size to 524288, actually got 425984
+Jun 12 11:19:16 node1 iscsid: iscsid: connecting to 172.17.136.132:3260
+Jun 12 11:19:16 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 0
+Jun 12 11:19:16 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 11:19:16 node1 iscsid: iscsid: Setting login timer 0x558f51f344d8 timeout 15
+Jun 12 11:19:16 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:19:16 node1 iscsid: iscsid: thread 0x558f51f344d8 schedule: delay 15 state 3
+Jun 12 11:19:16 node1 iscsid: iscsid: new thread 0x558f51f344d8 due 147699 is first item on pend_list
+Jun 12 11:19:16 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 12 11:19:16 node1 iscsid: iscsid: thread 558f51f344d8 done
+Jun 12 11:19:16 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:16 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:16 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:16 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:16 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:16 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:16 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:16 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147685), inserting
+Jun 12 11:19:16 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 15
+Jun 12 11:19:16 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:17 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:17 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:17 node1 iscsid: iscsid: current time 147685
+Jun 12 11:19:17 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147685, curtime 147685 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:17 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:17 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 14 more  #超时 -> if (time_left)
+Jun 12 11:19:17 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:17 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:17 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:17 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:17 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:17 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:17 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:17 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147686), inserting
+Jun 12 11:19:17 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 14
+Jun 12 11:19:17 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:18 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:18 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:18 node1 iscsid: iscsid: current time 147686
+Jun 12 11:19:18 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147686, curtime 147686 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:18 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:18 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 13 more
+Jun 12 11:19:18 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:18 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:18 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:18 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:18 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:18 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:18 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:18 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147687), inserting
+Jun 12 11:19:18 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 13
+Jun 12 11:19:18 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:19 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:19 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:19 node1 iscsid: iscsid: current time 147687
+Jun 12 11:19:19 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147687, curtime 147687 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:19 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:19 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 12 more
+Jun 12 11:19:19 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:19 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:19 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:19 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:19 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:19 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:19 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:19 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147688), inserting
+Jun 12 11:19:19 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 12
+Jun 12 11:19:19 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:20 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:20 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:20 node1 iscsid: iscsid: current time 147688
+Jun 12 11:19:20 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147688, curtime 147688 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:20 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:20 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 11 more
+Jun 12 11:19:20 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:20 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:20 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:20 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:20 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:20 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:20 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:20 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147689), inserting
+Jun 12 11:19:20 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 11
+Jun 12 11:19:20 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:21 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:21 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:21 node1 iscsid: iscsid: current time 147689
+Jun 12 11:19:21 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147689, curtime 147689 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:21 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:21 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 10 more
+Jun 12 11:19:21 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:21 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:21 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:21 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:21 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:21 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:21 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:21 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147690), inserting
+Jun 12 11:19:21 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 10
+Jun 12 11:19:21 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:22 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:22 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:22 node1 iscsid: iscsid: current time 147690
+Jun 12 11:19:22 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147690, curtime 147690 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:22 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:22 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 9 more
+Jun 12 11:19:22 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:22 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:22 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:22 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:22 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:22 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:22 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:22 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147691), inserting
+Jun 12 11:19:22 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 9
+Jun 12 11:19:22 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:23 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:23 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:23 node1 iscsid: iscsid: current time 147691
+Jun 12 11:19:23 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147691, curtime 147691 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:23 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:23 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 8 more
+Jun 12 11:19:23 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:23 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:23 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:23 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:23 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:23 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:23 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:23 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147692), inserting
+Jun 12 11:19:23 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 8
+Jun 12 11:19:23 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:24 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:24 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:24 node1 iscsid: iscsid: current time 147692
+Jun 12 11:19:24 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147692, curtime 147692 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:24 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:24 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 7 more
+Jun 12 11:19:24 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:24 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:24 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:24 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:24 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:24 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:24 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:24 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147693), inserting
+Jun 12 11:19:24 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 7
+Jun 12 11:19:24 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:25 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:25 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:25 node1 iscsid: iscsid: current time 147693
+Jun 12 11:19:25 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147693, curtime 147693 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:25 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:25 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 6 more
+Jun 12 11:19:25 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:25 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:25 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:25 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:25 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:25 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:25 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:25 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147694), inserting
+Jun 12 11:19:25 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 6
+Jun 12 11:19:25 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:26 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:26 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:26 node1 iscsid: iscsid: current time 147694
+Jun 12 11:19:26 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147694, curtime 147694 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:26 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:26 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 5 more
+Jun 12 11:19:26 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:26 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:26 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:26 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:26 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:26 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:26 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:26 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147695), inserting
+Jun 12 11:19:26 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 5
+Jun 12 11:19:26 node1 iscsid: iscsid: thread 558f51f39070 done
+
+Jun 12 11:19:27 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:27 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:27 node1 iscsid: iscsid: current time 147695
+Jun 12 11:19:27 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147695, curtime 147695 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:27 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:27 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 4 more
+Jun 12 11:19:27 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:27 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:27 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:27 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:27 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:27 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:27 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:27 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147696), inserting
+Jun 12 11:19:27 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 4
+Jun 12 11:19:27 node1 iscsid: iscsid: thread 558f51f39070 done
+
+
+
+
+Jun 12 11:19:28 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:28 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:28 node1 iscsid: iscsid: current time 147696
+Jun 12 11:19:28 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147696, curtime 147696 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:28 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:28 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 3 more
+Jun 12 11:19:28 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:28 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:28 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:28 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:28 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:28 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:28 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:28 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147697), inserting
+Jun 12 11:19:28 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 3
+Jun 12 11:19:28 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:29 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:29 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:29 node1 iscsid: iscsid: current time 147697
+Jun 12 11:19:29 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147697, curtime 147697 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:29 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:29 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 2 more
+Jun 12 11:19:29 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:29 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:29 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:29 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:29 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:29 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:29 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147699
+Jun 12 11:19:29 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147698), inserting
+Jun 12 11:19:29 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 2
+Jun 12 11:19:29 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:30 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:30 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:30 node1 iscsid: iscsid: current time 147698
+Jun 12 11:19:30 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147698, curtime 147698 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:30 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:30 node1 iscsid: iscsid: thread 558f51f344d8 due 147699, wait 1 more
+Jun 12 11:19:30 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:30 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:30 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:30 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:30 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:30 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:30 node1 iscsid: iscsid: last thread 0x558f51e130a0 due 0
+Jun 12 11:19:30 node1 iscsid: iscsid: new thread 0x558f51f39070 is after (147699), inserting at tail
+Jun 12 11:19:30 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:31 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:31 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:31 node1 iscsid: iscsid: current time 147699
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 558f51f344d8 was scheduled for 147699, curtime 147699 q_forw 0x558f51f39070 &pend_list 0x558f51e130a0
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 558f51f344d8 now in ready_list
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147699, curtime 147699 q_forw 0x558f51e130a0 &pend_list 0x558f51e130a0
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:31 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 12 11:19:31 node1 iscsid: iscsid: exec thread 558f51f344d8 callback
+Jun 12 11:19:31 node1 iscsid: iscsid: iscsi_login_eh
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 558f51f39070 delete: state 2
+Jun 12 11:19:31 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 12 11:19:31 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 12 11:19:31 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:31 node1 iscsid: iscsid: login failed ISCSI_CONN_STATE_XPT_WAIT/R_STAGE_SESSION_REOPEN 1
+Jun 12 11:19:31 node1 iscsid: iscsid: re-opening session 27 (reopen_cnt 1)
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 558f51f34508 delete: state 3
+Jun 12 11:19:31 node1 iscsid: iscsid: disconnecting conn 0x558f51f32010, fd 6
+Jun 12 11:19:31 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:31 node1 iscsid: iscsid: set TCP recv window size to 524288, actually got 425984
+Jun 12 11:19:31 node1 iscsid: iscsid: set TCP send window size to 524288, actually got 425984
+Jun 12 11:19:31 node1 iscsid: iscsid: connecting to 172.17.136.132:3260
+Jun 12 11:19:31 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 0
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 11:19:31 node1 iscsid: iscsid: Setting login timer 0x558f51f344d8 timeout 15
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 0x558f51f344d8 schedule: delay 15 state 3
+Jun 12 11:19:31 node1 iscsid: iscsid: new thread 0x558f51f344d8 due 147714 is first item on pend_list
+Jun 12 11:19:31 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 558f51f344d8 done
+Jun 12 11:19:31 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:31 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:31 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:31 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:31 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:31 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:31 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147700), inserting
+Jun 12 11:19:31 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 15
+Jun 12 11:19:31 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:32 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:32 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:32 node1 iscsid: iscsid: current time 147700
+Jun 12 11:19:32 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147700, curtime 147700 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:32 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:32 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 14 more
+Jun 12 11:19:32 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:32 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:32 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:32 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:32 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:32 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:32 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:32 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147701), inserting
+Jun 12 11:19:32 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 14
+Jun 12 11:19:32 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:33 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:33 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:33 node1 iscsid: iscsid: current time 147701
+Jun 12 11:19:33 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147701, curtime 147701 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:33 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:33 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 13 more
+Jun 12 11:19:33 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:33 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:33 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:33 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:33 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:33 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:33 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:33 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147702), inserting
+Jun 12 11:19:33 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 13
+Jun 12 11:19:33 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:34 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:34 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:34 node1 iscsid: iscsid: current time 147702
+Jun 12 11:19:34 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147702, curtime 147702 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:34 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:34 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 12 more
+Jun 12 11:19:34 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:34 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:34 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:34 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:34 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:34 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:34 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:34 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147703), inserting
+Jun 12 11:19:34 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 12
+Jun 12 11:19:34 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:35 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:35 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:35 node1 iscsid: iscsid: current time 147703
+Jun 12 11:19:35 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147703, curtime 147703 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:35 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:35 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 11 more
+Jun 12 11:19:35 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:35 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:35 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:35 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:35 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:35 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:35 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:35 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147704), inserting
+Jun 12 11:19:35 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 11
+Jun 12 11:19:35 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:36 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:36 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:36 node1 iscsid: iscsid: current time 147704
+Jun 12 11:19:36 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147704, curtime 147704 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:36 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:36 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 10 more
+Jun 12 11:19:36 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:36 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:36 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:36 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:36 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:36 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:36 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:36 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147705), inserting
+Jun 12 11:19:36 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 10
+Jun 12 11:19:36 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:37 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:37 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:37 node1 iscsid: iscsid: current time 147705
+Jun 12 11:19:37 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147705, curtime 147705 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:37 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:37 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 9 more
+Jun 12 11:19:37 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:37 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:37 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:37 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:37 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:37 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:37 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:37 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147706), inserting
+Jun 12 11:19:37 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 9
+Jun 12 11:19:37 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:38 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:38 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:38 node1 iscsid: iscsid: current time 147706
+Jun 12 11:19:38 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147706, curtime 147706 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:38 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:38 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 8 more
+Jun 12 11:19:38 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:38 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:38 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:38 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:38 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:38 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:38 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:38 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147707), inserting
+Jun 12 11:19:38 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 8
+Jun 12 11:19:38 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:39 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:39 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:39 node1 iscsid: iscsid: current time 147707
+Jun 12 11:19:39 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147707, curtime 147707 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:39 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:39 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 7 more
+Jun 12 11:19:39 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:39 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:39 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:39 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:39 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:39 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:39 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:39 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147708), inserting
+Jun 12 11:19:39 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 7
+Jun 12 11:19:39 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:40 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:40 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:40 node1 iscsid: iscsid: current time 147708
+Jun 12 11:19:40 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147708, curtime 147708 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:40 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:40 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 6 more
+Jun 12 11:19:40 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:40 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:40 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:40 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:40 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:40 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:40 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:40 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147709), inserting
+Jun 12 11:19:40 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 6
+Jun 12 11:19:40 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:41 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:41 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:41 node1 iscsid: iscsid: current time 147709
+Jun 12 11:19:41 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147709, curtime 147709 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:41 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:41 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 5 more
+Jun 12 11:19:41 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:41 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:41 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:41 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:41 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:41 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:41 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:41 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147710), inserting
+Jun 12 11:19:41 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 5
+Jun 12 11:19:41 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:42 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:42 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:42 node1 iscsid: iscsid: current time 147710
+Jun 12 11:19:42 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147710, curtime 147710 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:42 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:42 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 4 more
+Jun 12 11:19:42 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:42 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:42 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:42 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:42 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:42 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:42 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:42 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147711), inserting
+Jun 12 11:19:42 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 4
+Jun 12 11:19:42 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:43 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:43 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:43 node1 iscsid: iscsid: current time 147711
+Jun 12 11:19:43 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147711, curtime 147711 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:43 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:43 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 3 more
+Jun 12 11:19:43 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:43 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:43 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:43 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:43 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:43 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:43 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:43 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147712), inserting
+Jun 12 11:19:43 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 3
+Jun 12 11:19:43 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:44 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:44 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:44 node1 iscsid: iscsid: current time 147712
+Jun 12 11:19:44 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147712, curtime 147712 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:44 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:44 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 2 more
+Jun 12 11:19:44 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:44 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:44 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:44 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:44 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:44 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:44 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147714
+Jun 12 11:19:44 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147713), inserting
+Jun 12 11:19:44 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 2
+Jun 12 11:19:44 node1 iscsid: iscsid: thread 558f51f39070 done
+
+Jun 12 11:19:45 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:45 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:45 node1 iscsid: iscsid: current time 147713
+Jun 12 11:19:45 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147713, curtime 147713 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:45 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:45 node1 iscsid: iscsid: thread 558f51f344d8 due 147714, wait 1 more
+Jun 12 11:19:45 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:45 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:45 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:45 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:45 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:45 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:45 node1 iscsid: iscsid: last thread 0x558f51e130a0 due 0
+Jun 12 11:19:45 node1 iscsid: iscsid: new thread 0x558f51f39070 is after (147714), inserting at tail
+Jun 12 11:19:45 node1 iscsid: iscsid: thread 558f51f39070 done
+
+
+Jun 12 11:19:46 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:46 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:46 node1 iscsid: iscsid: current time 147714
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 558f51f344d8 was scheduled for 147714, curtime 147714 q_forw 0x558f51f39070 &pend_list 0x558f51e130a0
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 558f51f344d8 now in ready_list
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147714, curtime 147714 q_forw 0x558f51e130a0 &pend_list 0x558f51e130a0
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:46 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 12 11:19:46 node1 iscsid: iscsid: exec thread 558f51f344d8 callback
+Jun 12 11:19:46 node1 iscsid: iscsid: iscsi_login_eh
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 558f51f39070 delete: state 2
+Jun 12 11:19:46 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 12 11:19:46 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 12 11:19:46 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:46 node1 iscsid: iscsid: login failed ISCSI_CONN_STATE_XPT_WAIT/R_STAGE_SESSION_REOPEN 2
+Jun 12 11:19:46 node1 iscsid: iscsid: re-opening session 27 (reopen_cnt 2)
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 558f51f34508 delete: state 3
+Jun 12 11:19:46 node1 iscsid: iscsid: disconnecting conn 0x558f51f32010, fd 6
+Jun 12 11:19:46 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:46 node1 iscsid: iscsid: set TCP recv window size to 524288, actually got 425984
+Jun 12 11:19:46 node1 iscsid: iscsid: set TCP send window size to 524288, actually got 425984
+Jun 12 11:19:46 node1 iscsid: iscsid: connecting to 172.17.136.132:3260
+Jun 12 11:19:46 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 0
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 11:19:46 node1 iscsid: iscsid: Setting login timer 0x558f51f344d8 timeout 15
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 0x558f51f344d8 schedule: delay 15 state 3
+Jun 12 11:19:46 node1 iscsid: iscsid: new thread 0x558f51f344d8 due 147729 is first item on pend_list
+Jun 12 11:19:46 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 558f51f344d8 done
+Jun 12 11:19:46 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:46 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:46 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:46 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:46 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:46 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:46 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147715), inserting
+Jun 12 11:19:46 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 15
+Jun 12 11:19:46 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:47 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:47 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:47 node1 iscsid: iscsid: current time 147715
+Jun 12 11:19:47 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147715, curtime 147715 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:47 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:47 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 14 more
+Jun 12 11:19:47 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:47 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:47 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:47 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:47 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:47 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:47 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:47 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147716), inserting
+Jun 12 11:19:47 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 14
+Jun 12 11:19:47 node1 iscsid: iscsid: thread 558f51f39070 done
+
+Jun 12 11:19:48 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:48 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:48 node1 iscsid: iscsid: current time 147716
+Jun 12 11:19:48 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147716, curtime 147716 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:48 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:48 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 13 more
+Jun 12 11:19:48 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:48 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:48 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:48 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:48 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:48 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:48 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:48 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147717), inserting
+Jun 12 11:19:48 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 13
+Jun 12 11:19:48 node1 iscsid: iscsid: thread 558f51f39070 done
+
+Jun 12 11:19:49 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:49 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:49 node1 iscsid: iscsid: current time 147717
+Jun 12 11:19:49 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147717, curtime 147717 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:49 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:49 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 12 more
+Jun 12 11:19:49 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:49 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:49 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:49 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:49 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:49 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:49 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:49 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147718), inserting
+Jun 12 11:19:49 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 12
+Jun 12 11:19:49 node1 iscsid: iscsid: thread 558f51f39070 done
+
+Jun 12 11:19:50 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:50 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:50 node1 iscsid: iscsid: current time 147718
+Jun 12 11:19:50 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147718, curtime 147718 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:50 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:50 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 11 more
+Jun 12 11:19:50 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:50 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:50 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:50 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:50 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:50 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:50 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:50 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147719), inserting
+Jun 12 11:19:50 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 11
+Jun 12 11:19:50 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:51 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:51 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:51 node1 iscsid: iscsid: current time 147719
+Jun 12 11:19:51 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147719, curtime 147719 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:51 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:51 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 10 more
+Jun 12 11:19:51 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:51 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:51 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:51 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:51 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:51 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:51 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:51 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147720), inserting
+Jun 12 11:19:51 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 10
+Jun 12 11:19:51 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:52 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:52 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:52 node1 iscsid: iscsid: current time 147720
+Jun 12 11:19:52 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147720, curtime 147720 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:52 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:52 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 9 more
+Jun 12 11:19:52 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:52 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:52 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:52 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:52 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:52 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:52 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:52 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147721), inserting
+Jun 12 11:19:52 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 9
+Jun 12 11:19:52 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:53 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:53 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:53 node1 iscsid: iscsid: current time 147721
+Jun 12 11:19:53 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147721, curtime 147721 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:53 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:53 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 8 more
+Jun 12 11:19:53 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:53 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:53 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:53 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:53 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:53 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:53 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:53 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147722), inserting
+Jun 12 11:19:53 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 8
+Jun 12 11:19:53 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:54 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:54 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:54 node1 iscsid: iscsid: current time 147722
+Jun 12 11:19:54 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147722, curtime 147722 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:54 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:54 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 7 more
+Jun 12 11:19:54 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:54 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:54 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:54 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:54 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:54 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:54 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:54 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147723), inserting
+Jun 12 11:19:54 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 7
+Jun 12 11:19:54 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:55 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:55 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:55 node1 iscsid: iscsid: current time 147723
+Jun 12 11:19:55 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147723, curtime 147723 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:55 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:55 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 6 more
+Jun 12 11:19:55 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:55 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:55 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:55 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:55 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:55 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:55 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:55 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147724), inserting
+Jun 12 11:19:55 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 6
+Jun 12 11:19:55 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:56 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:56 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:56 node1 iscsid: iscsid: current time 147724
+Jun 12 11:19:56 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147724, curtime 147724 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:56 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:56 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 5 more
+Jun 12 11:19:56 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:56 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:56 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:56 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:56 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:56 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:56 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:56 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147725), inserting
+Jun 12 11:19:56 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 5
+Jun 12 11:19:56 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:57 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:57 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:57 node1 iscsid: iscsid: current time 147725
+Jun 12 11:19:57 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147725, curtime 147725 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:57 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:57 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 4 more
+Jun 12 11:19:57 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:57 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:57 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:57 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:57 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:57 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:57 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:57 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147726), inserting
+Jun 12 11:19:57 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 4
+Jun 12 11:19:57 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:58 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:58 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:58 node1 iscsid: iscsid: current time 147726
+Jun 12 11:19:58 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147726, curtime 147726 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:58 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:58 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 3 more
+Jun 12 11:19:58 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:58 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:58 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:58 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:58 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:58 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:58 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:58 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147727), inserting
+Jun 12 11:19:58 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 3
+Jun 12 11:19:58 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:19:59 node1 iscsid: iscsid: poll result 1
+Jun 12 11:19:59 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:19:59 node1 iscsid: iscsid: current time 147727
+Jun 12 11:19:59 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147727, curtime 147727 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:19:59 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:19:59 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 2 more
+Jun 12 11:19:59 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:19:59 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:19:59 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:19:59 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:19:59 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:19:59 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:19:59 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147729
+Jun 12 11:19:59 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147728), inserting
+Jun 12 11:19:59 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 2
+Jun 12 11:19:59 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:20:00 node1 iscsid: iscsid: poll result 1
+Jun 12 11:20:00 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:20:00 node1 iscsid: iscsid: current time 147728
+Jun 12 11:20:00 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147728, curtime 147728 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:20:00 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:20:00 node1 iscsid: iscsid: thread 558f51f344d8 due 147729, wait 1 more
+Jun 12 11:20:00 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:20:00 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:00 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:20:00 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:20:00 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:20:00 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:20:00 node1 iscsid: iscsid: last thread 0x558f51e130a0 due 0
+Jun 12 11:20:00 node1 iscsid: iscsid: new thread 0x558f51f39070 is after (147729), inserting at tail
+Jun 12 11:20:00 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:20:01 node1 iscsid: iscsid: poll result 1
+Jun 12 11:20:01 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:20:01 node1 iscsid: iscsid: current time 147729
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 558f51f344d8 was scheduled for 147729, curtime 147729 q_forw 0x558f51f39070 &pend_list 0x558f51e130a0
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 558f51f344d8 now in ready_list
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147729, curtime 147729 q_forw 0x558f51e130a0 &pend_list 0x558f51e130a0
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:20:01 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 12 11:20:01 node1 iscsid: iscsid: exec thread 558f51f344d8 callback
+Jun 12 11:20:01 node1 iscsid: iscsid: iscsi_login_eh
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 558f51f39070 delete: state 2
+Jun 12 11:20:01 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 12 11:20:01 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 12 11:20:01 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:01 node1 iscsid: iscsid: login failed ISCSI_CONN_STATE_XPT_WAIT/R_STAGE_SESSION_REOPEN 3
+Jun 12 11:20:01 node1 iscsid: iscsid: re-opening session 27 (reopen_cnt 3)
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 558f51f34508 delete: state 3
+Jun 12 11:20:01 node1 iscsid: iscsid: disconnecting conn 0x558f51f32010, fd 6
+Jun 12 11:20:01 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:20:01 node1 iscsid: iscsid: set TCP recv window size to 524288, actually got 425984
+Jun 12 11:20:01 node1 iscsid: iscsid: set TCP send window size to 524288, actually got 425984
+Jun 12 11:20:01 node1 iscsid: iscsid: connecting to 172.17.136.132:3260
+Jun 12 11:20:01 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 0
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 11:20:01 node1 iscsid: iscsid: Setting login timer 0x558f51f344d8 timeout 15
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 0x558f51f344d8 schedule: delay 15 state 3
+Jun 12 11:20:01 node1 iscsid: iscsid: new thread 0x558f51f344d8 due 147744 is first item on pend_list
+Jun 12 11:20:01 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 558f51f344d8 done
+Jun 12 11:20:01 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:20:01 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:01 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:20:01 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:20:01 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:20:01 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147744
+Jun 12 11:20:01 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147730), inserting
+Jun 12 11:20:01 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 15
+Jun 12 11:20:01 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:20:02 node1 iscsid: iscsid: poll result 1
+Jun 12 11:20:02 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:20:02 node1 iscsid: iscsid: current time 147730
+Jun 12 11:20:02 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147730, curtime 147730 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:20:02 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:20:02 node1 iscsid: iscsid: thread 558f51f344d8 due 147744, wait 14 more
+Jun 12 11:20:02 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:20:02 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:02 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:20:02 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:20:02 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:20:02 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:20:02 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147744
+Jun 12 11:20:02 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147731), inserting
+Jun 12 11:20:02 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 14
+Jun 12 11:20:02 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:20:03 node1 iscsid: iscsid: poll result 1
+Jun 12 11:20:03 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:20:03 node1 iscsid: iscsid: current time 147731
+Jun 12 11:20:03 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147731, curtime 147731 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:20:03 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:20:03 node1 iscsid: iscsid: thread 558f51f344d8 due 147744, wait 13 more
+Jun 12 11:20:03 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:20:03 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:03 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:20:03 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:20:03 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:20:03 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:20:03 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147744
+Jun 12 11:20:03 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147732), inserting
+Jun 12 11:20:03 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 13
+Jun 12 11:20:03 node1 iscsid: iscsid: thread 558f51f39070 done
+
+
+Jun 12 11:20:04 node1 iscsid: iscsid: poll result 1
+Jun 12 11:20:04 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:20:04 node1 iscsid: iscsid: current time 147732
+Jun 12 11:20:04 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147732, curtime 147732 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:20:04 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:20:04 node1 iscsid: iscsid: thread 558f51f344d8 due 147744, wait 12 more
+Jun 12 11:20:04 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:20:04 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:04 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:20:04 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:20:04 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:20:04 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:20:04 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147744
+Jun 12 11:20:04 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147733), inserting
+Jun 12 11:20:04 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 12
+Jun 12 11:20:04 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:20:05 node1 iscsid: iscsid: poll result 1
+Jun 12 11:20:05 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:20:05 node1 iscsid: iscsid: current time 147733
+Jun 12 11:20:05 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147733, curtime 147733 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:20:05 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:20:05 node1 iscsid: iscsid: thread 558f51f344d8 due 147744, wait 11 more
+Jun 12 11:20:05 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:20:05 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:05 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:20:05 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:20:05 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:20:05 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:20:05 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147744
+Jun 12 11:20:05 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147734), inserting
+Jun 12 11:20:05 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 11
+Jun 12 11:20:05 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:20:06 node1 iscsid: iscsid: poll result 1
+Jun 12 11:20:06 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:20:06 node1 iscsid: iscsid: current time 147734
+Jun 12 11:20:06 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147734, curtime 147734 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:20:06 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:20:06 node1 iscsid: iscsid: thread 558f51f344d8 due 147744, wait 10 more
+Jun 12 11:20:06 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:20:06 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:06 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:20:06 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:20:06 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:20:06 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:20:06 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147744
+Jun 12 11:20:06 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147735), inserting
+Jun 12 11:20:06 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 10
+Jun 12 11:20:06 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:20:07 node1 iscsid: iscsid: poll result 1
+Jun 12 11:20:07 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:20:07 node1 iscsid: iscsid: current time 147735
+Jun 12 11:20:07 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147735, curtime 147735 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:20:07 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:20:07 node1 iscsid: iscsid: thread 558f51f344d8 due 147744, wait 9 more
+Jun 12 11:20:07 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:20:07 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:07 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:20:07 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:20:07 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:20:07 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:20:07 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147744
+Jun 12 11:20:07 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147736), inserting
+Jun 12 11:20:07 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 9
+Jun 12 11:20:07 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:20:08 node1 iscsid: iscsid: poll result 1
+Jun 12 11:20:08 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:20:08 node1 iscsid: iscsid: current time 147736
+Jun 12 11:20:08 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147736, curtime 147736 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:20:08 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:20:08 node1 iscsid: iscsid: thread 558f51f344d8 due 147744, wait 8 more
+Jun 12 11:20:08 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:20:08 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:08 node1 iscsid: iscsid: poll not connected 0
+Jun 12 11:20:08 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:20:08 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 1
+Jun 12 11:20:08 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 1 state 3
+Jun 12 11:20:08 node1 iscsid: iscsid: next thread 0x558f51f344d8 due 147744
+Jun 12 11:20:08 node1 iscsid: iscsid: new thread 0x558f51f39070 is before (147737), inserting
+Jun 12 11:20:08 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 8
+Jun 12 11:20:08 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:20:09 node1 iscsid: iscsid: poll result 1
+Jun 12 11:20:09 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 12 11:20:09 node1 iscsid: iscsid: current time 147737
+Jun 12 11:20:09 node1 iscsid: iscsid: thread 558f51f39070 was scheduled for 147737, curtime 147737 q_forw 0x558f51f344d8 &pend_list 0x558f51e130a0
+Jun 12 11:20:09 node1 iscsid: iscsid: thread 558f51f39070 now in ready_list
+Jun 12 11:20:09 node1 iscsid: iscsid: thread 558f51f344d8 due 147744, wait 7 more
+Jun 12 11:20:09 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:20:09 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:09 node1 iscsid: iscsid: connected local port 52056 to 172.17.136.132:3260
+Jun 12 11:20:09 node1 iscsid: iscsid: in kbind_conn
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: bound iSCSI connection 27:0 to session 27
+Jun 12 11:20:09 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_connection/connection27:0'/'exp_statsn'
+Jun 12 11:20:09 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_connection/connection27:0'/'ping_tmo'
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 15 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 17 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 172.17.136.132
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 18 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 3260
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 19 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 120
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 22 to:
+Jun 12 11:20:09 node1 iscsid: iscsid:
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 23 to:
+Jun 12 11:20:09 node1 iscsid: iscsid:
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 24 to:
+Jun 12 11:20:09 node1 iscsid: iscsid:
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 25 to:
+Jun 12 11:20:09 node1 iscsid: iscsid:
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 26 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 1
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 27 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 15
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 28 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 30
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 35 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 30
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 30 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 5
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 31 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 5
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 32 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: default
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 34 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: iqn.1994-05.com.redhat:461b38c9b3e6
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 39 to:
+Jun 12 11:20:09 node1 iscsid: iscsid:
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 40 to:
+Jun 12 11:20:09 node1 iscsid: iscsid:
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 41 to:
+Jun 12 11:20:09 node1 iscsid: iscsid:
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 43 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 0
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_host_param
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 2 to:
+Jun 12 11:20:09 node1 iscsid: iscsid:
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_host_param
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 0 to:
+Jun 12 11:20:09 node1 iscsid: iscsid:
+Jun 12 11:20:09 node1 iscsid: iscsid: sending login PDU with current stage 1, next stage 3, transit 0x80, isid 0x00023d00001b exp_statsn 176
+Jun 12 11:20:09 node1 iscsid: iscsid: >    InitiatorName=iqn.1994-05.com.redhat:461b38c9b3e6
+Jun 12 11:20:09 node1 iscsid: iscsid: >    InitiatorAlias=node1
+Jun 12 11:20:09 node1 iscsid: iscsid: >    TargetName=iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+Jun 12 11:20:09 node1 iscsid: iscsid: >    SessionType=Normal
+Jun 12 11:20:09 node1 iscsid: iscsid: >    HeaderDigest=None
+Jun 12 11:20:09 node1 iscsid: iscsid: >    DataDigest=None
+Jun 12 11:20:09 node1 iscsid: iscsid: >    DefaultTime2Wait=2
+Jun 12 11:20:09 node1 iscsid: iscsid: >    DefaultTime2Retain=0
+Jun 12 11:20:09 node1 iscsid: iscsid: >    IFMarker=No
+Jun 12 11:20:09 node1 iscsid: iscsid: >    OFMarker=No
+Jun 12 11:20:09 node1 iscsid: iscsid: >    ErrorRecoveryLevel=0
+Jun 12 11:20:09 node1 iscsid: iscsid: >    InitialR2T=No
+Jun 12 11:20:09 node1 iscsid: iscsid: >    ImmediateData=Yes
+Jun 12 11:20:09 node1 iscsid: iscsid: >    MaxBurstLength=16776192
+Jun 12 11:20:09 node1 iscsid: iscsid: >    FirstBurstLength=262144
+Jun 12 11:20:09 node1 iscsid: iscsid: >    MaxOutstandingR2T=1
+Jun 12 11:20:09 node1 iscsid: iscsid: >    MaxConnections=1
+Jun 12 11:20:09 node1 iscsid: iscsid: >    DataPDUInOrder=Yes
+Jun 12 11:20:09 node1 iscsid: iscsid: >    DataSequenceInOrder=Yes
+Jun 12 11:20:09 node1 iscsid: iscsid: >    MaxRecvDataSegmentLength=262144
+Jun 12 11:20:09 node1 iscsid: iscsid: in ksend_pdu_begin
+Jun 12 11:20:09 node1 iscsid: iscsid: send PDU began for hdr 48 bytes and data 476 bytes
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: wrote 48 bytes of PDU header
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: wrote 476 bytes of PDU data
+Jun 12 11:20:09 node1 iscsid: iscsid: in ksend_pdu_end
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: send PDU finished for conn 27:0
+Jun 12 11:20:09 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 11:20:09 node1 iscsid: iscsid: poll result 1
+Jun 12 11:20:09 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 11:20:09 node1 iscsid: iscsid: in nl_read
+Jun 12 11:20:09 node1 iscsid: iscsid: ctldev_handle got event type 101
+Jun 12 11:20:09 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 11:20:09 node1 iscsid: iscsid: message real length is 456 bytes, recv_handle 0x558f51f390b8
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 1, tmo 0
+Jun 12 11:20:09 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 11:20:09 node1 iscsid: iscsid: current time 147737
+Jun 12 11:20:09 node1 iscsid: iscsid: thread 558f51f344d8 due 147744, wait 7 more
+Jun 12 11:20:09 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 11:20:09 node1 iscsid: iscsid: in krecv_pdu_begin
+Jun 12 11:20:09 node1 iscsid: iscsid: recv PDU began, pdu handle 0x558f51f390f0
+Jun 12 11:20:09 node1 iscsid: iscsid: in kread 0 48 0x558f51f32048 0x558f51f390f0
+Jun 12 11:20:09 node1 iscsid: iscsid: read 48 bytes of PDU header
+Jun 12 11:20:09 node1 iscsid: iscsid: read 48 PDU header bytes, opcode 0x23, dlength 334, data 0x558f51f320b8, max 8192
+Jun 12 11:20:09 node1 iscsid: iscsid: in kread 48 334 0x558f51f320b8 0x558f51f390f0
+Jun 12 11:20:09 node1 iscsid: iscsid: read 334 bytes of PDU data
+Jun 12 11:20:09 node1 iscsid: iscsid: finished reading login PDU, 48 hdr, 0 ah, 334 data, 2 pad
+Jun 12 11:20:09 node1 iscsid: iscsid: login current stage 1, next stage 3, transit 0x80
+Jun 12 11:20:09 node1 iscsid: iscsid: >    TargetPortalGroupTag=1
+Jun 12 11:20:09 node1 iscsid: iscsid: >    HeaderDigest=None
+Jun 12 11:20:09 node1 iscsid: iscsid: >    DataDigest=None
+Jun 12 11:20:09 node1 iscsid: iscsid: >    DefaultTime2Wait=2
+Jun 12 11:20:09 node1 iscsid: iscsid: >    DefaultTime2Retain=0
+Jun 12 11:20:09 node1 iscsid: iscsid: >    IFMarker=No
+Jun 12 11:20:09 node1 iscsid: iscsid: >    OFMarker=No
+Jun 12 11:20:09 node1 iscsid: iscsid: >    ErrorRecoveryLevel=0
+Jun 12 11:20:09 node1 iscsid: iscsid: >    InitialR2T=Yes
+Jun 12 11:20:09 node1 iscsid: iscsid: >    ImmediateData=Yes
+Jun 12 11:20:09 node1 iscsid: iscsid: >    MaxBurstLength=1048576
+Jun 12 11:20:09 node1 iscsid: iscsid: >    FirstBurstLength=262144
+Jun 12 11:20:09 node1 iscsid: iscsid: >    MaxOutstandingR2T=1
+Jun 12 11:20:09 node1 iscsid: iscsid: >    MaxConnections=1
+Jun 12 11:20:09 node1 iscsid: iscsid: >    DataPDUInOrder=Yes
+Jun 12 11:20:09 node1 iscsid: iscsid: >    DataSequenceInOrder=Yes
+Jun 12 11:20:09 node1 iscsid: iscsid: >    MaxRecvDataSegmentLength=262144
+Jun 12 11:20:09 node1 iscsid: iscsid: in krecv_pdu_end
+Jun 12 11:20:09 node1 iscsid: iscsid: recv PDU finished for pdu handle 0x0x558f51f390f0
+Jun 12 11:20:09 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 11:20:09 node1 iscsid: iscsid: login response status 0000
+Jun 12 11:20:09 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 1
+Jun 12 11:20:09 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 12 11:20:09 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 0 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 262144
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 1 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 262144
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 2 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 0
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 3 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 0
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 4 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 1
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 5 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 1
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 6 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 1
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 7 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 262144
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 8 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 1048576
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 9 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 1
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 10 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 1
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 11 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 0
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 14 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 1
+Jun 12 11:20:09 node1 iscsid: iscsid: in kset_param
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: set operational parameter 16 to:
+Jun 12 11:20:09 node1 iscsid: iscsid: 1
+Jun 12 11:20:09 node1 iscsid: iscsid: in kstart_conn
+Jun 12 11:20:09 node1 iscsid: iscsid: in __kipc_call
+Jun 12 11:20:09 node1 iscsid: iscsid: in kwritev
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 11:20:09 node1 iscsid: iscsid: online device 14:0:0:0
+Jun 12 11:20:09 node1 iscsid: iscsid: online device 14:0:0:1
+Jun 12 11:20:09 node1 iscsid: iscsid: mgmt_ipc_write_rsp: rsp to fd -1
+Jun 12 11:20:09 node1 iscsid: iscsid: connection27:0 is operational after recovery (4 attempts)
+Jun 12 11:20:09 node1 iscsid: iscsid: thread 558f51f39070 done
