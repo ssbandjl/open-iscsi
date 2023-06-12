@@ -1,0 +1,979 @@
+### 启动日志
+Jun 12 09:54:28 node1 iscsid: iscsid: iscsid shutting down.
+Jun 12 09:54:28 node1 iscsid: iscsid: sysfs_init: sysfs_path='/sys'
+Jun 12 09:54:28 node1 iscsid: iscsid: in ctldev_open
+Jun 12 09:54:28 node1 iscsid: iscsid: created NETLINK_ISCSI socket...
+Jun 12 09:54:28 node1 iscsid: iscsid: InitiatorName=iqn.1994-05.com.redhat:461b38c9b3e6
+Jun 12 09:54:28 node1 iscsid: iscsid: InitiatorName=iqn.1994-05.com.redhat:461b38c9b3e6
+Jun 12 09:54:28 node1 iscsid: iscsid: InitiatorAlias=node1
+Jun 12 09:54:28 node1 iscsid: iscsid: iscsid.safe_logout=Yes
+Jun 12 09:54:28 node1 iscsid: iscsid: Max file limits 1024 4096
+Jun 12 09:54:28 node1 iscsid: iscsid: found 172.17.136.132,3260
+Jun 12 09:54:28 node1 iscsid: iscsid: Looking for config file /var/lib/iscsi/send_targets/172.17.136.132,3260
+Jun 12 09:54:28 node1 iscsid: iscsid: Looking for config file /var/lib/iscsi/send_targets/172.17.136.132,3260 config st_config.
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.startup', 'manual' => 'manual'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.type', 'sendtargets' => 'sendtargets'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.address', '' => '172.17.136.132'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.port', '0' => '3260'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.auth.authmethod', 'None' => 'None'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'node.session.auth.chap_algs', 'MD5' => 'MD5'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.login_timeout', '15' => '15'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.use_discoveryd', 'No' => 'No'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.discoveryd_poll_inval', '30' => '30'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.reopen_max', '5' => '5'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.auth_timeout', '45' => '45'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.active_timeout', '30' => '30'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.iscsi.MaxRecvDataSegmentLength', '32768' => '32768'
+Jun 12 09:54:28 node1 iscsid: iscsid: st_start 172.17.136.132:3260 0
+Jun 12 09:54:28 node1 iscsid: iscsid: found 172.17.136.133,3260
+Jun 12 09:54:28 node1 iscsid: iscsid: Looking for config file /var/lib/iscsi/send_targets/172.17.136.133,3260
+Jun 12 09:54:28 node1 iscsid: iscsid: Looking for config file /var/lib/iscsi/send_targets/172.17.136.133,3260 config st_config.
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.startup', 'manual' => 'manual'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.type', 'sendtargets' => 'sendtargets'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.address', '' => '172.17.136.133'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.port', '0' => '3260'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.auth.authmethod', 'None' => 'None'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'node.session.auth.chap_algs', 'MD5' => 'MD5'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.login_timeout', '15' => '15'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.use_discoveryd', 'No' => 'No'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.discoveryd_poll_inval', '30' => '30'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.reopen_max', '5' => '5'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.auth_timeout', '45' => '45'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.active_timeout', '30' => '30'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.iscsi.MaxRecvDataSegmentLength', '32768' => '32768'
+Jun 12 09:54:28 node1 iscsid: iscsid: st_start 172.17.136.133:3260 0
+Jun 12 09:54:28 node1 iscsid: iscsid: found 172.17.136.131,3260
+Jun 12 09:54:28 node1 iscsid: iscsid: Looking for config file /var/lib/iscsi/send_targets/172.17.136.131,3260
+Jun 12 09:54:28 node1 iscsid: iscsid: Looking for config file /var/lib/iscsi/send_targets/172.17.136.131,3260 config st_config.
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.startup', 'manual' => 'manual'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.type', 'sendtargets' => 'sendtargets'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.address', '' => '172.17.136.131'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.port', '0' => '3260'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.auth.authmethod', 'None' => 'None'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'node.session.auth.chap_algs', 'MD5' => 'MD5'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.login_timeout', '15' => '15'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.use_discoveryd', 'No' => 'No'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.discoveryd_poll_inval', '30' => '30'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.reopen_max', '5' => '5'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.auth_timeout', '45' => '45'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.active_timeout', '30' => '30'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.iscsi.MaxRecvDataSegmentLength', '32768' => '32768'
+Jun 12 09:54:28 node1 iscsid: iscsid: st_start 172.17.136.131:3260 0
+Jun 12 09:54:28 node1 iscsid: iscsid: found 172.17.136.1323,3260
+Jun 12 09:54:28 node1 iscsid: iscsid: Looking for config file /var/lib/iscsi/send_targets/172.17.136.1323,3260
+Jun 12 09:54:28 node1 iscsid: iscsid: Looking for config file /var/lib/iscsi/send_targets/172.17.136.1323,3260 config st_config.
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.startup', 'manual' => 'manual'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.type', 'sendtargets' => 'sendtargets'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.address', '' => '172.17.136.1323'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.port', '0' => '3260'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.auth.authmethod', 'None' => 'None'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'node.session.auth.chap_algs', 'MD5' => 'MD5'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.login_timeout', '15' => '15'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.use_discoveryd', 'No' => 'No'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.discoveryd_poll_inval', '30' => '30'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.reopen_max', '5' => '5'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.auth_timeout', '45' => '45'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.active_timeout', '30' => '30'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.iscsi.MaxRecvDataSegmentLength', '32768' => '32768'
+Jun 12 09:54:28 node1 iscsid: iscsid: st_start 172.17.136.1323:3260 0
+Jun 12 09:54:28 node1 iscsid: iscsid: found 172.17.136.134,3260
+Jun 12 09:54:28 node1 iscsid: iscsid: Looking for config file /var/lib/iscsi/send_targets/172.17.136.134,3260
+Jun 12 09:54:28 node1 iscsid: iscsid: Looking for config file /var/lib/iscsi/send_targets/172.17.136.134,3260 config st_config.
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.startup', 'manual' => 'manual'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.type', 'sendtargets' => 'sendtargets'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.address', '' => '172.17.136.134'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.port', '0' => '3260'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.auth.authmethod', 'None' => 'None'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'node.session.auth.chap_algs', 'MD5' => 'MD5'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.login_timeout', '15' => '15'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.use_discoveryd', 'No' => 'No'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.discoveryd_poll_inval', '30' => '30'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.reopen_max', '5' => '5'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.auth_timeout', '45' => '45'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.timeo.active_timeout', '30' => '30'
+Jun 12 09:54:28 node1 iscsid: iscsid: updated 'discovery.sendtargets.iscsi.MaxRecvDataSegmentLength', '32768' => '32768'
+Jun 12 09:54:28 node1 iscsid: iscsid: st_start 172.17.136.134:3260 0
+Jun 12 09:54:28 node1 iscsid: iscsid: current time 142596
+Jun 12 09:54:28 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+
+
+###连接日志:
+[root@node1 ~]# iscsiadm -m node -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260 -l -d 8
+iscsiadm: Max file limits 16384 16384
+iscsiadm: exec_node_op: : node [iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755,172.17.136.132,3260] sid 0
+iscsiadm: searching iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+iscsiadm: found 172.17.136.132,3260,1
+iscsiadm: iface iter found default.
+iscsiadm: updated 'node.name', '' => 'iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755'
+iscsiadm: updated 'node.tpgt', '-1' => '1'
+iscsiadm: updated 'node.startup', 'manual' => 'automatic'
+iscsiadm: updated 'node.leading_login', 'No' => 'No'
+iscsiadm: updated 'iface.iscsi_ifacename', 'default' => 'default'
+iscsiadm: updated 'iface.transport_name', 'tcp' => 'tcp'
+iscsiadm: updated 'iface.vlan_id', '0' => '0'
+iscsiadm: updated 'iface.vlan_priority', '0' => '0'
+iscsiadm: updated 'iface.iface_num', '0' => '0'
+iscsiadm: updated 'iface.mtu', '0' => '0'
+iscsiadm: updated 'iface.port', '0' => '0'
+iscsiadm: updated 'iface.tos', '0' => '0'
+iscsiadm: updated 'iface.ttl', '0' => '0'
+iscsiadm: updated 'iface.tcp_wsf', '0' => '0'
+iscsiadm: updated 'iface.tcp_timer_scale', '0' => '0'
+iscsiadm: updated 'iface.def_task_mgmt_timeout', '0' => '0'
+iscsiadm: updated 'iface.erl', '0' => '0'
+iscsiadm: updated 'iface.max_receive_data_len', '0' => '0'
+iscsiadm: updated 'iface.first_burst_len', '0' => '0'
+iscsiadm: updated 'iface.max_outstanding_r2t', '0' => '0'
+iscsiadm: updated 'iface.max_burst_len', '0' => '0'
+iscsiadm: updated 'node.discovery_address', '' => '172.17.136.132'
+iscsiadm: updated 'node.discovery_port', '0' => '3260'
+iscsiadm: updated 'node.discovery_type', 'static' => 'send_targets'
+iscsiadm: updated 'node.session.initial_cmdsn', '0' => '0'
+iscsiadm: updated 'node.session.initial_login_retry_max', '4' => '8'
+iscsiadm: updated 'node.session.xmit_thread_priority', '-20' => '-20'
+iscsiadm: updated 'node.session.cmds_max', '128' => '128'
+iscsiadm: updated 'node.session.queue_depth', '32' => '32'
+iscsiadm: updated 'node.session.nr_sessions', '1' => '1'
+iscsiadm: updated 'node.session.auth.authmethod', 'None' => 'None'
+iscsiadm: updated 'node.session.auth.chap_algs', 'MD5' => 'MD5'
+iscsiadm: updated 'node.session.timeo.replacement_timeout', '120' => '120'
+iscsiadm: updated 'node.session.err_timeo.abort_timeout', '15' => '15'
+iscsiadm: updated 'node.session.err_timeo.lu_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.tgt_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.host_reset_timeout', '60' => '60'
+iscsiadm: updated 'node.session.iscsi.FastAbort', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.InitialR2T', 'No' => 'No'
+iscsiadm: updated 'node.session.iscsi.ImmediateData', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.FirstBurstLength', '262144' => '262144'
+iscsiadm: updated 'node.session.iscsi.MaxBurstLength', '16776192' => '16776192'
+iscsiadm: updated 'node.session.iscsi.DefaultTime2Retain', '0' => '0'
+iscsiadm: updated 'node.session.iscsi.DefaultTime2Wait', '2' => '2'
+iscsiadm: updated 'node.session.iscsi.MaxConnections', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.MaxOutstandingR2T', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.ERL', '0' => '0'
+iscsiadm: updated 'node.session.scan', 'auto' => 'auto'
+iscsiadm: updated 'node.conn[0].address', '' => '172.17.136.132'
+iscsiadm: updated 'node.conn[0].port', '3260' => '3260'
+iscsiadm: updated 'node.conn[0].startup', 'manual' => 'manual'
+iscsiadm: updated 'node.conn[0].tcp.window_size', '524288' => '524288'
+iscsiadm: updated 'node.conn[0].tcp.type_of_service', '0' => '0'
+iscsiadm: updated 'node.conn[0].timeo.logout_timeout', '15' => '15'
+iscsiadm: updated 'node.conn[0].timeo.login_timeout', '30' => '15'
+iscsiadm: updated 'node.conn[0].timeo.auth_timeout', '45' => '45'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_interval', '5' => '5'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_timeout', '5' => '5'
+iscsiadm: updated 'node.conn[0].iscsi.MaxXmitDataSegmentLength', '0' => '0'
+iscsiadm: updated 'node.conn[0].iscsi.MaxRecvDataSegmentLength', '262144' => '262144'
+iscsiadm: updated 'node.conn[0].iscsi.HeaderDigest', 'None' => 'None'
+iscsiadm: updated 'node.conn[0].iscsi.IFMarker', 'No' => 'No'
+iscsiadm: updated 'node.conn[0].iscsi.OFMarker', 'No' => 'No'
+iscsiadm: match session [iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755,172.17.136.132,3260][ ,,]:0
+iscsiadm: to [iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755,172.17.136.132,3260][default tcp,,]:0
+iscsiadm: found 172.17.136.131,3260,1
+iscsiadm: iface iter found default.
+iscsiadm: updated 'node.name', '' => 'iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755'
+iscsiadm: updated 'node.tpgt', '-1' => '1'
+iscsiadm: updated 'node.startup', 'manual' => 'automatic'
+iscsiadm: updated 'node.leading_login', 'No' => 'No'
+iscsiadm: updated 'iface.iscsi_ifacename', 'default' => 'default'
+iscsiadm: updated 'iface.transport_name', 'tcp' => 'tcp'
+iscsiadm: updated 'iface.vlan_id', '0' => '0'
+iscsiadm: updated 'iface.vlan_priority', '0' => '0'
+iscsiadm: updated 'iface.iface_num', '0' => '0'
+iscsiadm: updated 'iface.mtu', '0' => '0'
+iscsiadm: updated 'iface.port', '0' => '0'
+iscsiadm: updated 'iface.tos', '0' => '0'
+iscsiadm: updated 'iface.ttl', '0' => '0'
+iscsiadm: updated 'iface.tcp_wsf', '0' => '0'
+iscsiadm: updated 'iface.tcp_timer_scale', '0' => '0'
+iscsiadm: updated 'iface.def_task_mgmt_timeout', '0' => '0'
+iscsiadm: updated 'iface.erl', '0' => '0'
+iscsiadm: updated 'iface.max_receive_data_len', '0' => '0'
+iscsiadm: updated 'iface.first_burst_len', '0' => '0'
+iscsiadm: updated 'iface.max_outstanding_r2t', '0' => '0'
+iscsiadm: updated 'iface.max_burst_len', '0' => '0'
+iscsiadm: updated 'node.discovery_address', '' => '172.17.136.131'
+iscsiadm: updated 'node.discovery_port', '0' => '3260'
+iscsiadm: updated 'node.discovery_type', 'static' => 'send_targets'
+iscsiadm: updated 'node.session.initial_cmdsn', '0' => '0'
+iscsiadm: updated 'node.session.initial_login_retry_max', '4' => '8'
+iscsiadm: updated 'node.session.xmit_thread_priority', '-20' => '-20'
+iscsiadm: updated 'node.session.cmds_max', '128' => '128'
+iscsiadm: updated 'node.session.queue_depth', '32' => '32'
+iscsiadm: updated 'node.session.nr_sessions', '1' => '1'
+iscsiadm: updated 'node.session.auth.authmethod', 'None' => 'None'
+iscsiadm: updated 'node.session.auth.chap_algs', 'MD5' => 'MD5'
+iscsiadm: updated 'node.session.timeo.replacement_timeout', '120' => '120'
+iscsiadm: updated 'node.session.err_timeo.abort_timeout', '15' => '15'
+iscsiadm: updated 'node.session.err_timeo.lu_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.tgt_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.host_reset_timeout', '60' => '60'
+iscsiadm: updated 'node.session.iscsi.FastAbort', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.InitialR2T', 'No' => 'No'
+iscsiadm: updated 'node.session.iscsi.ImmediateData', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.FirstBurstLength', '262144' => '262144'
+iscsiadm: updated 'node.session.iscsi.MaxBurstLength', '16776192' => '16776192'
+iscsiadm: updated 'node.session.iscsi.DefaultTime2Retain', '0' => '0'
+iscsiadm: updated 'node.session.iscsi.DefaultTime2Wait', '2' => '2'
+iscsiadm: updated 'node.session.iscsi.MaxConnections', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.MaxOutstandingR2T', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.ERL', '0' => '0'
+iscsiadm: updated 'node.session.scan', 'auto' => 'auto'
+iscsiadm: updated 'node.conn[0].address', '' => '172.17.136.131'
+iscsiadm: updated 'node.conn[0].port', '3260' => '3260'
+iscsiadm: updated 'node.conn[0].startup', 'manual' => 'manual'
+iscsiadm: updated 'node.conn[0].tcp.window_size', '524288' => '524288'
+iscsiadm: updated 'node.conn[0].tcp.type_of_service', '0' => '0'
+iscsiadm: updated 'node.conn[0].timeo.logout_timeout', '15' => '15'
+iscsiadm: updated 'node.conn[0].timeo.login_timeout', '30' => '15'
+iscsiadm: updated 'node.conn[0].timeo.auth_timeout', '45' => '45'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_interval', '5' => '5'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_timeout', '5' => '5'
+iscsiadm: updated 'node.conn[0].iscsi.MaxXmitDataSegmentLength', '0' => '0'
+iscsiadm: updated 'node.conn[0].iscsi.MaxRecvDataSegmentLength', '262144' => '262144'
+iscsiadm: updated 'node.conn[0].iscsi.HeaderDigest', 'None' => 'None'
+iscsiadm: updated 'node.conn[0].iscsi.IFMarker', 'No' => 'No'
+iscsiadm: updated 'node.conn[0].iscsi.OFMarker', 'No' => 'No'
+iscsiadm: match session [iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755,172.17.136.132,3260][ ,,]:0
+iscsiadm: to [iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755,172.17.136.131,3260][default tcp,,]:0
+iscsiadm: found 172.17.136.133,3260,1
+iscsiadm: iface iter found default.
+iscsiadm: updated 'node.name', '' => 'iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755'
+iscsiadm: updated 'node.tpgt', '-1' => '1'
+iscsiadm: updated 'node.startup', 'manual' => 'automatic'
+iscsiadm: updated 'node.leading_login', 'No' => 'No'
+iscsiadm: updated 'iface.iscsi_ifacename', 'default' => 'default'
+iscsiadm: updated 'iface.transport_name', 'tcp' => 'tcp'
+iscsiadm: updated 'iface.vlan_id', '0' => '0'
+iscsiadm: updated 'iface.vlan_priority', '0' => '0'
+iscsiadm: updated 'iface.iface_num', '0' => '0'
+iscsiadm: updated 'iface.mtu', '0' => '0'
+iscsiadm: updated 'iface.port', '0' => '0'
+iscsiadm: updated 'iface.tos', '0' => '0'
+iscsiadm: updated 'iface.ttl', '0' => '0'
+iscsiadm: updated 'iface.tcp_wsf', '0' => '0'
+iscsiadm: updated 'iface.tcp_timer_scale', '0' => '0'
+iscsiadm: updated 'iface.def_task_mgmt_timeout', '0' => '0'
+iscsiadm: updated 'iface.erl', '0' => '0'
+iscsiadm: updated 'iface.max_receive_data_len', '0' => '0'
+iscsiadm: updated 'iface.first_burst_len', '0' => '0'
+iscsiadm: updated 'iface.max_outstanding_r2t', '0' => '0'
+iscsiadm: updated 'iface.max_burst_len', '0' => '0'
+iscsiadm: updated 'node.discovery_address', '' => '172.17.136.133'
+iscsiadm: updated 'node.discovery_port', '0' => '3260'
+iscsiadm: updated 'node.discovery_type', 'static' => 'send_targets'
+iscsiadm: updated 'node.session.initial_cmdsn', '0' => '0'
+iscsiadm: updated 'node.session.initial_login_retry_max', '4' => '8'
+iscsiadm: updated 'node.session.xmit_thread_priority', '-20' => '-20'
+iscsiadm: updated 'node.session.cmds_max', '128' => '128'
+iscsiadm: updated 'node.session.queue_depth', '32' => '32'
+iscsiadm: updated 'node.session.nr_sessions', '1' => '1'
+iscsiadm: updated 'node.session.auth.authmethod', 'None' => 'None'
+iscsiadm: updated 'node.session.auth.chap_algs', 'MD5' => 'MD5'
+iscsiadm: updated 'node.session.timeo.replacement_timeout', '120' => '120'
+iscsiadm: updated 'node.session.err_timeo.abort_timeout', '15' => '15'
+iscsiadm: updated 'node.session.err_timeo.lu_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.tgt_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.host_reset_timeout', '60' => '60'
+iscsiadm: updated 'node.session.iscsi.FastAbort', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.InitialR2T', 'No' => 'No'
+iscsiadm: updated 'node.session.iscsi.ImmediateData', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.FirstBurstLength', '262144' => '262144'
+iscsiadm: updated 'node.session.iscsi.MaxBurstLength', '16776192' => '16776192'
+iscsiadm: updated 'node.session.iscsi.DefaultTime2Retain', '0' => '0'
+iscsiadm: updated 'node.session.iscsi.DefaultTime2Wait', '2' => '2'
+iscsiadm: updated 'node.session.iscsi.MaxConnections', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.MaxOutstandingR2T', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.ERL', '0' => '0'
+iscsiadm: updated 'node.session.scan', 'auto' => 'auto'
+iscsiadm: updated 'node.conn[0].address', '' => '172.17.136.133'
+iscsiadm: updated 'node.conn[0].port', '3260' => '3260'
+iscsiadm: updated 'node.conn[0].startup', 'manual' => 'manual'
+iscsiadm: updated 'node.conn[0].tcp.window_size', '524288' => '524288'
+iscsiadm: updated 'node.conn[0].tcp.type_of_service', '0' => '0'
+iscsiadm: updated 'node.conn[0].timeo.logout_timeout', '15' => '15'
+iscsiadm: updated 'node.conn[0].timeo.login_timeout', '30' => '15'
+iscsiadm: updated 'node.conn[0].timeo.auth_timeout', '45' => '45'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_interval', '5' => '5'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_timeout', '5' => '5'
+iscsiadm: updated 'node.conn[0].iscsi.MaxXmitDataSegmentLength', '0' => '0'
+iscsiadm: updated 'node.conn[0].iscsi.MaxRecvDataSegmentLength', '262144' => '262144'
+iscsiadm: updated 'node.conn[0].iscsi.HeaderDigest', 'None' => 'None'
+iscsiadm: updated 'node.conn[0].iscsi.IFMarker', 'No' => 'No'
+iscsiadm: updated 'node.conn[0].iscsi.OFMarker', 'No' => 'No'
+iscsiadm: match session [iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755,172.17.136.132,3260][ ,,]:0
+iscsiadm: to [iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755,172.17.136.133,3260][default tcp,,]:0
+iscsiadm: default: Creating session 1/1
+Logging in to [iface: default, target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] (multiple)
+Login to [iface: default, target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] successful.
+
+
+### 以下是iscsid的日志
+Jun 12 09:56:36 node1 iscsid: iscsid: poll result 1
+Jun 12 09:56:36 node1 iscsid: iscsid: in read_transports
+Jun 12 09:56:36 node1 iscsid: iscsid: Adding new transport qla4xxx
+Jun 12 09:56:36 node1 iscsid: iscsid: Matched transport qla4xxx
+Jun 12 09:56:36 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'handle'
+Jun 12 09:56:36 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'caps'
+Jun 12 09:56:36 node1 iscsid: iscsid: Adding new transport tcp
+Jun 12 09:56:36 node1 iscsid: iscsid: Matched transport tcp
+Jun 12 09:56:36 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'handle'
+Jun 12 09:56:36 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'caps'
+Jun 12 09:56:36 node1 iscsid: iscsid: Allocted session 0x558f51f2c570
+Jun 12 09:56:36 node1 iscsid: iscsid: no authentication configured...
+Jun 12 09:56:36 node1 iscsid: iscsid: resolved 172.17.136.132 to 172.17.136.132
+Jun 12 09:56:36 node1 iscsid: iscsid: setting iface default, dev , set ip , hw , transport tcp.
+Jun 12 09:56:36 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 09:56:36 node1 iscsid: iscsid: set TCP recv window size to 524288, actually got 425984
+Jun 12 09:56:36 node1 iscsid: iscsid: set TCP send window size to 524288, actually got 425984
+Jun 12 09:56:36 node1 iscsid: iscsid: connecting to 172.17.136.132:3260
+Jun 12 09:56:36 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 2, tmo 0
+Jun 12 09:56:36 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 09:56:36 node1 iscsid: iscsid: Setting login timer 0x558f51f344d8 timeout 15
+Jun 12 09:56:36 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 09:56:36 node1 iscsid: iscsid: thread 0x558f51f344d8 schedule: delay 15 state 3
+Jun 12 09:56:36 node1 iscsid: iscsid: new thread 0x558f51f344d8 due 142739 is first item on pend_list
+Jun 12 09:56:36 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 12 09:56:36 node1 iscsid: iscsid: current time 142724
+Jun 12 09:56:36 node1 iscsid: iscsid: thread 558f51f344d8 due 142739, wait 15 more
+Jun 12 09:56:36 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 09:56:36 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 09:56:36 node1 iscsid: iscsid: connected local port 53632 to 172.17.136.132:3260
+Jun 12 09:56:36 node1 iscsid: iscsid: in kcreate_session
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: expecting event 11, got 106, handling...
+Jun 12 09:56:36 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 09:56:36 node1 iscsid: iscsid: in nl_read
+Jun 12 09:56:36 node1 iscsid: iscsid: ctldev_handle got event type 106
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/scsi_host/host14'/'proc_name'
+Jun 12 09:56:36 node1 iscsid: iscsid: in read_transports
+Jun 12 09:56:36 node1 iscsid: iscsid: Updating transport qla4xxx
+Jun 12 09:56:36 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'handle'
+Jun 12 09:56:36 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'caps'
+Jun 12 09:56:36 node1 iscsid: iscsid: Updating transport tcp
+Jun 12 09:56:36 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'handle'
+Jun 12 09:56:36 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'caps'
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: created new iSCSI session sid 21 host no 14
+Jun 12 09:56:36 node1 iscsid: iscsid: in kcreate_conn
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: created new iSCSI connection 21:0
+Jun 12 09:56:36 node1 iscsid: iscsid: in kbind_conn
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: bound iSCSI connection 21:0 to session 21
+Jun 12 09:56:36 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_connection/connection21:0'/'exp_statsn'
+Jun 12 09:56:36 node1 iscsid: iscsid: sysfs_attr_get_value: open '/class/iscsi_connection/connection21:0'/'ping_tmo'
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 15 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 17 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 172.17.136.132
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 18 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 3260
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 19 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 120
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 22 to:
+Jun 12 09:56:36 node1 iscsid: iscsid:
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 23 to:
+Jun 12 09:56:36 node1 iscsid: iscsid:
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 24 to:
+Jun 12 09:56:36 node1 iscsid: iscsid:
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 25 to:
+Jun 12 09:56:36 node1 iscsid: iscsid:
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 26 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 1
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 27 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 15
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 28 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 30
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 35 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 30
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 30 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 5
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 31 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 5
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 32 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: default
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 34 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: iqn.1994-05.com.redhat:461b38c9b3e6
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 39 to:
+Jun 12 09:56:36 node1 iscsid: iscsid:
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 40 to:
+Jun 12 09:56:36 node1 iscsid: iscsid:
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 41 to:
+Jun 12 09:56:36 node1 iscsid: iscsid:
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 43 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 0
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_host_param
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 2 to:
+Jun 12 09:56:36 node1 iscsid: iscsid:
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_host_param
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 0 to:
+Jun 12 09:56:36 node1 iscsid: iscsid:
+Jun 12 09:56:36 node1 iscsid: iscsid: sending login PDU with current stage 1, next stage 3, transit 0x80, isid 0x00023d000015 exp_statsn 0
+Jun 12 09:56:36 node1 iscsid: iscsid: >    InitiatorName=iqn.1994-05.com.redhat:461b38c9b3e6
+Jun 12 09:56:36 node1 iscsid: iscsid: >    InitiatorAlias=node1
+Jun 12 09:56:36 node1 iscsid: iscsid: >    TargetName=iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+Jun 12 09:56:36 node1 iscsid: iscsid: >    SessionType=Normal
+Jun 12 09:56:36 node1 iscsid: iscsid: >    HeaderDigest=None
+Jun 12 09:56:36 node1 iscsid: iscsid: >    DataDigest=None
+Jun 12 09:56:36 node1 iscsid: iscsid: >    DefaultTime2Wait=2
+Jun 12 09:56:36 node1 iscsid: iscsid: >    DefaultTime2Retain=0
+Jun 12 09:56:36 node1 iscsid: iscsid: >    IFMarker=No
+Jun 12 09:56:36 node1 iscsid: iscsid: >    OFMarker=No
+Jun 12 09:56:36 node1 iscsid: iscsid: >    ErrorRecoveryLevel=0
+Jun 12 09:56:36 node1 iscsid: iscsid: >    InitialR2T=No
+Jun 12 09:56:36 node1 iscsid: iscsid: >    ImmediateData=Yes
+Jun 12 09:56:36 node1 iscsid: iscsid: >    MaxBurstLength=16776192
+Jun 12 09:56:36 node1 iscsid: iscsid: >    FirstBurstLength=262144
+Jun 12 09:56:36 node1 iscsid: iscsid: >    MaxOutstandingR2T=1
+Jun 12 09:56:36 node1 iscsid: iscsid: >    MaxConnections=1
+Jun 12 09:56:36 node1 iscsid: iscsid: >    DataPDUInOrder=Yes
+Jun 12 09:56:36 node1 iscsid: iscsid: >    DataSequenceInOrder=Yes
+Jun 12 09:56:36 node1 iscsid: iscsid: >    MaxRecvDataSegmentLength=262144
+Jun 12 09:56:36 node1 iscsid: iscsid: in ksend_pdu_begin
+Jun 12 09:56:36 node1 iscsid: iscsid: send PDU began for hdr 48 bytes and data 476 bytes
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: wrote 48 bytes of PDU header
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: wrote 476 bytes of PDU data
+Jun 12 09:56:36 node1 iscsid: iscsid: in ksend_pdu_end
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: send PDU finished for conn 21:0
+Jun 12 09:56:36 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 09:56:36 node1 iscsid: iscsid: poll result 1
+Jun 12 09:56:36 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 09:56:36 node1 iscsid: iscsid: in nl_read
+Jun 12 09:56:36 node1 iscsid: iscsid: ctldev_handle got event type 101
+Jun 12 09:56:36 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 09:56:36 node1 iscsid: iscsid: message real length is 456 bytes, recv_handle 0x558f51f390b8
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 1, tmo 0
+Jun 12 09:56:36 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 09:56:36 node1 iscsid: iscsid: current time 142724
+Jun 12 09:56:36 node1 iscsid: iscsid: thread 558f51f344d8 due 142739, wait 15 more
+Jun 12 09:56:36 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 09:56:36 node1 iscsid: iscsid: in krecv_pdu_begin
+Jun 12 09:56:36 node1 iscsid: iscsid: recv PDU began, pdu handle 0x558f51f390f0
+Jun 12 09:56:36 node1 iscsid: iscsid: in kread 0 48 0x558f51f32048 0x558f51f390f0
+Jun 12 09:56:36 node1 iscsid: iscsid: read 48 bytes of PDU header
+Jun 12 09:56:36 node1 iscsid: iscsid: read 48 PDU header bytes, opcode 0x23, dlength 334, data 0x558f51f320b8, max 8192
+Jun 12 09:56:36 node1 iscsid: iscsid: in kread 48 334 0x558f51f320b8 0x558f51f390f0
+Jun 12 09:56:36 node1 iscsid: iscsid: read 334 bytes of PDU data
+Jun 12 09:56:36 node1 iscsid: iscsid: finished reading login PDU, 48 hdr, 0 ah, 334 data, 2 pad
+Jun 12 09:56:36 node1 iscsid: iscsid: login current stage 1, next stage 3, transit 0x80
+Jun 12 09:56:36 node1 iscsid: iscsid: >    TargetPortalGroupTag=1
+Jun 12 09:56:36 node1 iscsid: iscsid: >    HeaderDigest=None
+Jun 12 09:56:36 node1 iscsid: iscsid: >    DataDigest=None
+Jun 12 09:56:36 node1 iscsid: iscsid: >    DefaultTime2Wait=2
+Jun 12 09:56:36 node1 iscsid: iscsid: >    DefaultTime2Retain=0
+Jun 12 09:56:36 node1 iscsid: iscsid: >    IFMarker=No
+Jun 12 09:56:36 node1 iscsid: iscsid: >    OFMarker=No
+Jun 12 09:56:36 node1 iscsid: iscsid: >    ErrorRecoveryLevel=0
+Jun 12 09:56:36 node1 iscsid: iscsid: >    InitialR2T=Yes
+Jun 12 09:56:36 node1 iscsid: iscsid: >    ImmediateData=Yes
+Jun 12 09:56:36 node1 iscsid: iscsid: >    MaxBurstLength=1048576
+Jun 12 09:56:36 node1 iscsid: iscsid: >    FirstBurstLength=262144
+Jun 12 09:56:36 node1 iscsid: iscsid: >    MaxOutstandingR2T=1
+Jun 12 09:56:36 node1 iscsid: iscsid: >    MaxConnections=1
+Jun 12 09:56:36 node1 iscsid: iscsid: >    DataPDUInOrder=Yes
+Jun 12 09:56:36 node1 iscsid: iscsid: >    DataSequenceInOrder=Yes
+Jun 12 09:56:36 node1 iscsid: iscsid: >    MaxRecvDataSegmentLength=262144
+Jun 12 09:56:36 node1 iscsid: iscsid: in krecv_pdu_end
+Jun 12 09:56:36 node1 iscsid: iscsid: recv PDU finished for pdu handle 0x0x558f51f390f0
+Jun 12 09:56:36 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 09:56:36 node1 iscsid: iscsid: login response status 0000
+Jun 12 09:56:36 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 1
+Jun 12 09:56:36 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 12 09:56:36 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 0 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 262144
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 1 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 262144
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 2 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 0
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 3 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 0
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 4 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 1
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 5 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 1
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 6 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 1
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 7 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 262144
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 8 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 1048576
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 9 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 1
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 10 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 1
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 11 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 0
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 14 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 1
+Jun 12 09:56:36 node1 iscsid: iscsid: in kset_param
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: set operational parameter 16 to:
+Jun 12 09:56:36 node1 iscsid: iscsid: 1
+Jun 12 09:56:36 node1 iscsid: iscsid: in kstart_conn
+Jun 12 09:56:36 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:56:36 node1 iscsid: iscsid: in kwritev
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:56:36 node1 iscsid: iscsid: scanning host14 from pid 1646328
+Jun 12 09:56:36 node1 iscsid: iscsid: Connection21:0 to [target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] through [iface: default] is operational now
+Jun 12 09:56:36 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 09:56:36 node1 iscsid: iscsid: scanning host14
+Jun 12 09:56:36 node1 iscsid: iscsid: scanning host14 completed
+Jun 12 09:56:36 node1 iscsid: iscsid: mgmt_ipc_write_rsp: rsp to fd 6
+Jun 12 09:56:36 node1 iscsid: iscsid: set queue depth for 14:0:0:0 to 32
+Jun 12 09:56:36 node1 iscsid: iscsid: set queue depth for 14:0:0:1 to 32
+Jun 12 09:56:37 node1 iscsid: iscsid: reaped pid 1646328, reap_count now 0
+Jun 12 09:56:37 node1 iscsid: iscsid: current time 142725
+Jun 12 09:56:37 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+
+### 断连日志:
+[root@node1 ~]# iscsiadm -m node --logoutall=all -d 8
+iscsiadm: Max file limits 16384 16384
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'targetname'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'username'
+iscsiadm: could not read username: 5
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'password'
+iscsiadm: could not read password: 5
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'username_in'
+iscsiadm: could not read username in: 5
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'password_in'
+iscsiadm: could not read password in: 5
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'recovery_tmo'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'lu_reset_tmo'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'tgt_reset_tmo'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'abort_tmo'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'tpgt'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_connection/connection21:0'/'persistent_address'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_connection/connection21:0'/'address'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_connection/connection21:0'/'persistent_port'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_connection/connection21:0'/'port'
+iscsiadm: sysfs_device_get: open '/class/iscsi_session/session21'
+iscsiadm: sysfs_resolve_link: path link '/class/iscsi_session/session21' points to '../../devices/platform/host14/session21/iscsi_session/session21'
+iscsiadm: sysfs_resolve_link: base '/class/iscsi_session/session21', tail 'devices/platform/host14/session21/iscsi_session/session21', back 2
+iscsiadm: sysfs_resolve_link: after moving back ''
+iscsiadm: sysfs_device_get: new uncached device '/devices/platform/host14/session21/iscsi_session/session21'
+iscsiadm: sysfs_device_set_values: kernel='session21'
+iscsiadm: sysfs_device_set_values: kernel_number='21'
+iscsiadm: sysfs_device_get: subsystem link '/sys/devices/platform/host14/session21/iscsi_session/session21/subsystem' points to '../../../../../../class/iscsi_session'
+iscsiadm: sysfs_device_get: add to cache 'devpath=/devices/platform/host14/session21/iscsi_session/session21', subsystem='iscsi_session', driver=''
+iscsiadm: sysfs_device_get_parent: open '/devices/platform/host14/session21/iscsi_session/session21'
+iscsiadm: sysfs_device_get_parent: '/devices/platform/host14/session21/iscsi_session/session21'
+iscsiadm: sysfs_device_get: open '/devices/platform/host14/session21/iscsi_session'
+iscsiadm: sysfs_device_get: new uncached device '/devices/platform/host14/session21/iscsi_session'
+iscsiadm: sysfs_device_set_values: kernel='iscsi_session'
+iscsiadm: sysfs_device_set_values: kernel_number=''
+iscsiadm: sysfs_device_get: add to cache 'devpath=/devices/platform/host14/session21/iscsi_session', subsystem='', driver=''
+iscsiadm: sysfs_device_get_parent: open '/devices/platform/host14/session21/iscsi_session'
+iscsiadm: sysfs_device_get_parent: '/devices/platform/host14/session21/iscsi_session'
+iscsiadm: sysfs_device_get: open '/devices/platform/host14/session21'
+iscsiadm: sysfs_device_get: new uncached device '/devices/platform/host14/session21'
+iscsiadm: sysfs_device_set_values: kernel='session21'
+iscsiadm: sysfs_device_set_values: kernel_number='21'
+iscsiadm: sysfs_device_get: add to cache 'devpath=/devices/platform/host14/session21', subsystem='', driver=''
+iscsiadm: sysfs_device_get_parent: open '/devices/platform/host14/session21'
+iscsiadm: sysfs_device_get_parent: '/devices/platform/host14/session21'
+iscsiadm: sysfs_device_get: open '/devices/platform/host14'
+iscsiadm: sysfs_device_get: new uncached device '/devices/platform/host14'
+iscsiadm: sysfs_device_set_values: kernel='host14'
+iscsiadm: sysfs_device_set_values: kernel_number='14'
+iscsiadm: sysfs_device_get: subsystem link '/sys/devices/platform/host14/subsystem' points to '../../../bus/scsi'
+iscsiadm: sysfs_device_get: add to cache 'devpath=/devices/platform/host14', subsystem='scsi', driver=''
+iscsiadm: sysfs_attr_get_value: open '/class/scsi_host/host14'/'proc_name'
+iscsiadm: in read_transports
+iscsiadm: Adding new transport qla4xxx
+iscsiadm: Matched transport qla4xxx
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'handle'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'caps'
+iscsiadm: Adding new transport tcp
+iscsiadm: Matched transport tcp
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'handle'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'caps'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_host/host14'/'hwaddress'
+iscsiadm: could not read hwaddress for host14
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_host/host14'/'ipaddress'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_host/host14'/'netdev'
+iscsiadm: could not read netdev for host14
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'initiatorname'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_host/host14'/'port_state'
+iscsiadm: sysfs_attr_get_value: stat '/sys/class/iscsi_host/host14/port_state' failed: No such file or directory
+iscsiadm: Could not read attr port_state on path /class/iscsi_host/host14
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_host/host14'/'port_speed'
+iscsiadm: sysfs_attr_get_value: stat '/sys/class/iscsi_host/host14/port_speed' failed: No such file or directory
+iscsiadm: Could not read attr port_speed on path /class/iscsi_host/host14
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_session/session21'/'ifacename'
+iscsiadm: found targetname iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 address 172.17.136.132 pers address 172.17.136.132 port 3260 pers port 3260 driver tcp iface name default ipaddress 172.17.136.131 netdev  hwaddress  iname iqn.1994-05.com.redhat:461b38c9b3e6
+iscsiadm: rec read looking for config file /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755/172.17.136.132,3260.
+iscsiadm: rec read looking for config file /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755/172.17.136.132,3260,1/default.
+iscsiadm: updated 'node.name', '' => 'iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755'
+iscsiadm: updated 'node.tpgt', '-1' => '1'
+iscsiadm: updated 'node.startup', 'manual' => 'automatic'
+iscsiadm: updated 'node.leading_login', 'No' => 'No'
+iscsiadm: updated 'iface.iscsi_ifacename', 'default' => 'default'
+iscsiadm: updated 'iface.transport_name', 'tcp' => 'tcp'
+iscsiadm: updated 'iface.vlan_id', '0' => '0'
+iscsiadm: updated 'iface.vlan_priority', '0' => '0'
+iscsiadm: updated 'iface.iface_num', '0' => '0'
+iscsiadm: updated 'iface.mtu', '0' => '0'
+iscsiadm: updated 'iface.port', '0' => '0'
+iscsiadm: updated 'iface.tos', '0' => '0'
+iscsiadm: updated 'iface.ttl', '0' => '0'
+iscsiadm: updated 'iface.tcp_wsf', '0' => '0'
+iscsiadm: updated 'iface.tcp_timer_scale', '0' => '0'
+iscsiadm: updated 'iface.def_task_mgmt_timeout', '0' => '0'
+iscsiadm: updated 'iface.erl', '0' => '0'
+iscsiadm: updated 'iface.max_receive_data_len', '0' => '0'
+iscsiadm: updated 'iface.first_burst_len', '0' => '0'
+iscsiadm: updated 'iface.max_outstanding_r2t', '0' => '0'
+iscsiadm: updated 'iface.max_burst_len', '0' => '0'
+iscsiadm: updated 'node.discovery_address', '' => '172.17.136.132'
+iscsiadm: updated 'node.discovery_port', '0' => '3260'
+iscsiadm: updated 'node.discovery_type', 'static' => 'send_targets'
+iscsiadm: updated 'node.session.initial_cmdsn', '0' => '0'
+iscsiadm: updated 'node.session.initial_login_retry_max', '4' => '8'
+iscsiadm: updated 'node.session.xmit_thread_priority', '-20' => '-20'
+iscsiadm: updated 'node.session.cmds_max', '128' => '128'
+iscsiadm: updated 'node.session.queue_depth', '32' => '32'
+iscsiadm: updated 'node.session.nr_sessions', '1' => '1'
+iscsiadm: updated 'node.session.auth.authmethod', 'None' => 'None'
+iscsiadm: updated 'node.session.auth.chap_algs', 'MD5' => 'MD5'
+iscsiadm: updated 'node.session.timeo.replacement_timeout', '120' => '120'
+iscsiadm: updated 'node.session.err_timeo.abort_timeout', '15' => '15'
+iscsiadm: updated 'node.session.err_timeo.lu_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.tgt_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.host_reset_timeout', '60' => '60'
+iscsiadm: updated 'node.session.iscsi.FastAbort', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.InitialR2T', 'No' => 'No'
+iscsiadm: updated 'node.session.iscsi.ImmediateData', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.FirstBurstLength', '262144' => '262144'
+iscsiadm: updated 'node.session.iscsi.MaxBurstLength', '16776192' => '16776192'
+iscsiadm: updated 'node.session.iscsi.DefaultTime2Retain', '0' => '0'
+iscsiadm: updated 'node.session.iscsi.DefaultTime2Wait', '2' => '2'
+iscsiadm: updated 'node.session.iscsi.MaxConnections', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.MaxOutstandingR2T', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.ERL', '0' => '0'
+iscsiadm: updated 'node.session.scan', 'auto' => 'auto'
+iscsiadm: updated 'node.conn[0].address', '' => '172.17.136.132'
+iscsiadm: updated 'node.conn[0].port', '3260' => '3260'
+iscsiadm: updated 'node.conn[0].startup', 'manual' => 'manual'
+iscsiadm: updated 'node.conn[0].tcp.window_size', '524288' => '524288'
+iscsiadm: updated 'node.conn[0].tcp.type_of_service', '0' => '0'
+iscsiadm: updated 'node.conn[0].timeo.logout_timeout', '15' => '15'
+iscsiadm: updated 'node.conn[0].timeo.login_timeout', '30' => '15'
+iscsiadm: updated 'node.conn[0].timeo.auth_timeout', '45' => '45'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_interval', '5' => '5'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_timeout', '5' => '5'
+iscsiadm: updated 'node.conn[0].iscsi.MaxXmitDataSegmentLength', '0' => '0'
+iscsiadm: updated 'node.conn[0].iscsi.MaxRecvDataSegmentLength', '262144' => '262144'
+iscsiadm: updated 'node.conn[0].iscsi.HeaderDigest', 'None' => 'None'
+iscsiadm: updated 'node.conn[0].iscsi.IFMarker', 'No' => 'No'
+iscsiadm: updated 'node.conn[0].iscsi.OFMarker', 'No' => 'No'
+Logging out of session [sid: 21, target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260]
+Logout of [sid: 21, target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] successful.
+
+
+iscsid:
+Jun 12 09:58:52 node1 iscsid: iscsid: poll result 1
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: open '/class/iscsi_session/session21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_resolve_link: path link '/class/iscsi_session/session21' points to '../../devices/platform/host14/session21/iscsi_session/session21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_resolve_link: base '/class/iscsi_session/session21', tail 'devices/platform/host14/session21/iscsi_session/session21', back 2
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_resolve_link: after moving back ''
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: new uncached device '/devices/platform/host14/session21/iscsi_session/session21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_set_values: kernel='session21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_set_values: kernel_number='21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: subsystem link '/sys/devices/platform/host14/session21/iscsi_session/session21/subsystem' points to '../../../../../../class/iscsi_session'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: add to cache 'devpath=/devices/platform/host14/session21/iscsi_session/session21', subsystem='iscsi_session', driver=''
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get_parent: open '/devices/platform/host14/session21/iscsi_session/session21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get_parent: '/devices/platform/host14/session21/iscsi_session/session21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: open '/devices/platform/host14/session21/iscsi_session'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: new uncached device '/devices/platform/host14/session21/iscsi_session'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_set_values: kernel='iscsi_session'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_set_values: kernel_number=''
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: add to cache 'devpath=/devices/platform/host14/session21/iscsi_session', subsystem='', driver=''
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get_parent: open '/devices/platform/host14/session21/iscsi_session'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get_parent: '/devices/platform/host14/session21/iscsi_session'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: open '/devices/platform/host14/session21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: new uncached device '/devices/platform/host14/session21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_set_values: kernel='session21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_set_values: kernel_number='21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: add to cache 'devpath=/devices/platform/host14/session21', subsystem='', driver=''
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get_parent: open '/devices/platform/host14/session21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get_parent: '/devices/platform/host14/session21'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: open '/devices/platform/host14'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: new uncached device '/devices/platform/host14'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_set_values: kernel='host14'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_set_values: kernel_number='14'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: subsystem link '/sys/devices/platform/host14/subsystem' points to '../../../bus/scsi'
+Jun 12 09:58:52 node1 iscsid: iscsid: sysfs_device_get: add to cache 'devpath=/devices/platform/host14', subsystem='scsi', driver=''
+Jun 12 09:58:52 node1 iscsid: iscsid: in kunbind_session
+Jun 12 09:58:52 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:58:52 node1 iscsid: iscsid: in kwritev
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: current time 142860
+Jun 12 09:58:52 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 12 09:58:52 node1 iscsid: iscsid: poll result 1
+Jun 12 09:58:52 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 09:58:52 node1 iscsid: iscsid: in nl_read
+Jun 12 09:58:52 node1 iscsid: iscsid: ctldev_handle got event type 105
+Jun 12 09:58:52 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 09:58:52 node1 iscsid: iscsid: message real length is 72 bytes, recv_handle 0x558f51f390b8
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 5, tmo 0
+Jun 12 09:58:52 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 0 state 3
+Jun 12 09:58:52 node1 iscsid: iscsid: current time 142861
+Jun 12 09:58:52 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 12 09:58:52 node1 iscsid: iscsid: exec thread 558f51f39070 callback
+Jun 12 09:58:52 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 09:58:52 node1 iscsid: iscsid: sending pdu opcode 0x46:
+Jun 12 09:58:52 node1 iscsid: iscsid: in ksend_pdu_begin
+Jun 12 09:58:52 node1 iscsid: iscsid: send PDU began for hdr 48 bytes and data 0 bytes
+Jun 12 09:58:52 node1 iscsid: iscsid: in kwritev
+Jun 12 09:58:52 node1 iscsid: iscsid: wrote 48 bytes of PDU header
+Jun 12 09:58:52 node1 iscsid: iscsid: in ksend_pdu_end
+Jun 12 09:58:52 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:58:52 node1 iscsid: iscsid: in kwritev
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: send PDU finished for conn 21:0
+Jun 12 09:58:52 node1 iscsid: iscsid: get ev context 0x558f51f39070
+Jun 12 09:58:52 node1 iscsid: iscsid: sched conn context 0x558f51f39070 event 4, tmo 15
+Jun 12 09:58:52 node1 iscsid: iscsid: thread 0x558f51f39070 schedule: delay 15 state 3
+Jun 12 09:58:52 node1 iscsid: iscsid: new thread 0x558f51f39070 due 142876 is first item on pend_list
+Jun 12 09:58:52 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 12 09:58:52 node1 iscsid: iscsid: logout timeout timer 15000
+Jun 12 09:58:52 node1 iscsid: iscsid: thread 558f51f39070 done
+Jun 12 09:58:52 node1 iscsid: iscsid: poll result 1
+Jun 12 09:58:52 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 09:58:52 node1 iscsid: iscsid: in nl_read
+Jun 12 09:58:52 node1 iscsid: iscsid: ctldev_handle got event type 101
+Jun 12 09:58:52 node1 iscsid: iscsid: get ev context 0x558f51f3b140
+Jun 12 09:58:52 node1 iscsid: iscsid: message real length is 120 bytes, recv_handle 0x558f51f3b188
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: sched conn context 0x558f51f3b140 event 1, tmo 0
+Jun 12 09:58:52 node1 iscsid: iscsid: thread 0x558f51f3b140 schedule: delay 0 state 3
+Jun 12 09:58:52 node1 iscsid: iscsid: current time 142861
+Jun 12 09:58:52 node1 iscsid: iscsid: thread 558f51f39070 due 142876, wait 15 more
+Jun 12 09:58:52 node1 iscsid: iscsid: exec thread 558f51f3b140 callback
+Jun 12 09:58:52 node1 iscsid: iscsid: in krecv_pdu_begin
+Jun 12 09:58:52 node1 iscsid: iscsid: recv PDU began, pdu handle 0x558f51f3b1c0
+Jun 12 09:58:52 node1 iscsid: iscsid: in kread 0 48 0x7ffc4c1c9970 0x558f51f3b1c0
+Jun 12 09:58:52 node1 iscsid: iscsid: read 48 bytes of PDU header
+Jun 12 09:58:52 node1 iscsid: iscsid: read 48 PDU header bytes, opcode 0x26, dlength 0, data 0x558f51f320b8, max 8192
+Jun 12 09:58:52 node1 iscsid: iscsid: in krecv_pdu_end
+Jun 12 09:58:52 node1 iscsid: iscsid: recv PDU finished for pdu handle 0x0x558f51f3b1c0
+Jun 12 09:58:52 node1 iscsid: iscsid: put ev context 0x558f51f3b140
+Jun 12 09:58:52 node1 iscsid: iscsid: Recv: logout response 0
+Jun 12 09:58:52 node1 iscsid: iscsid: disconnect conn
+Jun 12 09:58:52 node1 iscsid: iscsid: disconnecting conn 0x558f51f32010, fd 7
+Jun 12 09:58:52 node1 iscsid: iscsid: stop conn (conn state 4)
+Jun 12 09:58:52 node1 iscsid: iscsid: in kstop_conn
+Jun 12 09:58:52 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:58:52 node1 iscsid: iscsid: in kwritev
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: kdestroy conn
+Jun 12 09:58:52 node1 iscsid: iscsid: in kdestroy_conn
+Jun 12 09:58:52 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:58:52 node1 iscsid: iscsid: in kwritev
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: kdestroy session 21
+Jun 12 09:58:52 node1 iscsid: iscsid: in kdestroy_session
+Jun 12 09:58:52 node1 iscsid: iscsid: in __kipc_call
+Jun 12 09:58:52 node1 iscsid: iscsid: in kwritev
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: expecting event 12, got 105, handling...
+Jun 12 09:58:52 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 09:58:52 node1 iscsid: iscsid: in nl_read
+Jun 12 09:58:52 node1 iscsid: iscsid: ctldev_handle got event type 105
+Jun 12 09:58:52 node1 iscsid: iscsid: get ev context 0x558f51f3b140
+Jun 12 09:58:52 node1 iscsid: iscsid: message real length is 72 bytes, recv_handle 0x558f51f3b188
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: sched conn context 0x558f51f3b140 event 5, tmo 0
+Jun 12 09:58:52 node1 iscsid: iscsid: thread 0x558f51f3b140 schedule: delay 0 state 3
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: expecting event 12, got 104, handling...
+Jun 12 09:58:52 node1 iscsid: iscsid: in ctldev_handle
+Jun 12 09:58:52 node1 iscsid: iscsid: in nl_read
+Jun 12 09:58:52 node1 iscsid: iscsid: ctldev_handle got event type 104
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: session destroyed sid 21 host no 14
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: in nlpayload_read
+Jun 12 09:58:52 node1 iscsid: iscsid: Connection21:0 to [target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] through [iface: default] is shutdown.
+Jun 12 09:58:52 node1 iscsid: iscsid: mgmt_ipc_write_rsp: rsp to fd 6
+Jun 12 09:58:52 node1 iscsid: iscsid: thread 558f51f344d8 delete: state 3
+Jun 12 09:58:52 node1 iscsid: iscsid: thread 558f51f34508 delete: state 0
+Jun 12 09:58:52 node1 iscsid: iscsid: destroying session
+Jun 12 09:58:52 node1 iscsid: iscsid: thread 558f51f39070 delete: state 1
+Jun 12 09:58:52 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 12 09:58:52 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 12 09:58:52 node1 iscsid: iscsid: put ev context 0x558f51f39070
+Jun 12 09:58:52 node1 iscsid: iscsid: thread 558f51f3b140 delete: state 2
+Jun 12 09:58:52 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 12 09:58:52 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 12 09:58:52 node1 iscsid: iscsid: put ev context 0x558f51f3b140
+Jun 12 09:58:52 node1 iscsid: iscsid: Releasing session 0x558f51f2c570
+Jun 12 09:58:52 node1 iscsid: iscsid: thread 558f51f3b140 done
+
+
+
