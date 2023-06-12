@@ -1,0 +1,401 @@
+源码分析: https://groups.google.com/g/open-iscsi/c/Z0FMQUxalcU
+iscsid: https://blog.csdn.net/kjtt_kjtt/article/details/38661329
+upstream: https://github.com/open-iscsi/open-iscsi.git
+iscsiadm 与 iscsid 代码流程: https://blog.csdn.net/hahafly1234/article/details/114319122
+网络磁盘挂载方式iscsid: https://www.jianshu.com/p/80f6db329ddf
+频繁执行iscsiadm导致iscsid不进行target的重连: http://sysnote.github.io/2017/03/15/iscsiadm-affect-reconnect/
+源代码: 989e50000032c4913f529edc97c4e8db52564a8d4bf5d6d2f1393c212c5296e0 *open-iscsi-2.0-872-rc4-bnx2i.tar.gz, https://github.com/gooselinux/iscsi-initiator-utils/blob/master/sources, https://github.com/ssbandjl/iscsi-initiator-utils
+https://src.fedoraproject.org/lookaside/extras/iscsi-initiator-utils/open-iscsi-6.2.0.695.tar.bz2/01b98ae5349609977c795cc039cd33d3/
+
+
+
+查询: iscsiadm -m discovery -t sendtargets -p 172.17.136.132
+断开: iscsiadm -m node --logoutall=all
+连接tgt: iscsiadm -m node -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260 -l
+or gdb --args iscsiadm -m node -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260 -l -d 8
+usr/iscsiadm.c -> main
+  MODE_NODE
+  case 'l'
+  do_login = 1
+  exec_node_op -> static int exec_node_op
+    OP_NOOP
+    if (do_login) 
+    login_portals(rec, wait) -> static int login_portals
+      for_each_matched_rec -> static int __for_each_matched_rec
+      iscsi_login_portals iscsi_login_portal
+        list_for_each_entry -> int iscsi_login_portal -> __iscsi_login_portal <- login_fn(data, &login_list, curr_rec)
+          iscsi_sysfs_for_each_session
+          __iscsi_login_portal -> __iscsi_login_portal(void *data
+            iscsid_req_by_rec_async(MGMT_IPC_SESSION_LOGIN
+              iscsid_request
+                iscsid_connect(fd, start_iscsid)
+                  ipc_connect -> static int ipc_connect
+                    *fd = socket(AF_LOCAL, SOCK_STREAM, 0)
+                    setup_abstract_addr ISCSIADM_ABSTRACT_NAMESPACE
+                    connect(*fd, (struct sockaddr *) &addr, addr_len)
+                write(*fd, req, sizeof(*req)) req中带会话登录命令: MGMT_IPC_SESSION_LOGIN -> 发给iscsid服务 -> systemctl status iscsid ->  Listen: @ISCSIADM_ABSTRACT_NAMESPACE (Stream) -> tail -f /var/log/messages | grep iscsid -> /sbin/iscsid -h -> man iscsid -> initiator_name : cat  /etc/iscsi/initiatorname.iscsi
+                -> static void session_conn_process_login
+                ...
+iscsi_sysfs_for_each_session
+  if (wait)
+  static int iscsid_login_reqs_wait
+    iscsid_req_wait(MGMT_IPC_SESSION_LOGIN, curr->fd)
+      iscsid_response ?
+    log_login_msg
+
+
+iscsid: -> usr/iscsid.c -> main
+mgmt_ipc_listen
+  setup_abstract_addr(&addr, iscsid_namespace)
+  #define ISCSIADM_NAMESPACE	"ISCSIADM_ABSTRACT_NAMESPACE" -> socket关联
+event_loop(ipc, control_fd, mgmt_ipc_fd) -> void event_loop
+  res = poll(poll_array, POLL_MAX, reap_count ? REAP_WAKEUP : -1)
+  log_debug(6, "poll result %d", res)
+  mgmt_ipc_handle(mgmt_ipc_fd) -> void mgmt_ipc_handle
+    mgmt_ipc_read_req
+    handler = mgmt_ipc_functions[command] -> 根据命令执行方法 -> mgmt_ipc_functions[__MGMT_IPC_MAX_COMMAND] -> MGMT_IPC_SESSION_LOGIN -> mgmt_ipc_session_login
+    err = handler(qtask)
+
+
+命令映射方法:
+static mgmt_ipc_fn_t *	mgmt_ipc_functions[__MGMT_IPC_MAX_COMMAND] = {
+[MGMT_IPC_SESSION_LOGIN]	= mgmt_ipc_session_login,
+
+
+[root@node1 ~]# iscsiadm -m node -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260 -l
+Logging in to [iface: default, target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] (multiple) <- __iscsi_login_portal
+Login to [iface: default, target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] successful.
+
+
+
+debug: debuginfo-install iscsi-initiator-utils-6.2.0.874-22.el7_9.x86_64
+iscsi_login_portals
+login_portals
+
+
+indra jeet的个人资料照片
+indra jeet
+未读，
+2021年4月29日 01:19:09
+收件人 open-iscsi
+Hi Everyone,
+
+I am trying to understand open-iscsi implementation. 
+
+discovery
+login/logout
+1. Discovery
+In this code path, we usually call to 
+discovery_sendtarget
+--> request_target
+     --> iscsi_io_send_pdu,  which basically writes on a socket opened by iscsiadm, and reads from the socket by "iscsi_io_rev_pdu".
+
+2. login/logout
+In this code path, it get usually triggers to 
+mgmt_ipc_session_login
+   -> __session_login_task -> static int __session_login_task
+    iscsi_sysfs_get_transport_by_name
+      transport_load_kmod
+		    rc = kmod_module_new_from_name(ctx, "ib_iser", &mod);
+        加载内核模块ko -> iscsi_tcp | ib_iser
+        __session_create
+          iscsi_setup_authentication
+          iscsi_session_init_params
+          list_add_tail(&session->list, &t->sessions)
+        __session_conn_create
+        iscsi_host_set_net_params
+        qtask->rsp.command = MGMT_IPC_SESSION_LOGIN
+        -> iscsi_conn_connect -> static int iscsi_conn_connect
+          iscsi_ev_context_get
+          conn->session->t->template->ep_connect -> iscsi_io_tcp_connect
+            connect(conn->socket_fd, (struct sockaddr *) ss, sizeof (*ss)) -> 连接到tgt
+                --> iscsi_sched_ev_context -> static int iscsi_sched_ev_context
+                  case EV_CONN_POLL -> actor_poll
+                        --> session_conn_poll -> static void session_conn_poll
+                          iscsi_ev_context_put
+                          session->t->template->ep_poll
+                          session_ipc_create -> static int session_ipc_create
+                            ipc->create_session -> kcreate_session(uint64_t transport_handle
+                              ev.type = ISCSI_UEVENT_CREATE_SESSION
+                              __kipc_call(iov, 2) -> __kipc_call(struct iovec *iovp, int count) -> kernel
+                                kwritev(type, iovp, count) -> 调用内核态驱动函数 -> iscsi_if_recv_msg -> iscsi_if_create_session -> ...
+                              ...
+                                --> iscsi_login_req
+                                  iscsi_make_login_pdu
+                                    login_hdr->opcode = ISCSI_OP_LOGIN | ISCSI_OP_IMMEDIATE
+                                      --> iscsi_io_send_pdu -> send a PDU to the target -> iscsi_io_send_pdu(iscsi_conn_t *conn
+                                        case ISCSI_OP_LOGIN
+                                        login_hdr->flags & ISCSI_FLAG_LOGIN_TRANSIT
+In my understanding, discovery, login/logout does not involve iscsi kernel and send pdu over open by userspace socket.
+
+
+
+
+
+
+yum install libmount-devel -y
+mkdir -p builddir
+meson -Disns_supported=false builddir
+
+
+head -2 /etc/os-release
+find /usr/include/ -name "*.h" | xargs grep -w reallocarray
+
+#!/bin/sh
+
+tfile=$(mktemp /tmp/test_reallocarray_XXXXXXXX.c)
+ofile=${tfile%.c}.o
+
+cat > $tfile <<EOL
+#define _GNU_SOURCE
+#include <stdlib.h>
+int main(void)
+{
+	return !!reallocarray(NULL, 1, 1);
+}
+EOL
+
+gcc $tfile -o $ofile >/dev/null 2>&1
+if [ $? -ne 0 ]; then echo "FAIL"; fi
+/bin/rm -f $tfile $ofile
+
+	assert(!(sizeof(struct iscsi_session *) &&
+		 *session_count > UINT_MAX / sizeof(struct iscsi_session *)));
+	*sessions =
+	    realloc(*sessions, *session_count * sizeof(struct iscsi_session *));
+
+/usr/include/openssl/evp.h
+
+netlink.c
+static struct iscsi_ipc nl_ipc
+ev.type =
+handler = mgmt_ipc_functions[command]
+
+清理老连接: 
+iscsiadm -m node --logoutall=all;iscsiadm -m node -o delete -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260;rm -rf /var/lib/iscsi/send_targets/
+
+发现tgt, 建连接, 绕过iscsid, 直接走内核
+iscsiadm -m discovery -t sendtargets -p 172.17.136.132, or gdb --args iscsiadm -m discovery -t sendtargets -p 172.17.136.132 -d 8
+iscsiadm -> main.c
+MODE_DISCOVERY
+exec_disc_op
+do_target_discovery
+sendtargets
+do_software_sendtargets
+idbm_bind_ifaces_to_nodes
+idbm_bind_iface_to_nodes
+discovery_sendtargets
+iscsi_create_session
+  iscsi_destroy_session
+  iscsi_create_leading_conn -> static int iscsi_create_leading_conn
+    if (!(t->caps & CAP_TEXT_NEGO)) -> CAP_TEXT_NEGO 文本请求和响应被设计为参数协商工具和未来扩展的工具 -> Text Requests and Responses are designed as a parameter negotiation
+    iscsi_io_connect
+      action.sa_handler = sigalarm_handler -> 设置信号
+      sigaction(SIGALRM, &action, &old)
+      iscsi_io_tcp_connect(conn, 0)
+        conn->socket_fd = socket -> 创建socket
+        bind_conn_to_iface
+        log_debug(1, "connecting to %s:%s", conn->host, serv) -> connecting to 172.17.136.132:3260
+        connect(conn->socket_fd
+      log_debug(1, "connected local port %s to %s:%s" -> connected to discovery address 172.17.136.132
+    return 0
+    ...
+    conn->socket_fd = ipc->ctldev_open() -> 对于软件，这是在 iscsi_io_connect 中设置的 tcp 套接字 fd，对于负载，这是 iscsi netlink 套接字 fd -> ctldev_open(void)
+      ctrl_fd = socket(PF_NETLINK, SOCK_RAW, NETLINK_ISCSI)
+      if (bind(ctrl_fd, (struct sockaddr *)&src_addr, sizeof(src_addr)))
+    iscsi_sysfs_get_host_no_from_hwinfo
+    iscsi_host_set_net_params
+    t->template->ep_connect(conn, 1) -> iscsi_io_tcp_connect(iscsi_conn_t *conn
+      conn->socket_fd = socket(ss->ss_family, SOCK_STREAM, IPPROTO_TCP)
+      bind_conn_to_iface
+      setsockopt(conn->socket_fd, IPPROTO_TCP, TCP_NODELAY, &onearg
+      if (conn->tcp_window_size) 
+      connect(conn->socket_fd, (struct sockaddr *) ss, sizeof (*ss) -> 连接tgt -> connecting to 172.17.136.132:3260
+    do -> loop
+    t->template->ep_poll(conn, 1) -> iscsi_io_tcp_poll(iscsi_conn_t *conn, int timeout_ms)
+      rc = poll(&pdesc, 1, timeout_ms)
+    ipc->create_session -> kcreate_session(uint64_t transport_handle -> 先删除node: iscsiadm -m node -o delete -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260
+      ISCSI_UEVENT_CREATE_SESSION ?
+      __kipc_call(iov, 2)
+    rc = ipc->create_conn -> kcreate_conn
+      ev.type = ISCSI_UEVENT_CREATE_CONN
+      rc = __kipc_call(iov, 2) -> driver -> kernel -> drivers/scsi/scsi_transport_iscsi.c -> iscsi_if_recv_msg
+        case ISCSI_UEVENT_CREATE_CONN:
+        err = iscsi_if_create_conn(transport, ev);
+    if (ipc->bind_conn
+  iscsi_copy_operational_params
+  login_status = iscsi_login(session, 0, data, data_len
+    iscsi_login_begin
+    iscsi_login_req
+    iscsi_timer_set
+    iscsi_timer_msecs_until
+    poll(&pfd, 1, timeout)
+  iscsi_wait_for_login
+
+
+root@node1 open-iscsi]# /usr/sbin/iscsiadm --version
+iscsiadm version 6.2.0.874-22
+
+[root@node1 ~]# rpm -qi iscsi-initiator-utils-6.2.0.874-22.el7_9.x86_64
+Name        : iscsi-initiator-utils
+Version     : 6.2.0.874
+Release     : 22.el7_9
+Architecture: x86_64
+Install Date: Thu 08 Jun 2023 01:54:41 PM CST
+Group       : System Environment/Daemons
+Size        : 2476244
+License     : GPLv2+
+Signature   : RSA/SHA256, Wed 01 Dec 2021 10:14:50 PM CST, Key ID 24c6a8a7f4a80eb5
+Source RPM  : iscsi-initiator-utils-6.2.0.874-22.el7_9.src.rpm
+Build Date  : Thu 25 Nov 2021 12:33:21 AM CST
+Build Host  : x86-02.bsys.centos.org
+Relocations : (not relocatable)
+Packager    : CentOS BuildSystem <http://bugs.centos.org>
+Vendor      : CentOS
+URL         : http://www.open-iscsi.org
+Summary     : iSCSI daemon and utility programs
+Description :
+The iscsi package provides the server daemon for the iSCSI protocol,
+as well as the utility programs used to manage it. iSCSI is a protocol
+for distributed disk access using SCSI commands sent over Internet
+Protocol networks.
+[root@node1 ~]# 
+
+main
+  log_init
+  sysfs_init
+  parse_host_info
+  increase_max_files
+  idbm_create_rec
+
+
+iscsiadm 与 iscsid 代码流程:
+discovery -> iscsiadm -m discovery -t sendtargets -p 172.17.136.132
+main
+  exec_disc_op
+    do_target_discovery
+      iscsi_sysfs_get_transport_by_name //获取transport
+      do_software_sendtargets
+                     discovery_sendtargets（idbm_bind_ifaces_to_nodes) 
+                       iscsi_alloc_session //这里回去获取transport
+                            iscsi_setup_portal //解析要发现的地址
+                            iscsi_create_session -> static int iscsi_create_session
+                            iscsi_create_leading_conn
+                              ipc->ctldev_open //创netlink socket and bind
+                                  ep_connect //connect
+                                  ep_poll //connect成功
+                                  ipc->create_session -> kcreate_session //让内核创建session
+                                  ipc->create_conn
+                                  ipc->bind_conn
+                            iscsi_login
+                              iscsi_login_begin
+                                  iscsi_login_req
+                            iscsi_session_set_neg_params 设置参数，要到内核
+                            kstart_conn
+                            iscsi_wait_for_login
+                       process_recvd_pdu
+                            iscsi_destroy_session discovery阶段的连接结束拉
+               exec_disc_op_on_recs
+                       idbm_for_each_rec delete_stale_rec
+                            idbm_add_node
+                       iscsi_login_portals
+                              __iscsi_login_portals（ iscsi_login_portal ）
+                                __iscsi_login_portal
+                                       iscsid_req_by_rec
+                                         iscsid_req_by_rec_async
+                                           iscsid_request
+                                                   iscsid_connect  这个发消息给iscsid
+                                               iscsid_req_wait
+iscsid：               
+mgmt_ipc_session_login
+  session_login_task
+    __session_login_task
+            iscsi_sysfs_get_transport_by_name  //获取transport
+              read_transports
+            __session_create
+            __session_conn_create
+            iscsi_conn_connect
+              ep_connect
+
+
+iscsid的日志级别可以通过修改`/etc/iscsi/iscsid.conf`文件中的`log_level`参数来进行配置。该参数决定了打印的日志级别，可以设置为以下任何一个值：
+- 0 - 禁用所有日志记录
+- 1 - 仅记录故障
+- 2 - 记录错误情况
+- 3 - 记录警告和错误情况
+- 4 - 记录警告、错误和信息
+- 5 - 记录所有内容，包括调试信息
+
+/sbin/iscsid -f -d 8 #设置级别
+
+
+iscsid日志:
+Jun 12 09:47:39 node1 iscsid: iscsid: iscsid shutting down.
+static void session_conn_process_login
+Jun 12 09:48:23 node1 iscsid: iscsid: Connection18:0 to [target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] through [iface: default] is operational now <- log_warning("Connection%d:%d to [target
+Jun 12 09:50:46 node1 iscsid: iscsid: Connection18:0 to [target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] through [iface: default] is shutdown.
+
+查看portal配置文件: ls -alh /var/lib/iscsi/send_targets/172.17.136.132,3260/st_config
+node记录: ls -alh /var/lib/iscsi/nodes/
+
+__kipc_call() 不应该阻塞。 因此 Netlink 的 xmit 逻辑是序列化的。 这意味着我们不在 xmit 路径上分配。 相反，我们重用 nlm_sendbuf 缓冲区。 传输必须确保非阻塞操作：
+- session_create()
+- conn_create()
+- conn_bind()
+_ set_param()
+- conn_start()
+- conn_stop()
+可以在以下操作中短时间阻止清理：
+- conn_destroy()
+- session_destroy()
+FIXME：需要扩展接口以允许更长时间的清理阻塞
+
+
+linkdown
+event_loop
+actor_poll -> 执行所有已过期的项目, 超时项目
+  clock_gettime(CLOCK_MONOTONIC_COARSE, &tv)
+  current_time = tv.tv_sec
+  list_for_each_entry_safe(thread, tmp, &pend_list, list) -> 将成熟的项目从 pend_list 移到 ready_list。 Actor 按运行时间升序排列，因此在第一个未成熟的条目处停止
+  if (time_left) 超时
+  alarm(time_left) -> 安排闹钟。 在 SECONDS 秒后，进程将收到 SIGALRM。 如果 SECONDS 为零，则将取消任何当前预定的警报。 该函数返回在最后一个预定的警报发出信号之前剩余的秒数，如果没有，则返回零。 没有返回值指示错误，但您可以将 errno 设置为 0 并在调用 alarm 后检查其值，这可能会告诉您。 由于处理器调度，信号可能会迟到 -> sigaction(SIGALRM, &action, &old) -> 其他线程中处理该信号 -> sigalarm_handler -> timedout = 1
+  while (!list_empty(&ready_list)) -> 准备列表不为空
+  thread->state = ACTOR_NOTSCHEDULED 修改状态
+  thread->callback(thread->data) -> exec thread 558f51f39070 callback
+case EV_CONN_POLL
+actor_timer session_conn_poll -> 设置超时回调
+static int iscsi_sched_ev_context
+case EV_CONN_ERROR
+  actor_init(&ev_context->actor, session_conn_error -> static void session_conn_error(void *data) -> 设置回调 -> 收到内核事件 -> Kernel reported iSCSI connection 27:0 error (1022 - ISCSI_ERR_NOP_TIMEDOUT: A NOP has timed out) state (3)
+    iscsi_ev_context_put
+    __conn_error_handle
+      session_conn_shutdown
+
+
+
+actor_poll(void) -> 使正在运行的 actor 成为事件驱动的
+与其频繁醒来检查 actor 是否需要运行，不如为第一次超时设置警报，并在警报到期并发送 SIGALRM 时使用 signalfd 让我们退出 poll()。
+alarm(2) 只有第二个粒度，但我们使用延迟演员进行多秒超时处理，所以这没问题。 所有调用站点都乘以 1000 等待毫秒，因此只需更改 actor_timer() 调用站点以秒为单位传递超时。
+将 actor_check() 折叠到 actor_poll() 中。
+去掉actor_timer_mod，不用了。
+为清楚起见，将 actor_list 重命名为 ready_list。
+删除 poll_list，不再需要。
+移除 ACTOR_POLL_WAITING 状态，不再需要。
+向 list.h 添加一些更有用的宏。
+基于 Chris Leech 的早期工作
+
+void iscsi_conn_error_event
+  ev->type = ISCSI_KEVENT_CONN_ERROR; 内核设置连接错误状态事件
+  ...
+static int ctldev_handle
+  case ISCSI_KEVENT_CONN_ERROR
+  ipc_ev_clbk->sched_ev_context EV_CONN_ERROR -> iscsi_sched_ev_context -> static int iscsi_sched_ev_context
+    case EV_CONN_ERROR
+    ...
+
+nop_in, nop_out, BHS, AHS
+
+Nop-Out, initiator -> tgt, Initiator Opcodes, check whether the target is still responding
+Nop-In,  tgt -> initiator, Target Opcodes, 
+
+

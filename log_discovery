@@ -1,0 +1,148 @@
+[root@node1 open-iscsi]# iscsiadm -m discovery -t sendtargets -p 172.17.136.132 -d 8
+iscsiadm: Max file limits 16384 16384
+iscsiadm: updating defaults from '/etc/iscsi/iscsid.conf'
+iscsiadm: updated 'discovery.sendtargets.iscsi.MaxRecvDataSegmentLength', '32768' => '32768'
+iscsiadm: updated 'node.startup', 'manual' => 'automatic'
+iscsiadm: updated 'node.leading_login', 'No' => 'No'
+iscsiadm: updated 'node.session.timeo.replacement_timeout', '120' => '120'
+iscsiadm: updated 'node.conn[0].timeo.login_timeout', '30' => '15'
+iscsiadm: updated 'node.conn[0].timeo.logout_timeout', '15' => '15'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_interval', '5' => '5'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_timeout', '5' => '5'
+iscsiadm: updated 'node.session.err_timeo.abort_timeout', '15' => '15'
+iscsiadm: updated 'node.session.err_timeo.lu_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.tgt_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.initial_login_retry_max', '4' => '8'
+iscsiadm: updated 'node.session.cmds_max', '128' => '128'
+iscsiadm: updated 'node.session.queue_depth', '32' => '32'
+iscsiadm: updated 'node.session.xmit_thread_priority', '-20' => '-20'
+iscsiadm: updated 'node.session.iscsi.InitialR2T', 'No' => 'No'
+iscsiadm: updated 'node.session.iscsi.ImmediateData', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.FirstBurstLength', '262144' => '262144'
+iscsiadm: updated 'node.session.iscsi.MaxBurstLength', '16776192' => '16776192'
+iscsiadm: updated 'node.conn[0].iscsi.MaxRecvDataSegmentLength', '262144' => '262144'
+iscsiadm: updated 'node.conn[0].iscsi.MaxXmitDataSegmentLength', '0' => '0'
+iscsiadm: updated 'node.conn[0].iscsi.HeaderDigest', 'None' => 'None'
+iscsiadm: updated 'node.session.nr_sessions', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.FastAbort', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.scan', 'auto' => 'auto'
+iscsiadm: Looking for config file /var/lib/iscsi/send_targets/172.17.136.132,3260
+iscsiadm: Looking for config file /var/lib/iscsi/send_targets/172.17.136.132,3260 config st_config.
+iscsiadm: updated 'discovery.startup', 'manual' => 'manual'
+iscsiadm: updated 'discovery.type', 'sendtargets' => 'sendtargets'
+iscsiadm: updated 'discovery.sendtargets.address', '' => '172.17.136.132'
+iscsiadm: updated 'discovery.sendtargets.port', '0' => '3260'
+iscsiadm: updated 'discovery.sendtargets.auth.authmethod', 'None' => 'None'
+iscsiadm: updated 'node.session.auth.chap_algs', 'MD5' => 'MD5'
+iscsiadm: updated 'discovery.sendtargets.timeo.login_timeout', '15' => '15'
+iscsiadm: updated 'discovery.sendtargets.use_discoveryd', 'No' => 'No'
+iscsiadm: updated 'discovery.sendtargets.discoveryd_poll_inval', '30' => '30'
+iscsiadm: updated 'discovery.sendtargets.reopen_max', '5' => '5'
+iscsiadm: updated 'discovery.sendtargets.timeo.auth_timeout', '45' => '45'
+iscsiadm: updated 'discovery.sendtargets.timeo.active_timeout', '30' => '30'
+iscsiadm: updated 'discovery.sendtargets.iscsi.MaxRecvDataSegmentLength', '32768' => '32768'
+iscsiadm: disc rec already exists
+iscsiadm: Looking for config file /var/lib/iscsi/send_targets/172.17.136.132,3260
+iscsiadm: starting sendtargets discovery, address 172.17.136.132:3260, 
+iscsiadm: in read_transports
+iscsiadm: Adding new transport qla4xxx
+iscsiadm: Matched transport qla4xxx
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'handle'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'caps'
+iscsiadm: Adding new transport tcp
+iscsiadm: Matched transport tcp
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'handle'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'caps'
+iscsiadm: no authentication configured...
+iscsiadm: sendtargets discovery to 172.17.136.132:3260 using isid 0x00023d000000
+iscsiadm: resolved 172.17.136.132 to 172.17.136.132
+iscsiadm: discovery timeouts: login 15, reopen_cnt 6, auth 45.
+iscsiadm: connecting to 172.17.136.132:3260
+iscsiadm: connected local port 58872 to 172.17.136.132:3260
+iscsiadm: connected to discovery address 172.17.136.132
+iscsiadm: discovery session to 172.17.136.132:3260 starting iSCSI login
+iscsiadm: sending login PDU with current stage 1, next stage 3, transit 0x80, isid 0x00023d000000 exp_statsn 0
+iscsiadm: >    InitiatorName=iqn.1994-05.com.redhat:461b38c9b3e6
+iscsiadm: >    InitiatorAlias=node1
+iscsiadm: >    SessionType=Discovery
+iscsiadm: >    HeaderDigest=None
+iscsiadm: >    DataDigest=None
+iscsiadm: >    DefaultTime2Wait=2
+iscsiadm: >    DefaultTime2Retain=0
+iscsiadm: >    IFMarker=No
+iscsiadm: >    OFMarker=No
+iscsiadm: >    ErrorRecoveryLevel=0
+iscsiadm: >    MaxRecvDataSegmentLength=32768
+iscsiadm: wrote 48 bytes of PDU header
+iscsiadm: wrote 244 bytes of PDU data
+iscsiadm: iscsi_login: Poll return 1
+iscsiadm: read 48 bytes of PDU header
+iscsiadm: read 48 PDU header bytes, opcode 0x23, dlength 173, data 0x558f1cee1c00, max 32768
+iscsiadm: read 173 bytes of PDU data
+iscsiadm: read 3 pad bytes
+iscsiadm: finished reading login PDU, 48 hdr, 0 ah, 173 data, 3 pad
+iscsiadm: login current stage 1, next stage 3, transit 0x80
+iscsiadm: >    TargetPortalGroupTag=1
+iscsiadm: >    HeaderDigest=None
+iscsiadm: >    DataDigest=None
+iscsiadm: >    DefaultTime2Wait=2
+iscsiadm: >    DefaultTime2Retain=0
+iscsiadm: >    IFMarker=No
+iscsiadm: >    OFMarker=No
+iscsiadm: >    ErrorRecoveryLevel=0
+iscsiadm: >    MaxRecvDataSegmentLength=32768
+iscsiadm: login response status 0000
+iscsiadm: discovery login success to 172.17.136.132
+iscsiadm: sending text pdu with CmdSN 1, exp_statsn 1
+iscsiadm: >    SendTargets=All
+iscsiadm: wrote 48 bytes of PDU header
+iscsiadm: wrote 16 bytes of PDU data
+iscsiadm: discovery process  172.17.136.132:3260 polling fd 3, timeout in 30.000000 seconds
+iscsiadm: discovery process to 172.17.136.132:3260 returned from poll, rc 1
+iscsiadm: read 48 bytes of PDU header
+iscsiadm: read 48 PDU header bytes, opcode 0x24, dlength 108, data 0x558f1cee1c00, max 32768
+iscsiadm: read 108 bytes of PDU data
+iscsiadm: finished reading text PDU, 48 hdr, 0 ah, 108 data, 0 pad
+iscsiadm: >    TargetName=iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+iscsiadm: >    TargetAddress=172.17.136.132:3260,1
+iscsiadm: discovery session to 172.17.136.132:3260 received text response, 108 data bytes, ttt 0xffffffff, final 0x80
+iscsiadm: enlarge buffer from 0 to 108
+iscsiadm: processing sendtargets record (nil), text 0x558f1cee9c60, line TargetName=iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+iscsiadm: processing sendtargets record 0x558f1cee9c60, text 0x558f1cee9ca8, line TargetAddress=172.17.136.132:3260,1
+iscsiadm: processing final sendtargets record 0x558f1cee9c60, line TargetName=iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+iscsiadm: adding target record 0x558f1cee9c6b, end 0x558f1cee9ccb
+iscsiadm: text 0x558f1cee9ca8, next 0x558f1cee9ccc, end 0x558f1cee9ccb, TargetAddress=172.17.136.132:3260,1
+iscsiadm: updating defaults from '/etc/iscsi/iscsid.conf'
+iscsiadm: updated 'discovery.sendtargets.iscsi.MaxRecvDataSegmentLength', '32768' => '32768'
+iscsiadm: updated 'node.startup', 'manual' => 'automatic'
+iscsiadm: updated 'node.leading_login', 'No' => 'No'
+iscsiadm: updated 'node.session.timeo.replacement_timeout', '120' => '120'
+iscsiadm: updated 'node.conn[0].timeo.login_timeout', '30' => '15'
+iscsiadm: updated 'node.conn[0].timeo.logout_timeout', '15' => '15'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_interval', '5' => '5'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_timeout', '5' => '5'
+iscsiadm: updated 'node.session.err_timeo.abort_timeout', '15' => '15'
+iscsiadm: updated 'node.session.err_timeo.lu_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.tgt_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.initial_login_retry_max', '4' => '8'
+iscsiadm: updated 'node.session.cmds_max', '128' => '128'
+iscsiadm: updated 'node.session.queue_depth', '32' => '32'
+iscsiadm: updated 'node.session.xmit_thread_priority', '-20' => '-20'
+iscsiadm: updated 'node.session.iscsi.InitialR2T', 'No' => 'No'
+iscsiadm: updated 'node.session.iscsi.ImmediateData', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.FirstBurstLength', '262144' => '262144'
+iscsiadm: updated 'node.session.iscsi.MaxBurstLength', '16776192' => '16776192'
+iscsiadm: updated 'node.conn[0].iscsi.MaxRecvDataSegmentLength', '262144' => '262144'
+iscsiadm: updated 'node.conn[0].iscsi.MaxXmitDataSegmentLength', '0' => '0'
+iscsiadm: updated 'node.conn[0].iscsi.HeaderDigest', 'None' => 'None'
+iscsiadm: updated 'node.session.nr_sessions', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.FastAbort', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.scan', 'auto' => 'auto'
+iscsiadm: discovery process to 172.17.136.132:3260 exiting
+iscsiadm: disconnecting conn 0x558f1cedaae0, fd 3
+iscsiadm: rec read looking for config file /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755/172.17.136.132,3260.
+iscsiadm: rec read looking for config file /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755/172.17.136.132,3260,1/default.
+iscsiadm: Could not stat /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755/172.17.136.132,3260,1/default: No such file or directory.
+iscsiadm: adding new DB record
+iscsiadm: node addition making link from /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755/172.17.136.132,3260,1 to /var/lib/iscsi/send_targets/172.17.136.132,3260/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755,172.17.136.132,3260,1,default
+172.17.136.132:3260,1 iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
