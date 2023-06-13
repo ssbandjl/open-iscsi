@@ -233,6 +233,11 @@ iscsi_create_session
   iscsi_wait_for_login
 
 
+iscsi_io_recv_pdu
+process_sendtargets_response
+iscsi_io_tcp_disconnect
+logout_by_startup
+
 root@node1 open-iscsi]# /usr/sbin/iscsiadm --version
 iscsiadm version 6.2.0.874-22
 

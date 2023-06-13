@@ -146,3 +146,398 @@ iscsiadm: Could not stat /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a235
 iscsiadm: adding new DB record
 iscsiadm: node addition making link from /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755/172.17.136.132,3260,1 to /var/lib/iscsi/send_targets/172.17.136.132,3260/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755,172.17.136.132,3260,1,default
 172.17.136.132:3260,1 iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+
+
+
+
+完整日志:
+(gdb) r
+Starting program: /usr/sbin/iscsiadm -m discovery -t sendtargets -p 172.17.136.132 -d 8
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+iscsiadm: Max file limits 16384 16384
+iscsiadm: updating defaults from '/etc/iscsi/iscsid.conf'
+iscsiadm: updated 'discovery.sendtargets.iscsi.MaxRecvDataSegmentLength', '32768' => '32768'
+iscsiadm: updated 'node.startup', 'manual' => 'automatic'
+iscsiadm: updated 'node.leading_login', 'No' => 'No'
+iscsiadm: updated 'node.session.timeo.replacement_timeout', '120' => '120'
+iscsiadm: updated 'node.conn[0].timeo.login_timeout', '30' => '15'
+iscsiadm: updated 'node.conn[0].timeo.logout_timeout', '15' => '15'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_interval', '5' => '5'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_timeout', '5' => '5'
+iscsiadm: updated 'node.session.err_timeo.abort_timeout', '15' => '15'
+iscsiadm: updated 'node.session.err_timeo.lu_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.tgt_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.initial_login_retry_max', '4' => '8'
+iscsiadm: updated 'node.session.cmds_max', '128' => '128'
+iscsiadm: updated 'node.session.queue_depth', '32' => '32'
+iscsiadm: updated 'node.session.xmit_thread_priority', '-20' => '-20'
+iscsiadm: updated 'node.session.iscsi.InitialR2T', 'No' => 'No'
+iscsiadm: updated 'node.session.iscsi.ImmediateData', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.FirstBurstLength', '262144' => '262144'
+iscsiadm: updated 'node.session.iscsi.MaxBurstLength', '16776192' => '16776192'
+iscsiadm: updated 'node.conn[0].iscsi.MaxRecvDataSegmentLength', '262144' => '262144'
+iscsiadm: updated 'node.conn[0].iscsi.MaxXmitDataSegmentLength', '0' => '0'
+iscsiadm: updated 'node.conn[0].iscsi.HeaderDigest', 'None' => 'None'
+iscsiadm: updated 'node.session.nr_sessions', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.FastAbort', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.scan', 'auto' => 'auto'
+iscsiadm: Looking for config file /var/lib/iscsi/send_targets/172.17.136.132,3260
+iscsiadm: Looking for config file /var/lib/iscsi/send_targets/172.17.136.132,3260 config st_config.
+iscsiadm: Could not stat /var/lib/iscsi/send_targets/172.17.136.132,3260 err 2.
+iscsiadm: Could not open /var/lib/iscsi/send_targets/172.17.136.132,3260: No such file or directory
+iscsiadm: adding new DB record
+iscsiadm: Looking for config file /var/lib/iscsi/send_targets/172.17.136.132,3260
+iscsiadm: starting sendtargets discovery, address 172.17.136.132:3260, 
+iscsiadm: in read_transports
+iscsiadm: Adding new transport qla4xxx
+iscsiadm: Matched transport qla4xxx
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'handle'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/qla4xxx'/'caps'
+iscsiadm: Adding new transport tcp
+iscsiadm: Matched transport tcp
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'handle'
+iscsiadm: sysfs_attr_get_value: open '/class/iscsi_transport/tcp'/'caps'
+iscsiadm: no authentication configured...
+iscsiadm: sendtargets discovery to 172.17.136.132:3260 using isid 0x00023d000000
+iscsiadm: resolved 172.17.136.132 to 172.17.136.132
+iscsiadm: discovery timeouts: login 15, reopen_cnt 6, auth 45.
+
+Breakpoint 3, discovery_sendtargets (fndata=fndata@entry=0x7fffffffd1e0, iface=iface@entry=0x7fffffff9e50, rec_list=rec_list@entry=0x7fffffff9de0) at discovery.c:1617
+1617            rc = iscsi_create_session(session, &drec->u.sendtargets,
+(gdb) s
+iscsi_create_session (data_len=<optimized out>, data=<optimized out>, config=<optimized out>, session=<optimized out>) at discovery.c:1617
+1617            rc = iscsi_create_session(session, &drec->u.sendtargets,
+(gdb) s
+iscsi_create_leading_conn (session=<optimized out>) at discovery.c:1104
+1104            host_no = iscsi_sysfs_get_host_no_from_hwinfo(iface, &rc);
+(gdb) n
+1150            rc = ipc->create_session(session->t->handle,
+(gdb) 
+iscsi_create_session (data_len=32768, data=0x55555583ac00 "\270w.\367\377\177", config=0x7fffffffd5f0, session=0x55555582e040) at discovery.c:1344
+1344            struct iscsi_transport *t = session->t;
+(gdb) 
+1342            unsigned int login_failures = 0;
+(gdb) 
+1340            int login_status, rc = 0, login_delay = 0;
+(gdb) 
+1341            uint8_t status_class = 0, status_detail = 0;
+(gdb) 
+1344            struct iscsi_transport *t = session->t;
+(gdb) 
+1433            login_status = iscsi_login(session, 0, data, data_len,
+(gdb) 
+1351            conn->saddr = conn->failback_saddr;
+(gdb) 
+1355            if (--session->reopen_cnt < 0) {
+(gdb) 
+1351            conn->saddr = conn->failback_saddr;
+(gdb) 
+1355            if (--session->reopen_cnt < 0) {
+(gdb) 
+1433            login_status = iscsi_login(session, 0, data, data_len,
+(gdb) 
+1362            session->cmdsn = 1;
+(gdb) 
+1363            session->itt = 1;
+(gdb) 
+1369            iscsi_destroy_session(session);
+(gdb) 
+1364            session->portal_group_tag = PORTAL_GROUP_TAG_UNKNOWN;
+(gdb) 
+1369            iscsi_destroy_session(session);
+(gdb) 
+1372            if (login_failures == 0)
+(gdb) 
+discovery_sendtargets (fndata=fndata@entry=0x7fffffffd1e0, iface=iface@entry=0x7fffffff9e50, rec_list=rec_list@entry=0x7fffffff9de0) at discovery.c:1617
+1617            rc = iscsi_create_session(session, &drec->u.sendtargets,
+(gdb) s
+iscsi_create_session (data_len=32768, data=0x55555583ac00 "\270w.\367\377\177", config=0x7fffffffd5f0, session=0x55555582e040) at discovery.c:1385
+1385            getnameinfo((struct sockaddr *) &conn->saddr,
+(gdb) n
+1396            rc = iscsi_create_leading_conn(session);
+(gdb) 
+iscsiadm: connecting to 172.17.136.132:3260
+iscsiadm: connected local port 60796 to 172.17.136.132:3260
+1402            log_debug(1, "connected to discovery address %s", conn->host);
+(gdb) 
+iscsiadm: connected to discovery address 172.17.136.132
+1404            log_debug(4, "discovery session to %s:%s starting iSCSI login",
+(gdb) 
+iscsiadm: discovery session to 172.17.136.132:3260 starting iSCSI login
+1411            iscsi_copy_operational_params(&session->conn[0], &config->session_conf,
+(gdb) 
+1414            if (t->caps & CAP_TEXT_NEGO) {
+(gdb) 
+1425            if ((session->t->caps & CAP_LOGIN_OFFLOAD))
+(gdb) 
+1432            memset(data, 0, data_len);
+(gdb) 
+1428            status_class = 0;
+(gdb) 
+1429            status_detail = 0;
+(gdb) 
+1430            rc = ISCSI_ERR_LOGIN;
+(gdb) 
+1432            memset(data, 0, data_len);
+(gdb) 
+1433            login_status = iscsi_login(session, 0, data, data_len,
+(gdb) 
+iscsiadm: sending login PDU with current stage 1, next stage 3, transit 0x80, isid 0x00023d000000 exp_statsn 0
+iscsiadm: >    InitiatorName=iqn.1994-05.com.redhat:461b38c9b3e6
+iscsiadm: >    InitiatorAlias=node1
+iscsiadm: >    SessionType=Discovery
+iscsiadm: >    HeaderDigest=None
+iscsiadm: >    DataDigest=None
+iscsiadm: >    DefaultTime2Wait=2
+iscsiadm: >    DefaultTime2Retain=0
+iscsiadm: >    IFMarker=No
+iscsiadm: >    OFMarker=No
+iscsiadm: >    ErrorRecoveryLevel=0
+iscsiadm: >    MaxRecvDataSegmentLength=32768
+iscsiadm: wrote 48 bytes of PDU header
+iscsiadm: wrote 244 bytes of PDU data
+iscsiadm: iscsi_login: Poll return 1
+iscsiadm: read 48 bytes of PDU header
+iscsiadm: read 48 PDU header bytes, opcode 0x23, dlength 173, data 0x55555583ac00, max 32768
+iscsiadm: read 173 bytes of PDU data
+iscsiadm: read 3 pad bytes
+iscsiadm: finished reading login PDU, 48 hdr, 0 ah, 173 data, 3 pad
+iscsiadm: login current stage 1, next stage 3, transit 0x80
+iscsiadm: >    TargetPortalGroupTag=1
+iscsiadm: >    HeaderDigest=None
+iscsiadm: >    DataDigest=None
+iscsiadm: >    DefaultTime2Wait=2
+iscsiadm: >    DefaultTime2Retain=0
+iscsiadm: >    IFMarker=No
+iscsiadm: >    OFMarker=No
+iscsiadm: >    ErrorRecoveryLevel=0
+iscsiadm: >    MaxRecvDataSegmentLength=32768
+iscsiadm: login response status 0000
+1436            switch (login_status) {
+(gdb) 
+1461            switch (status_class) {
+(gdb) 
+1463                    log_debug(4, "discovery login success to %s", conn->host);
+(gdb) 
+iscsiadm: discovery login success to 172.17.136.132
+1527            if (!(t->caps & CAP_TEXT_NEGO))
+(gdb) 
+discovery_sendtargets (fndata=fndata@entry=0x7fffffffd1e0, iface=iface@entry=0x7fffffff9e50, rec_list=rec_list@entry=0x7fffffff9de0) at discovery.c:1623
+1623            str_truncate_buffer(&sendtargets, 0);
+(gdb) 
+1626            if (!request_targets(session)) {
+(gdb) 
+1623            str_truncate_buffer(&sendtargets, 0);
+(gdb) 
+1626            if (!request_targets(session)) {
+(gdb) 
+iscsiadm: sending text pdu with CmdSN 1, exp_statsn 1
+iscsiadm: >    SendTargets=All
+iscsiadm: wrote 48 bytes of PDU header
+iscsiadm: wrote 16 bytes of PDU data
+1632            iscsi_timer_set(&connection_timer, session->conn[0].active_timeout);
+(gdb) 
+1635            memset(&pfd, 0, sizeof (pfd));
+(gdb) 
+1632            iscsi_timer_set(&connection_timer, session->conn[0].active_timeout);
+(gdb) 
+1636            pfd.fd = session->conn[0].socket_fd;
+(gdb) 
+1635            memset(&pfd, 0, sizeof (pfd));
+(gdb) 
+1636            pfd.fd = session->conn[0].socket_fd;
+(gdb) 
+1637            pfd.events = POLLIN | POLLPRI;
+(gdb) 
+1640            timeout = iscsi_timer_msecs_until(&connection_timer);
+(gdb) 
+1644            log_debug(4,
+(gdb) 
+1640            timeout = iscsi_timer_msecs_until(&connection_timer);
+(gdb) 
+1644            log_debug(4,
+(gdb) 
+iscsiadm: discovery process  172.17.136.132:3260 polling fd 3, timeout in 25.172000 seconds
+1650            pfd.revents = 0;
+(gdb) 
+1651            rc = poll(&pfd, 1, timeout);
+(gdb) 
+1650            pfd.revents = 0;
+(gdb) 
+1651            rc = poll(&pfd, 1, timeout);
+(gdb) 
+1653            log_debug(7,
+(gdb) 
+1651            rc = poll(&pfd, 1, timeout);
+(gdb) 
+1653            log_debug(7,
+(gdb) 
+iscsiadm: discovery process to 172.17.136.132:3260 returned from poll, rc 1
+1657            if (iscsi_timer_expired(&connection_timer)) {
+(gdb) 
+1664            if (rc > 0) {
+(gdb) 
+1665                    if (pfd.revents & (POLLIN | POLLPRI)) {
+(gdb) 
+1666                            timeout = iscsi_timer_msecs_until(&connection_timer);
+(gdb) 
+1668                            rc = iscsi_io_recv_pdu(&session->conn[0],
+(gdb) 
+iscsiadm: read 48 bytes of PDU header
+iscsiadm: read 48 PDU header bytes, opcode 0x24, dlength 108, data 0x55555583ac00, max 32768
+iscsiadm: read 108 bytes of PDU data
+iscsiadm: finished reading text PDU, 48 hdr, 0 ah, 108 data, 0 pad
+iscsiadm: >    TargetName=iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+iscsiadm: >    TargetAddress=172.17.136.132:3260,1
+1672                            if (rc == -EAGAIN)
+(gdb) 
+1674                            else if (rc < 0) {
+(gdb) 
+1687                            rc = process_recvd_pdu(pdu, drec, rec_list,
+(gdb) 
+iscsiadm: discovery session to 172.17.136.132:3260 received text response, 108 data bytes, ttt 0xffffffff, final 0x80
+iscsiadm: enlarge buffer from 0 to 108
+iscsiadm: processing sendtargets record (nil), text 0x555555842c60, line TargetName=iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+iscsiadm: processing sendtargets record 0x555555842c60, text 0x555555842ca8, line TargetAddress=172.17.136.132:3260,1
+1687                            rc = process_recvd_pdu(pdu, drec, rec_list,
+(gdb) 
+iscsiadm: processing final sendtargets record 0x555555842c60, line TargetName=iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+iscsiadm: adding target record 0x555555842c6b, end 0x555555842ccb
+iscsiadm: text 0x555555842ca8, next 0x555555842ccc, end 0x555555842ccb, TargetAddress=172.17.136.132:3260,1
+iscsiadm: updating defaults from '/etc/iscsi/iscsid.conf'
+iscsiadm: updated 'discovery.sendtargets.iscsi.MaxRecvDataSegmentLength', '32768' => '32768'
+iscsiadm: updated 'node.startup', 'manual' => 'automatic'
+iscsiadm: updated 'node.leading_login', 'No' => 'No'
+iscsiadm: updated 'node.session.timeo.replacement_timeout', '120' => '120'
+iscsiadm: updated 'node.conn[0].timeo.login_timeout', '30' => '15'
+iscsiadm: updated 'node.conn[0].timeo.logout_timeout', '15' => '15'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_interval', '5' => '5'
+iscsiadm: updated 'node.conn[0].timeo.noop_out_timeout', '5' => '5'
+iscsiadm: updated 'node.session.err_timeo.abort_timeout', '15' => '15'
+iscsiadm: updated 'node.session.err_timeo.lu_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.err_timeo.tgt_reset_timeout', '30' => '30'
+iscsiadm: updated 'node.session.initial_login_retry_max', '4' => '8'
+iscsiadm: updated 'node.session.cmds_max', '128' => '128'
+iscsiadm: updated 'node.session.queue_depth', '32' => '32'
+iscsiadm: updated 'node.session.xmit_thread_priority', '-20' => '-20'
+iscsiadm: updated 'node.session.iscsi.InitialR2T', 'No' => 'No'
+iscsiadm: updated 'node.session.iscsi.ImmediateData', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.iscsi.FirstBurstLength', '262144' => '262144'
+iscsiadm: updated 'node.session.iscsi.MaxBurstLength', '16776192' => '16776192'
+iscsiadm: updated 'node.conn[0].iscsi.MaxRecvDataSegmentLength', '262144' => '262144'
+iscsiadm: updated 'node.conn[0].iscsi.MaxXmitDataSegmentLength', '0' => '0'
+iscsiadm: updated 'node.conn[0].iscsi.HeaderDigest', 'None' => 'None'
+iscsiadm: updated 'node.session.nr_sessions', '1' => '1'
+iscsiadm: updated 'node.session.iscsi.FastAbort', 'Yes' => 'Yes'
+iscsiadm: updated 'node.session.scan', 'auto' => 'auto'
+1701                    if (pfd.revents & POLLHUP) {
+(gdb) 
+1709                    if (pfd.revents & POLLNVAL) {
+(gdb) 
+1715                    if (pfd.revents & POLLERR) {
+(gdb) 
+1726            log_debug(1, "discovery process to %s:%d exiting",
+(gdb) 
+1728            rc = 0;
+(gdb) 
+1726            log_debug(1, "discovery process to %s:%d exiting",
+(gdb) 
+iscsiadm: discovery process to 172.17.136.132:3260 exiting
+1731            str_free_buffer(&sendtargets);
+(gdb) 
+1732            free(data);
+(gdb) 
+1733            iscsi_destroy_session(session);
+(gdb) 
+iscsiadm: disconnecting conn 0x555555833ae0, fd 3
+1735            iscsi_free_session(session);
+(gdb) 
+1736            return rc;
+(gdb) 
+1737    }
+(gdb) 
+idbm_bind_iface_to_nodes (disc_node_fn=disc_node_fn@entry=0x5555555912d0 <discovery_sendtargets>, data=data@entry=0x7fffffffd1e0, iface=iface@entry=0x7fffffff9e50, bound_recs=bound_recs@entry=0x7fffffffcc90) at idbm.c:2577
+2577            if (rc)
+(gdb) 
+2575            INIT_LIST_HEAD(&new_recs);
+(gdb) 
+2577            if (rc)
+(gdb) 
+2580            list_for_each_entry_safe(rec, tmp, &new_recs, list) {
+(gdb) 
+2581                    list_del_init(&rec->list);
+(gdb) 
+2583                    iface_copy(&rec->iface, iface);
+(gdb) 
+2581                    list_del_init(&rec->list);
+(gdb) 
+2582                    list_add_tail(&rec->list, bound_recs);
+(gdb) 
+2583                    iface_copy(&rec->iface, iface);
+(gdb) 
+2580            list_for_each_entry_safe(rec, tmp, &new_recs, list) {
+(gdb) 
+2585            return 0;
+(gdb) 
+2586    }
+(gdb) 
+idbm_bind_ifaces_to_nodes (disc_node_fn=0x5555555912d0 <discovery_sendtargets>, data=0x7fffffffd1e0, ifaces=<optimized out>, bound_recs=0x7fffffffcc90) at idbm.c:2677
+2677    }
+(gdb) 
+do_software_sendtargets (sync_drec=1, op=7, do_login=0, info_level=-1, ifaces=0x0, drec=0x7fffffffd1e0) at iscsiadm.c:1123
+1123            if (rc) {
+(gdb) 
+1121            rc = idbm_bind_ifaces_to_nodes(discovery_sendtargets, drec, ifaces,
+(gdb) 
+1123            if (rc) {
+(gdb) 
+1127            } else if (list_empty(&rec_list)) {
+(gdb) 
+1132            rc = exec_disc_op_on_recs(drec, &rec_list, info_level, do_login, op);
+(gdb) 
+iscsiadm: rec read looking for config file /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755/172.17.136.132,3260.
+iscsiadm: rec read looking for config file /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755/172.17.136.132,3260,1/default.
+iscsiadm: Could not stat /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755/172.17.136.132,3260,1/default: No such file or directory.
+iscsiadm: adding new DB record
+iscsiadm: node addition making link from /var/lib/iscsi/nodes/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755/172.17.136.132,3260,1 to /var/lib/iscsi/send_targets/172.17.136.132,3260/iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755,172.17.136.132,3260,1,default
+172.17.136.132:3260,1 iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755
+1134            list_for_each_entry_safe(rec, tmp, &rec_list, list) {
+(gdb) 
+1132            rc = exec_disc_op_on_recs(drec, &rec_list, info_level, do_login, op);
+(gdb) 
+1134            list_for_each_entry_safe(rec, tmp, &rec_list, list) {
+(gdb) 
+1135                    list_del(&rec->list);
+(gdb) 
+1136                    free(rec);
+(gdb) 
+1134            list_for_each_entry_safe(rec, tmp, &rec_list, list) {
+(gdb) 
+do_isns (op=<optimized out>, do_login=<optimized out>, info_level=<optimized out>, ifaces=<optimized out>, drec=<optimized out>) at iscsiadm.c:1176
+1176            return rc;
+(gdb) 
+do_target_discovery (drec=0x7fffffffd1e0, ifaces=<optimized out>, info_level=-1, do_login=0, op=<optimized out>, sync_drec=1) at iscsiadm.c:1246
+1246    }
+(gdb) 
+main (argc=9, argv=0x7fffffffdbe8) at iscsiadm.c:3675
+3675                            rc = logout_by_startup(group_session_mgmt_mode);
+(gdb) 
+3676                            goto out;
+(gdb) 
+3800            idbm_terminate();
+(gdb) 
+3802            list_for_each_entry_safe(iface, tmp, &ifaces, list) {
+(gdb) 
+3806            free_transports();
+(gdb) 
+3807            sysfs_cleanup();
+(gdb) 
+3808            return rc;
+(gdb) 
+3809    }
+(gdb) 
+__libc_start_main (main=0x55555555bde0 <main>, argc=9, argv=0x7fffffffdbe8, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7fffffffdbd8) at ../csu/libc-start.c:300
+300       exit (result);
+(gdb) 
+
