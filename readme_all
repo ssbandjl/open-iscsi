@@ -13,6 +13,7 @@ https://src.fedoraproject.org/lookaside/extras/iscsi-initiator-utils/open-iscsi-
 断开: iscsiadm -m node --logoutall=all
 连接tgt: iscsiadm -m node -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260 -l
 or gdb --args iscsiadm -m node -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260 -l -d 8
+核心流程: 将会话登录命令通过socket发给iscsid, iscsid收到命令后, 调用驱动与tgt建立socket连接, 创建内核会话资源, 分配主机, 启动错误处理内核线程(scsi_error_handler)
 usr/iscsiadm.c -> main
   MODE_NODE
   case 'l'
@@ -26,14 +27,14 @@ usr/iscsiadm.c -> main
         list_for_each_entry -> int iscsi_login_portal -> __iscsi_login_portal <- login_fn(data, &login_list, curr_rec)
           iscsi_sysfs_for_each_session
           __iscsi_login_portal -> __iscsi_login_portal(void *data
-            iscsid_req_by_rec_async(MGMT_IPC_SESSION_LOGIN
+            iscsid_req_by_rec_async(MGMT_IPC_SESSION_LOGIN -> 异步连接iscsid的socket
               iscsid_request
                 iscsid_connect(fd, start_iscsid)
                   ipc_connect -> static int ipc_connect
                     *fd = socket(AF_LOCAL, SOCK_STREAM, 0)
                     setup_abstract_addr ISCSIADM_ABSTRACT_NAMESPACE
                     connect(*fd, (struct sockaddr *) &addr, addr_len)
-                write(*fd, req, sizeof(*req)) req中带会话登录命令: MGMT_IPC_SESSION_LOGIN -> 发给iscsid服务 -> systemctl status iscsid ->  Listen: @ISCSIADM_ABSTRACT_NAMESPACE (Stream) -> tail -f /var/log/messages | grep iscsid -> /sbin/iscsid -h -> man iscsid -> initiator_name : cat  /etc/iscsi/initiatorname.iscsi
+                write(*fd, req, sizeof(*req)) req中带会话登录命令(与iscsid函数表关联): MGMT_IPC_SESSION_LOGIN -> 发给iscsid服务 -> systemctl status iscsid ->  Listen: @ISCSIADM_ABSTRACT_NAMESPACE (Stream) -> tail -f /var/log/messages | grep iscsid -> /sbin/iscsid -h -> man iscsid -> initiator_name : cat  /etc/iscsi/initiatorname.iscsi
                 -> static void session_conn_process_login
                 ...
 iscsi_sysfs_for_each_session
@@ -174,7 +175,7 @@ handler = mgmt_ipc_functions[command]
 清理老连接: 
 iscsiadm -m node --logoutall=all;iscsiadm -m node -o delete -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260;rm -rf /var/lib/iscsi/send_targets/
 
-发现tgt, 建连接, 绕过iscsid, 直接走内核
+发现tgt流程, connect tgt socket, 记录portal信息, 断开连接, 释放会话, 可选登录portal(-l do_login)
 iscsiadm -m discovery -t sendtargets -p 172.17.136.132, or gdb --args iscsiadm -m discovery -t sendtargets -p 172.17.136.132 -d 8
 iscsiadm -> main.c
 MODE_DISCOVERY
@@ -231,6 +232,13 @@ iscsi_create_session
     iscsi_timer_msecs_until
     poll(&pfd, 1, timeout)
   iscsi_wait_for_login
+...
+iscsi_destroy_session
+  iscsi_io_disconnect
+iscsi_free_session(session)
+
+
+
 
 
 iscsi_io_recv_pdu
@@ -281,7 +289,7 @@ main
     do_target_discovery
       iscsi_sysfs_get_transport_by_name //获取transport
       do_software_sendtargets
-                     discovery_sendtargets（idbm_bind_ifaces_to_nodes) 
+                     discovery_sendtargets（idbm_bind_ifaces_to_nodes) -> idbm_bind_ifaces_to_nodes(discovery_sendtargets, drec, ifaces
                        iscsi_alloc_session //这里回去获取transport
                             iscsi_setup_portal //解析要发现的地址
                             iscsi_create_session -> static int iscsi_create_session
@@ -303,6 +311,7 @@ main
                exec_disc_op_on_recs
                        idbm_for_each_rec delete_stale_rec
                             idbm_add_node
+                       if (!do_login) -> 支持login_portals -> return 0; 或继续
                        iscsi_login_portals
                               __iscsi_login_portals（ iscsi_login_portal ）
                                 __iscsi_login_portal
@@ -321,6 +330,7 @@ mgmt_ipc_session_login
             __session_conn_create
             iscsi_conn_connect
               ep_connect
+
 
 
 iscsid的日志级别可以通过修改`/etc/iscsi/iscsid.conf`文件中的`log_level`参数来进行配置。该参数决定了打印的日志级别，可以设置为以下任何一个值：

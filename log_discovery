@@ -150,7 +150,7 @@ iscsiadm: node addition making link from /var/lib/iscsi/nodes/iqn.2018-01.com.h3
 
 
 
-完整日志:
+gdb版本完整日志:
 (gdb) r
 Starting program: /usr/sbin/iscsiadm -m discovery -t sendtargets -p 172.17.136.132 -d 8
 [Thread debugging using libthread_db enabled]
