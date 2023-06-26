@@ -220,9 +220,10 @@ iscsi_create_session
       __kipc_call(iov, 2)
     rc = ipc->create_conn -> kcreate_conn
       ev.type = ISCSI_UEVENT_CREATE_CONN
-      rc = __kipc_call(iov, 2) -> driver -> kernel -> drivers/scsi/scsi_transport_iscsi.c -> iscsi_if_recv_msg
+      rc = __kipc_call(iov, 2) -> driver -> kernel 转到内核 -> drivers/scsi/scsi_transport_iscsi.c -> iscsi_if_recv_msg
         case ISCSI_UEVENT_CREATE_CONN:
         err = iscsi_if_create_conn(transport, ev);
+        ...
     if (ipc->bind_conn
   iscsi_copy_operational_params
   login_status = iscsi_login(session, 0, data, data_len
@@ -382,6 +383,7 @@ actor_timer session_conn_poll -> 设置超时回调
 static int iscsi_sched_ev_context
 case EV_CONN_ERROR
   actor_init(&ev_context->actor, session_conn_error -> static void session_conn_error(void *data) -> 设置回调 -> 收到内核事件 -> Kernel reported iSCSI connection 27:0 error (1022 - ISCSI_ERR_NOP_TIMEDOUT: A NOP has timed out) state (3)
+    cat /var/log/messages|grep 'Kernel reported' -> Jun 26 17:00:59 node1 iscsid: iscsid: Kernel reported iSCSI connection 1:0 error (1022 - ISCSI_ERR_NOP_TIMEDOUT: A NOP has timed out) state (3) -> multipathd: checker failed path 8:16 in map mpatha
     iscsi_ev_context_put
     __conn_error_handle
       session_conn_shutdown
@@ -413,4 +415,35 @@ nop_in, nop_out, BHS, AHS
 Nop-Out, initiator -> tgt, Initiator Opcodes, check whether the target is still responding
 Nop-In,  tgt -> initiator, Target Opcodes, 
 
+
+
+
+iterate_targets
+request_targets
+__send_nopin_rsp
+__send_nopout
+iscsi_login_req
+  iscsi_io_send_pdu(iscsi_conn_t *conn, struct iscsi_hdr *hdr,
+    ipc->send_pdu_begin(session->t->handle, session->id,
+      ISCSI_UEVENT_SEND_PDU
+
+
+
+iscsi_recv_nop_in
+setup_full_feature_phase
+static void conn_send_nop_ou
+  __send_nopout
+
+
+
+iscsi_sched_ev_context
+  case EV_CONN_RECV_PDU
+  actor_init(&ev_context->actor, session_conn_recv_pdu
+  session_conn_recv_pdu
+    case ISCSI_CONN_STATE_IN_LOGIN
+      iscsi_recv_login_rsp
+        setup_full_feature_phase
+
+
+超 WRITE 10
 

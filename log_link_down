@@ -2011,3 +2011,1128 @@ Jun 12 11:20:09 node1 iscsid: iscsid: online device 14:0:0:1
 Jun 12 11:20:09 node1 iscsid: iscsid: mgmt_ipc_write_rsp: rsp to fd -1
 Jun 12 11:20:09 node1 iscsid: iscsid: connection27:0 is operational after recovery (4 attempts)
 Jun 12 11:20:09 node1 iscsid: iscsid: thread 558f51f39070 done
+
+
+
+连接错误:
+Jun 26 17:00:59 node1 iscsid: iscsid: poll result 1
+Jun 26 17:00:59 node1 iscsid: iscsid: in ctldev_handle
+Jun 26 17:00:59 node1 iscsid: iscsid: in nl_read
+Jun 26 17:00:59 node1 iscsid: iscsid: ctldev_handle got event type 102
+Jun 26 17:00:59 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:00:59 node1 kernel: connection1:0: ping timeout of 5 secs expired, recv timeout 5, last rx 4406555172, last ping 4406560192, now 4406565376
+Jun 26 17:00:59 node1 kernel: connection1:0: detected conn error (1022)
+Jun 26 17:00:59 node1 iscsid: iscsid: message real length is 72 bytes, recv_handle 0x561bdc587fc8
+Jun 26 17:00:59 node1 iscsid: iscsid: in nlpayload_read
+Jun 26 17:00:59 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 3, tmo 0
+Jun 26 17:00:59 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 0 state 3
+Jun 26 17:00:59 node1 iscsid: iscsid: current time 111898
+Jun 26 17:00:59 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 26 17:00:59 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:00:59 node1 iscsid: iscsid: Kernel reported iSCSI connection 1:0 error (1022 - ISCSI_ERR_NOP_TIMEDOUT: A NOP has timed out) state (3)
+Jun 26 17:00:59 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:00:59 node1 iscsid: iscsid: re-opening session 1 (reopen_cnt 0)
+Jun 26 17:00:59 node1 iscsid: iscsid: thread 561bdc5833e8 delete: state 3
+Jun 26 17:00:59 node1 iscsid: iscsid: thread 561bdc583418 delete: state 3
+Jun 26 17:00:59 node1 iscsid: iscsid: disconnecting conn 0x561bdc580f20, fd 6
+Jun 26 17:00:59 node1 iscsid: iscsid: in kstop_conn
+Jun 26 17:00:59 node1 iscsid: iscsid: in __kipc_call
+Jun 26 17:00:59 node1 iscsid: iscsid: in kwritev
+Jun 26 17:00:59 node1 iscsid: iscsid: in nlpayload_read
+Jun 26 17:00:59 node1 iscsid: iscsid: in nlpayload_read
+Jun 26 17:00:59 node1 iscsid: iscsid: connection 1:0 is stopped for recovery
+Jun 26 17:00:59 node1 iscsid: iscsid: Waiting 2 seconds before trying to reconnect.
+Jun 26 17:00:59 node1 iscsid: iscsid: Requeue reopen attempt in 2 secs
+Jun 26 17:00:59 node1 iscsid: iscsid: thread 561bdc5833e8 delete: state 3
+Jun 26 17:00:59 node1 iscsid: iscsid: thread 0x561bdc5833e8 schedule: delay 2 state 3
+Jun 26 17:00:59 node1 iscsid: iscsid: new thread 0x561bdc5833e8 due 111900 is first item on pend_list
+Jun 26 17:00:59 node1 iscsid: iscsid: new alarm set for 2 seconds, old alarm 0
+Jun 26 17:00:59 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:00:59 node1 ceph-mon: 2023-06-26 17:00:59.890631 7fb3c93ff700 4208 27 ERROR -1 -- 172.17.136.131:6789/0 >> 172.17.136.133:0/2051412479 conn(0x7fb3c80a1000 :6789 s=STATE_OPEN pgs=2 cs=1 l=1)._try_send send error: (104) Connection reset by peer
+Jun 26 17:01:00 node1 systemd: Started Session c87743 of user root.
+Jun 26 17:01:00 node1 systemd: Started Session c87744 of user root.
+Jun 26 17:01:01 node1 dse: 2023-06-26 17:01:01.130439 7f81eea5a700 11819 60 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:01 node1 dse: 2023-06-26 17:01:01.130488 7f81eea5a700 11819 60 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:01 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:01 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:01 node1 iscsid: iscsid: current time 111900
+Jun 26 17:01:01 node1 iscsid: iscsid: thread 561bdc5833e8 was scheduled for 111900, curtime 111900 q_forw 0x561bda5ac0a0 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:01 node1 iscsid: iscsid: thread 561bdc5833e8 now in ready_list
+Jun 26 17:01:01 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 26 17:01:01 node1 iscsid: iscsid: exec thread 561bdc5833e8 callback
+Jun 26 17:01:01 node1 iscsid: iscsid: iscsi_login_eh
+Jun 26 17:01:01 node1 iscsid: iscsid: login failed ISCSI_CONN_STATE_XPT_WAIT/R_STAGE_SESSION_REOPEN 0
+Jun 26 17:01:01 node1 iscsid: iscsid: re-opening session 1 (reopen_cnt 0)
+Jun 26 17:01:01 node1 iscsid: iscsid: thread 561bdc5833e8 delete: state 3
+Jun 26 17:01:01 node1 iscsid: iscsid: thread 561bdc583418 delete: state 3
+Jun 26 17:01:01 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:01 node1 iscsid: iscsid: set TCP recv window size to 524288, actually got 425984
+Jun 26 17:01:01 node1 iscsid: iscsid: set TCP send window size to 524288, actually got 425984
+Jun 26 17:01:01 node1 iscsid: iscsid: connecting to 172.17.136.132:3260
+Jun 26 17:01:01 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 0
+Jun 26 17:01:01 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 0 state 3
+Jun 26 17:01:01 node1 iscsid: iscsid: Setting login timer 0x561bdc5833e8 timeout 15
+Jun 26 17:01:01 node1 iscsid: iscsid: thread 561bdc5833e8 delete: state 3
+Jun 26 17:01:01 node1 iscsid: iscsid: thread 0x561bdc5833e8 schedule: delay 15 state 3
+Jun 26 17:01:01 node1 iscsid: iscsid: new thread 0x561bdc5833e8 due 111915 is first item on pend_list
+Jun 26 17:01:01 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 26 17:01:01 node1 iscsid: iscsid: thread 561bdc5833e8 done
+Jun 26 17:01:01 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:01 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:01 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:01 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:01 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:01 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:01 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:01 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111901), inserting
+Jun 26 17:01:01 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 15
+Jun 26 17:01:01 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:01 node1 systemd: Started Session 40144 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40145 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40146 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40148 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40147 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40149 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40150 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40152 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40151 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40153 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40154 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40155 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40156 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40157 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40159 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40160 of user root.
+Jun 26 17:01:01 node1 systemd: Started Session 40158 of user root.
+Jun 26 17:01:02 node1 systemd: Started Session c87745 of user root.
+Jun 26 17:01:02 node1 systemd: Started Session c87746 of user root.
+Jun 26 17:01:02 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:02 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:02 node1 iscsid: iscsid: current time 111901
+Jun 26 17:01:02 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111901, curtime 111901 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:02 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:02 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 14 more
+Jun 26 17:01:02 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:02 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:02 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:02 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:02 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:02 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:02 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:02 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111902), inserting
+Jun 26 17:01:02 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 14
+Jun 26 17:01:02 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:03 node1 systemd: Started Session c87747 of user root.
+Jun 26 17:01:03 node1 systemd: Started Session c87748 of user root.
+Jun 26 17:01:03 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:03 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:03 node1 iscsid: iscsid: current time 111902
+Jun 26 17:01:03 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111902, curtime 111902 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:03 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:03 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 13 more
+Jun 26 17:01:03 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:03 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:03 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:03 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:03 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:03 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:03 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:03 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111903), inserting
+Jun 26 17:01:03 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 13
+Jun 26 17:01:03 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:04 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:04 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:04 node1 iscsid: iscsid: current time 111903
+Jun 26 17:01:04 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111903, curtime 111903 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:04 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:04 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 12 more
+Jun 26 17:01:04 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:04 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:04 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:04 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:04 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:04 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:04 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:04 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111904), inserting
+Jun 26 17:01:04 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 12
+Jun 26 17:01:04 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:04 node1 kernel: session1: session recovery timed out after 5 secs
+Jun 26 17:01:05 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:05 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:05 node1 iscsid: iscsid: current time 111904
+Jun 26 17:01:05 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111904, curtime 111904 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:05 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:05 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 11 more
+Jun 26 17:01:05 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:05 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:05 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:05 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:05 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:05 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:05 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:05 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111905), inserting
+Jun 26 17:01:05 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 11
+Jun 26 17:01:05 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:06 node1 dse: 2023-06-26 17:01:06.161933 7f81eea5a700 11819 19 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:06 node1 dse: 2023-06-26 17:01:06.161994 7f81eea5a700 11819 19 ERROR -1  Processor -- bind was unable to bind after 3 attempts: (99) Cannot assign requested address
+Jun 26 17:01:06 node1 dse: 2023-06-26 17:01:06.200493 7f81f1a60700 11811 27 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:06 node1 dse: 2023-06-26 17:01:06.200531 7f81f1a60700 11811 27 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:06 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:06 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:06 node1 iscsid: iscsid: current time 111905
+Jun 26 17:01:06 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111905, curtime 111905 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:06 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:06 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 10 more
+Jun 26 17:01:06 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:06 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:06 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:06 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:06 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:06 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:06 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:06 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111906), inserting
+Jun 26 17:01:06 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 10
+Jun 26 17:01:06 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:07 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:07 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:07 node1 iscsid: iscsid: current time 111906
+Jun 26 17:01:07 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111906, curtime 111906 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:07 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:07 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 9 more
+Jun 26 17:01:07 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:07 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:07 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:07 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:07 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:07 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:07 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:07 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111907), inserting
+Jun 26 17:01:07 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 9
+Jun 26 17:01:07 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:08 node1 systemd: Started Session c87749 of user root.
+Jun 26 17:01:08 node1 systemd: Started Session c87750 of user root.
+Jun 26 17:01:08 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:08 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:08 node1 iscsid: iscsid: current time 111907
+Jun 26 17:01:08 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111907, curtime 111907 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:08 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:08 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 8 more
+Jun 26 17:01:08 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:08 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:08 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:08 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:08 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:08 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:08 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:08 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111908), inserting
+Jun 26 17:01:08 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 8
+Jun 26 17:01:08 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:09 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:09 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:09 node1 iscsid: iscsid: current time 111908
+Jun 26 17:01:09 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111908, curtime 111908 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:09 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:09 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 7 more
+Jun 26 17:01:09 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:09 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:09 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:09 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:09 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:09 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:09 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:09 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111909), inserting
+Jun 26 17:01:09 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 7
+Jun 26 17:01:09 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:10 node1 multipathd: checker failed path 8:16 in map mpatha
+Jun 26 17:01:10 node1 kernel: device-mapper: multipath: 253:3: Failing path 8:16.
+Jun 26 17:01:10 node1 multipathd: mpatha: remaining active paths: 1
+Jun 26 17:01:10 node1 systemd: Starting Ceph object storage daemon osd.2...
+Jun 26 17:01:10 node1 systemd: Started Ceph object storage daemon osd.2.
+Jun 26 17:01:10 node1 systemd: Starting Ceph object storage daemon osd.11...
+Jun 26 17:01:10 node1 ceph-osd.sh: starting osd.2 at - osd_data /var/lib/ceph/osd/ceph-2 /var/lib/ceph/osd/ceph-2/journal
+Jun 26 17:01:10 node1 systemd: Started Ceph object storage daemon osd.11.
+Jun 26 17:01:10 node1 ceph-osd.sh: 2023-06-26 17:01:10.436005 7f78a860e080 2246586 10 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:10 node1 ceph-osd.sh: 2023-06-26 17:01:10.436057 7f78a860e080 2246586 10 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:10 node1 ceph-osd.sh: starting osd.11 at - osd_data /var/lib/ceph/osd/ceph-11 /var/lib/ceph/osd/ceph-11/journal
+Jun 26 17:01:10 node1 ceph-osd.sh: 2023-06-26 17:01:10.515311 7fc9ba551080 2246624 5 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:10 node1 ceph-osd.sh: 2023-06-26 17:01:10.515334 7fc9ba551080 2246624 5 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:10 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:10 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:10 node1 iscsid: iscsid: current time 111909
+Jun 26 17:01:10 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111909, curtime 111909 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:10 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:10 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 6 more
+Jun 26 17:01:10 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:10 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:10 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:10 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:10 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:10 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:10 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:10 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111910), inserting
+Jun 26 17:01:10 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 6
+Jun 26 17:01:10 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:11 node1 dse: 2023-06-26 17:01:11.231178 7f81f1a60700 11811 29 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:11 node1 dse: 2023-06-26 17:01:11.231236 7f81f1a60700 11811 29 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:11 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:11 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:11 node1 iscsid: iscsid: current time 111910
+Jun 26 17:01:11 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111910, curtime 111910 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:11 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:11 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 5 more
+Jun 26 17:01:11 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:11 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:11 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:11 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:11 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:11 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:11 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:11 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111911), inserting
+Jun 26 17:01:11 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 5
+Jun 26 17:01:11 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:12 node1 systemd: Started Session c87751 of user root.
+Jun 26 17:01:12 node1 systemd: Started Session c87752 of user root.
+Jun 26 17:01:12 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:12 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:12 node1 iscsid: iscsid: current time 111911
+Jun 26 17:01:12 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111911, curtime 111911 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:12 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:12 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 4 more
+Jun 26 17:01:12 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:12 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:12 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:12 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:12 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:12 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:12 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:12 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111912), inserting
+Jun 26 17:01:12 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 4
+Jun 26 17:01:12 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:12 node1 systemd: Started Session c87753 of user root.
+Jun 26 17:01:12 node1 systemd: Started Session c87754 of user root.
+Jun 26 17:01:13 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:13 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:13 node1 iscsid: iscsid: current time 111912
+Jun 26 17:01:13 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111912, curtime 111912 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:13 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:13 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 3 more
+Jun 26 17:01:13 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:13 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:13 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:13 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:13 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:13 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:13 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:13 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111913), inserting
+Jun 26 17:01:13 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 3
+Jun 26 17:01:13 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:14 node1 systemd: Started Session c87755 of user root.
+Jun 26 17:01:14 node1 systemd: Started Session c87756 of user root.
+Jun 26 17:01:14 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:14 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:14 node1 iscsid: iscsid: current time 111913
+Jun 26 17:01:14 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111913, curtime 111913 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:14 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:14 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 2 more
+Jun 26 17:01:14 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:14 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:14 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:14 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:14 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:14 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:14 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111915
+Jun 26 17:01:14 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111914), inserting
+Jun 26 17:01:14 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 2
+Jun 26 17:01:14 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:15 node1 ceph-osd.sh: 2023-06-26 17:01:15.462138 7f78a860e080 2246586 10 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:15 node1 ceph-osd.sh: 2023-06-26 17:01:15.462186 7f78a860e080 2246586 10 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:15 node1 ceph-osd.sh: 2023-06-26 17:01:15.545073 7fc9ba551080 2246624 7 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:15 node1 ceph-osd.sh: 2023-06-26 17:01:15.545123 7fc9ba551080 2246624 7 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:15 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:15 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:15 node1 iscsid: iscsid: current time 111914
+Jun 26 17:01:15 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111914, curtime 111914 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:15 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:15 node1 iscsid: iscsid: thread 561bdc5833e8 due 111915, wait 1 more
+Jun 26 17:01:15 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:15 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:15 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:15 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:15 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:15 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:15 node1 iscsid: iscsid: last thread 0x561bda5ac0a0 due 0
+Jun 26 17:01:15 node1 iscsid: iscsid: new thread 0x561bdc587f80 is after (111915), inserting at tail
+Jun 26 17:01:15 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:16 node1 dse: 2023-06-26 17:01:16.262932 7f81f1a60700 11811 54 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:16 node1 dse: 2023-06-26 17:01:16.262981 7f81f1a60700 11811 54 ERROR -1  Processor -- bind was unable to bind after 3 attempts: (99) Cannot assign requested address
+Jun 26 17:01:16 node1 dse: 2023-06-26 17:01:16.292891 7f81ed257700 11831 50 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:16 node1 dse: 2023-06-26 17:01:16.292917 7f81ed257700 11831 50 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:16 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:16 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:16 node1 iscsid: iscsid: current time 111915
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 561bdc5833e8 was scheduled for 111915, curtime 111915 q_forw 0x561bdc587f80 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 561bdc5833e8 now in ready_list
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111915, curtime 111915 q_forw 0x561bda5ac0a0 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:16 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 26 17:01:16 node1 iscsid: iscsid: exec thread 561bdc5833e8 callback
+Jun 26 17:01:16 node1 iscsid: iscsid: iscsi_login_eh
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 561bdc587f80 delete: state 2
+Jun 26 17:01:16 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 26 17:01:16 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 26 17:01:16 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:16 node1 iscsid: iscsid: login failed ISCSI_CONN_STATE_XPT_WAIT/R_STAGE_SESSION_REOPEN 1
+Jun 26 17:01:16 node1 iscsid: iscsid: re-opening session 1 (reopen_cnt 1)
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 561bdc5833e8 delete: state 3
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 561bdc583418 delete: state 3
+Jun 26 17:01:16 node1 iscsid: iscsid: disconnecting conn 0x561bdc580f20, fd 6
+Jun 26 17:01:16 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:16 node1 iscsid: iscsid: set TCP recv window size to 524288, actually got 425984
+Jun 26 17:01:16 node1 iscsid: iscsid: set TCP send window size to 524288, actually got 425984
+Jun 26 17:01:16 node1 iscsid: iscsid: connecting to 172.17.136.132:3260
+Jun 26 17:01:16 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 0
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 0 state 3
+Jun 26 17:01:16 node1 iscsid: iscsid: Setting login timer 0x561bdc5833e8 timeout 15
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 561bdc5833e8 delete: state 3
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 0x561bdc5833e8 schedule: delay 15 state 3
+Jun 26 17:01:16 node1 iscsid: iscsid: new thread 0x561bdc5833e8 due 111930 is first item on pend_list
+Jun 26 17:01:16 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 561bdc5833e8 done
+Jun 26 17:01:16 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:16 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:16 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:16 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:16 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:16 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:16 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111916), inserting
+Jun 26 17:01:16 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 15
+Jun 26 17:01:16 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:17 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:17 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:17 node1 iscsid: iscsid: current time 111916
+Jun 26 17:01:17 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111916, curtime 111916 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:17 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:17 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 14 more
+Jun 26 17:01:17 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:17 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:17 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:17 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:17 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:17 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:17 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:17 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111917), inserting
+Jun 26 17:01:17 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 14
+Jun 26 17:01:17 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:18 node1 systemd: Started Session c87757 of user root.
+Jun 26 17:01:18 node1 systemd: Started Session c87758 of user root.
+Jun 26 17:01:18 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:18 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:18 node1 iscsid: iscsid: current time 111917
+Jun 26 17:01:18 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111917, curtime 111917 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:18 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:18 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 13 more
+Jun 26 17:01:18 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:18 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:18 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:18 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:18 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:18 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:18 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:18 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111918), inserting
+Jun 26 17:01:18 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 13
+Jun 26 17:01:18 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:19 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:19 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:19 node1 iscsid: iscsid: current time 111918
+Jun 26 17:01:19 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111918, curtime 111918 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:19 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:19 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 12 more
+Jun 26 17:01:19 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:19 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:19 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:19 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:19 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:19 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:19 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:19 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111919), inserting
+Jun 26 17:01:19 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 12
+Jun 26 17:01:19 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:20 node1 ceph-osd.sh: 2023-06-26 17:01:20.488411 7f78a860e080 2246586 10 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:20 node1 ceph-osd.sh: 2023-06-26 17:01:20.488467 7f78a860e080 2246586 10 ERROR -1  Processor -- bind was unable to bind after 3 attempts: (99) Cannot assign requested address
+Jun 26 17:01:20 node1 ceph-osd.sh: 2023-06-26 17:01:20.488803 7f78a860e080 2246586 10 ERROR -1  exit and create flag ms_cluster flag_restart_t: 1687770080488552 fn: 16
+Jun 26 17:01:20 node1 systemd: ceph-osd@2.service: main process exited, code=exited, status=1/FAILURE
+Jun 26 17:01:20 node1 systemd: Unit ceph-osd@2.service entered failed state.
+Jun 26 17:01:20 node1 systemd: ceph-osd@2.service failed.
+Jun 26 17:01:20 node1 ceph-osd.sh: 2023-06-26 17:01:20.572735 7fc9ba551080 2246624 7 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:20 node1 ceph-osd.sh: 2023-06-26 17:01:20.572781 7fc9ba551080 2246624 7 ERROR -1  Processor -- bind was unable to bind after 3 attempts: (99) Cannot assign requested address
+Jun 26 17:01:20 node1 ceph-osd.sh: 2023-06-26 17:01:20.573084 7fc9ba551080 2246624 7 ERROR -1  exit and create flag ms_cluster flag_restart_t: 1687770080572846 fn: 16
+Jun 26 17:01:20 node1 systemd: ceph-osd@11.service: main process exited, code=exited, status=1/FAILURE
+Jun 26 17:01:20 node1 systemd: Unit ceph-osd@11.service entered failed state.
+Jun 26 17:01:20 node1 systemd: ceph-osd@11.service failed.
+Jun 26 17:01:20 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:20 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:20 node1 iscsid: iscsid: current time 111919
+Jun 26 17:01:20 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111919, curtime 111919 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:20 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:20 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 11 more
+Jun 26 17:01:20 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:20 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:20 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:20 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:20 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:20 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:20 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:20 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111920), inserting
+Jun 26 17:01:20 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 11
+Jun 26 17:01:20 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:21 node1 systemd: Started Session c87759 of user root.
+Jun 26 17:01:21 node1 systemd: Started Session c87760 of user root.
+Jun 26 17:01:21 node1 dse: 2023-06-26 17:01:21.320376 7f81ed257700 11831 21 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:21 node1 dse: 2023-06-26 17:01:21.320426 7f81ed257700 11831 21 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:21 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:21 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:21 node1 iscsid: iscsid: current time 111920
+Jun 26 17:01:21 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111920, curtime 111920 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:21 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:21 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 10 more
+Jun 26 17:01:21 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:21 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:21 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:21 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:21 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:21 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:21 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:21 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111921), inserting
+Jun 26 17:01:21 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 10
+Jun 26 17:01:21 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:22 node1 systemd: Started Session c87761 of user root.
+Jun 26 17:01:22 node1 systemd: Started Session c87762 of user root.
+Jun 26 17:01:22 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:22 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:22 node1 iscsid: iscsid: current time 111921
+Jun 26 17:01:22 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111921, curtime 111921 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:22 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:22 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 9 more
+Jun 26 17:01:22 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:22 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:22 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:22 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:22 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:22 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:22 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:22 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111922), inserting
+Jun 26 17:01:22 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 9
+Jun 26 17:01:22 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:23 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:23 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:23 node1 iscsid: iscsid: current time 111922
+Jun 26 17:01:23 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111922, curtime 111922 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:23 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:23 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 8 more
+Jun 26 17:01:23 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:23 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:23 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:23 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:23 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:23 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:23 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:23 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111923), inserting
+Jun 26 17:01:23 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 8
+Jun 26 17:01:23 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:24 node1 systemd: Started Session c87763 of user root.
+Jun 26 17:01:24 node1 systemd: Started Session c87764 of user root.
+Jun 26 17:01:24 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:24 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:24 node1 iscsid: iscsid: current time 111923
+Jun 26 17:01:24 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111923, curtime 111923 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:24 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:24 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 7 more
+Jun 26 17:01:24 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:24 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:24 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:24 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:24 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:24 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:24 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:24 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111924), inserting
+Jun 26 17:01:24 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 7
+Jun 26 17:01:24 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:25 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:25 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:25 node1 iscsid: iscsid: current time 111924
+Jun 26 17:01:25 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111924, curtime 111924 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:25 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:25 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 6 more
+Jun 26 17:01:25 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:25 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:25 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:25 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:25 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:25 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:25 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:25 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111925), inserting
+Jun 26 17:01:25 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 6
+Jun 26 17:01:25 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:26 node1 dse: 2023-06-26 17:01:26.347185 7f81ed257700 11831 20 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:26 node1 dse: 2023-06-26 17:01:26.347245 7f81ed257700 11831 20 ERROR -1  Processor -- bind was unable to bind after 3 attempts: (99) Cannot assign requested address
+Jun 26 17:01:26 node1 dse: 2023-06-26 17:01:26.386167 7f81f7a6c700 11796 9 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:26 node1 dse: 2023-06-26 17:01:26.386212 7f81f7a6c700 11796 9 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:26 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:26 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:26 node1 iscsid: iscsid: current time 111925
+Jun 26 17:01:26 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111925, curtime 111925 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:26 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:26 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 5 more
+Jun 26 17:01:26 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:26 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:26 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:26 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:26 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:26 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:26 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:26 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111926), inserting
+Jun 26 17:01:26 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 5
+Jun 26 17:01:26 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:27 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:27 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:27 node1 iscsid: iscsid: current time 111926
+Jun 26 17:01:27 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111926, curtime 111926 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:27 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:27 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 4 more
+Jun 26 17:01:27 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:27 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:27 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:27 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:27 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:27 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:27 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:27 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111927), inserting
+Jun 26 17:01:27 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 4
+Jun 26 17:01:27 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:28 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:28 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:28 node1 iscsid: iscsid: current time 111927
+Jun 26 17:01:28 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111927, curtime 111927 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:28 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:28 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 3 more
+Jun 26 17:01:28 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:28 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:28 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:28 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:28 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:28 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:28 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:28 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111928), inserting
+Jun 26 17:01:28 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 3
+Jun 26 17:01:28 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:29 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:29 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:29 node1 iscsid: iscsid: current time 111928
+Jun 26 17:01:29 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111928, curtime 111928 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:29 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:29 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 2 more
+Jun 26 17:01:29 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:29 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:29 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:29 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:29 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:29 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:29 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111930
+Jun 26 17:01:29 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111929), inserting
+Jun 26 17:01:29 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 2
+Jun 26 17:01:29 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:30 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:30 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:30 node1 iscsid: iscsid: current time 111929
+Jun 26 17:01:30 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111929, curtime 111929 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:30 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:30 node1 iscsid: iscsid: thread 561bdc5833e8 due 111930, wait 1 more
+Jun 26 17:01:30 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:30 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:30 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:30 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:30 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:30 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:30 node1 iscsid: iscsid: last thread 0x561bda5ac0a0 due 0
+Jun 26 17:01:30 node1 iscsid: iscsid: new thread 0x561bdc587f80 is after (111930), inserting at tail
+Jun 26 17:01:30 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:31 node1 dse: 2023-06-26 17:01:31.417403 7f81f7a6c700 11796 13 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:31 node1 dse: 2023-06-26 17:01:31.417458 7f81f7a6c700 11796 13 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:31 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:31 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:31 node1 iscsid: iscsid: current time 111930
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 561bdc5833e8 was scheduled for 111930, curtime 111930 q_forw 0x561bdc587f80 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 561bdc5833e8 now in ready_list
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111930, curtime 111930 q_forw 0x561bda5ac0a0 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:31 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 26 17:01:31 node1 iscsid: iscsid: exec thread 561bdc5833e8 callback
+Jun 26 17:01:31 node1 iscsid: iscsid: iscsi_login_eh
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 561bdc587f80 delete: state 2
+Jun 26 17:01:31 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 26 17:01:31 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 26 17:01:31 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:31 node1 iscsid: iscsid: login failed ISCSI_CONN_STATE_XPT_WAIT/R_STAGE_SESSION_REOPEN 2
+Jun 26 17:01:31 node1 iscsid: iscsid: re-opening session 1 (reopen_cnt 2)
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 561bdc5833e8 delete: state 3
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 561bdc583418 delete: state 3
+Jun 26 17:01:31 node1 iscsid: iscsid: disconnecting conn 0x561bdc580f20, fd 6
+Jun 26 17:01:31 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:31 node1 iscsid: iscsid: set TCP recv window size to 524288, actually got 425984
+Jun 26 17:01:31 node1 iscsid: iscsid: set TCP send window size to 524288, actually got 425984
+Jun 26 17:01:31 node1 iscsid: iscsid: connecting to 172.17.136.132:3260
+Jun 26 17:01:31 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 0
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 0 state 3
+Jun 26 17:01:31 node1 iscsid: iscsid: Setting login timer 0x561bdc5833e8 timeout 15
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 561bdc5833e8 delete: state 3
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 0x561bdc5833e8 schedule: delay 15 state 3
+Jun 26 17:01:31 node1 iscsid: iscsid: new thread 0x561bdc5833e8 due 111945 is first item on pend_list
+Jun 26 17:01:31 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 561bdc5833e8 done
+Jun 26 17:01:31 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:31 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:31 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:31 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:31 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:31 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:31 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111931), inserting
+Jun 26 17:01:31 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 15
+Jun 26 17:01:31 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:32 node1 systemd: Started Session c87765 of user root.
+Jun 26 17:01:32 node1 systemd: Started Session c87766 of user root.
+Jun 26 17:01:32 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:32 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:32 node1 iscsid: iscsid: current time 111931
+Jun 26 17:01:32 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111931, curtime 111931 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:32 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:32 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 14 more
+Jun 26 17:01:32 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:32 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:32 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:32 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:32 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:32 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:32 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:32 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111932), inserting
+Jun 26 17:01:32 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 14
+Jun 26 17:01:32 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:33 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:33 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:33 node1 iscsid: iscsid: current time 111932
+Jun 26 17:01:33 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111932, curtime 111932 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:33 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:33 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 13 more
+Jun 26 17:01:33 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:33 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:33 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:33 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:33 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:33 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:33 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:33 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111933), inserting
+Jun 26 17:01:33 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 13
+Jun 26 17:01:33 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:34 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:34 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:34 node1 iscsid: iscsid: current time 111933
+Jun 26 17:01:34 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111933, curtime 111933 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:34 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:34 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 12 more
+Jun 26 17:01:34 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:34 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:34 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:34 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:34 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:34 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:34 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:34 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111934), inserting
+Jun 26 17:01:34 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 12
+Jun 26 17:01:34 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:35 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:35 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:35 node1 iscsid: iscsid: current time 111934
+Jun 26 17:01:35 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111934, curtime 111934 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:35 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:35 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 11 more
+Jun 26 17:01:35 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:35 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:35 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:35 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:35 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:35 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:35 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:35 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111935), inserting
+Jun 26 17:01:35 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 11
+Jun 26 17:01:35 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:36 node1 dse: 2023-06-26 17:01:36.450591 7f81f7a6c700 11796 16 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:36 node1 dse: 2023-06-26 17:01:36.450647 7f81f7a6c700 11796 16 ERROR -1  Processor -- bind was unable to bind after 3 attempts: (99) Cannot assign requested address
+Jun 26 17:01:36 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:36 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:36 node1 iscsid: iscsid: current time 111935
+Jun 26 17:01:36 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111935, curtime 111935 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:36 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:36 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 10 more
+Jun 26 17:01:36 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:36 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:36 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:36 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:36 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:36 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:36 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:36 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111936), inserting
+Jun 26 17:01:36 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 10
+Jun 26 17:01:36 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:36 node1 systemd: Started Session c87767 of user root.
+Jun 26 17:01:36 node1 systemd: Started Session c87768 of user root.
+Jun 26 17:01:37 node1 dse: 2023-06-26 17:01:37.211991 7f81f6269700 11800 27 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:37 node1 dse: 2023-06-26 17:01:37.212040 7f81f6269700 11800 27 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:37 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:37 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:37 node1 iscsid: iscsid: current time 111936
+Jun 26 17:01:37 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111936, curtime 111936 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:37 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:37 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 9 more
+Jun 26 17:01:37 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:37 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:37 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:37 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:37 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:37 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:37 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:37 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111937), inserting
+Jun 26 17:01:37 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 9
+Jun 26 17:01:37 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:38 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:38 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:38 node1 iscsid: iscsid: current time 111937
+Jun 26 17:01:38 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111937, curtime 111937 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:38 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:38 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 8 more
+Jun 26 17:01:38 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:38 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:38 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:38 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:38 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:38 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:38 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:38 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111938), inserting
+Jun 26 17:01:38 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 8
+Jun 26 17:01:38 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:39 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:39 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:39 node1 iscsid: iscsid: current time 111938
+Jun 26 17:01:39 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111938, curtime 111938 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:39 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:39 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 7 more
+Jun 26 17:01:39 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:39 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:39 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:39 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:39 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:39 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:39 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:39 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111939), inserting
+Jun 26 17:01:39 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 7
+Jun 26 17:01:39 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:40 node1 systemd: Starting Ceph object storage daemon osd.2...
+Jun 26 17:01:40 node1 systemd: Started Ceph object storage daemon osd.2.
+Jun 26 17:01:40 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:40 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:40 node1 iscsid: iscsid: current time 111939
+Jun 26 17:01:40 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111939, curtime 111939 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:40 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:40 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 6 more
+Jun 26 17:01:40 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:40 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:40 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:40 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:40 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:40 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:40 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:40 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111940), inserting
+Jun 26 17:01:40 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 6
+Jun 26 17:01:40 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:40 node1 ceph-osd.sh: starting osd.2 at - osd_data /var/lib/ceph/osd/ceph-2 /var/lib/ceph/osd/ceph-2/journal
+Jun 26 17:01:40 node1 systemd: Starting Ceph object storage daemon osd.11...
+Jun 26 17:01:40 node1 systemd: Started Ceph object storage daemon osd.11.
+Jun 26 17:01:40 node1 ceph-osd.sh: 2023-06-26 17:01:40.781975 7fed38caa080 2252287 36 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:40 node1 ceph-osd.sh: 2023-06-26 17:01:40.782010 7fed38caa080 2252287 36 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:40 node1 ceph-osd.sh: starting osd.11 at - osd_data /var/lib/ceph/osd/ceph-11 /var/lib/ceph/osd/ceph-11/journal
+Jun 26 17:01:40 node1 ceph-osd.sh: 2023-06-26 17:01:40.866706 7f92e2d4a080 2252316 25 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:40 node1 ceph-osd.sh: 2023-06-26 17:01:40.866740 7f92e2d4a080 2252316 25 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:41 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:41 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:41 node1 iscsid: iscsid: current time 111940
+Jun 26 17:01:41 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111940, curtime 111940 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:41 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:41 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 5 more
+Jun 26 17:01:41 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:41 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:41 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:41 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:41 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:41 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:41 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:41 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111941), inserting
+Jun 26 17:01:41 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 5
+Jun 26 17:01:41 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:42 node1 systemd: Started Session c87769 of user root.
+Jun 26 17:01:42 node1 systemd: Started Session c87770 of user root.
+Jun 26 17:01:42 node1 systemd: Started Session c87771 of user root.
+Jun 26 17:01:42 node1 systemd: Started Session c87772 of user root.
+Jun 26 17:01:42 node1 dse: 2023-06-26 17:01:42.241080 7f81f6269700 11800 27 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:42 node1 dse: 2023-06-26 17:01:42.241130 7f81f6269700 11800 27 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:42 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:42 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:42 node1 iscsid: iscsid: current time 111941
+Jun 26 17:01:42 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111941, curtime 111941 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:42 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:42 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 4 more
+Jun 26 17:01:42 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:42 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:42 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:42 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:42 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:42 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:42 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:42 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111942), inserting
+Jun 26 17:01:42 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 4
+Jun 26 17:01:42 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:43 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:43 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:43 node1 iscsid: iscsid: current time 111942
+Jun 26 17:01:43 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111942, curtime 111942 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:43 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:43 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 3 more
+Jun 26 17:01:43 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:43 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:43 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:43 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:43 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:43 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:43 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:43 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111943), inserting
+Jun 26 17:01:43 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 3
+Jun 26 17:01:43 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:44 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:44 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:44 node1 iscsid: iscsid: current time 111943
+Jun 26 17:01:44 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111943, curtime 111943 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:44 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:44 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 2 more
+Jun 26 17:01:44 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:44 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:44 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:44 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:44 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:44 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:44 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111945
+Jun 26 17:01:44 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111944), inserting
+Jun 26 17:01:44 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 2
+Jun 26 17:01:44 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:45 node1 systemd: Started Session c87773 of user root.
+Jun 26 17:01:45 node1 systemd: Started Session c87774 of user root.
+Jun 26 17:01:45 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:45 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:45 node1 iscsid: iscsid: current time 111944
+Jun 26 17:01:45 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111944, curtime 111944 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:45 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:45 node1 iscsid: iscsid: thread 561bdc5833e8 due 111945, wait 1 more
+Jun 26 17:01:45 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:45 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:45 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:45 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:45 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:45 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:45 node1 iscsid: iscsid: last thread 0x561bda5ac0a0 due 0
+Jun 26 17:01:45 node1 iscsid: iscsid: new thread 0x561bdc587f80 is after (111945), inserting at tail
+Jun 26 17:01:45 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:45 node1 ceph-osd.sh: 2023-06-26 17:01:45.810014 7fed38caa080 2252287 36 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:45 node1 ceph-osd.sh: 2023-06-26 17:01:45.810070 7fed38caa080 2252287 36 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:45 node1 ceph-osd.sh: 2023-06-26 17:01:45.893718 7f92e2d4a080 2252316 25 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:45 node1 ceph-osd.sh: 2023-06-26 17:01:45.893773 7f92e2d4a080 2252316 25 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:46 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:46 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:46 node1 iscsid: iscsid: current time 111945
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 561bdc5833e8 was scheduled for 111945, curtime 111945 q_forw 0x561bdc587f80 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 561bdc5833e8 now in ready_list
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111945, curtime 111945 q_forw 0x561bda5ac0a0 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:46 node1 iscsid: iscsid: nothing on pend_list, deactivating alarm
+Jun 26 17:01:46 node1 iscsid: iscsid: exec thread 561bdc5833e8 callback
+Jun 26 17:01:46 node1 iscsid: iscsid: iscsi_login_eh
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 561bdc587f80 delete: state 2
+Jun 26 17:01:46 node1 iscsid: iscsid: deleting a scheduled/waiting thread!
+Jun 26 17:01:46 node1 iscsid: iscsid: nothing left on pend_list, deactivating alarm
+Jun 26 17:01:46 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:46 node1 iscsid: iscsid: login failed ISCSI_CONN_STATE_XPT_WAIT/R_STAGE_SESSION_REOPEN 3
+Jun 26 17:01:46 node1 iscsid: iscsid: re-opening session 1 (reopen_cnt 3)
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 561bdc5833e8 delete: state 3
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 561bdc583418 delete: state 3
+Jun 26 17:01:46 node1 iscsid: iscsid: disconnecting conn 0x561bdc580f20, fd 6
+Jun 26 17:01:46 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:46 node1 iscsid: iscsid: set TCP recv window size to 524288, actually got 425984
+Jun 26 17:01:46 node1 iscsid: iscsid: set TCP send window size to 524288, actually got 425984
+Jun 26 17:01:46 node1 iscsid: iscsid: connecting to 172.17.136.132:3260
+Jun 26 17:01:46 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 0
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 0 state 3
+Jun 26 17:01:46 node1 iscsid: iscsid: Setting login timer 0x561bdc5833e8 timeout 15
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 561bdc5833e8 delete: state 3
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 0x561bdc5833e8 schedule: delay 15 state 3
+Jun 26 17:01:46 node1 iscsid: iscsid: new thread 0x561bdc5833e8 due 111960 is first item on pend_list
+Jun 26 17:01:46 node1 iscsid: iscsid: new alarm set for 15 seconds, old alarm 0
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 561bdc5833e8 done
+Jun 26 17:01:46 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:46 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:46 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:46 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:46 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:46 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111960
+Jun 26 17:01:46 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111946), inserting
+Jun 26 17:01:46 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 15
+Jun 26 17:01:46 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:47 node1 dse: 2023-06-26 17:01:47.259085 7f81f6269700 11800 17 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:47 node1 dse: 2023-06-26 17:01:47.259136 7f81f6269700 11800 17 ERROR -1  Processor -- bind was unable to bind after 3 attempts: (99) Cannot assign requested address
+Jun 26 17:01:47 node1 dse: 2023-06-26 17:01:47.296640 7f81f1a60700 11811 52 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:47 node1 dse: 2023-06-26 17:01:47.296688 7f81f1a60700 11811 52 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:47 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:47 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:47 node1 iscsid: iscsid: current time 111946
+Jun 26 17:01:47 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111946, curtime 111946 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:47 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:47 node1 iscsid: iscsid: thread 561bdc5833e8 due 111960, wait 14 more
+Jun 26 17:01:47 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:47 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:47 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:47 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:47 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:47 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:47 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111960
+Jun 26 17:01:47 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111947), inserting
+Jun 26 17:01:47 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 14
+Jun 26 17:01:47 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:48 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:48 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:48 node1 iscsid: iscsid: current time 111947
+Jun 26 17:01:48 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111947, curtime 111947 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:48 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:48 node1 iscsid: iscsid: thread 561bdc5833e8 due 111960, wait 13 more
+Jun 26 17:01:48 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:48 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:48 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:48 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:48 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:48 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:48 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111960
+Jun 26 17:01:48 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111948), inserting
+Jun 26 17:01:48 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 13
+Jun 26 17:01:48 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:49 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:49 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:49 node1 iscsid: iscsid: current time 111948
+Jun 26 17:01:49 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111948, curtime 111948 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:49 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:49 node1 iscsid: iscsid: thread 561bdc5833e8 due 111960, wait 12 more
+Jun 26 17:01:49 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:49 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:49 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:49 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:49 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:49 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:49 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111960
+Jun 26 17:01:49 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111949), inserting
+Jun 26 17:01:49 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 12
+Jun 26 17:01:49 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:50 node1 ceph-mon: 2023-06-26 17:01:50,377:3935(0x7fb3b83ff700):ZOO_INFO@auth_completion_func@1300: Authentication scheme digest succeeded
+Jun 26 17:01:50 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:50 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:50 node1 iscsid: iscsid: current time 111949
+Jun 26 17:01:50 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111949, curtime 111949 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:50 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:50 node1 iscsid: iscsid: thread 561bdc5833e8 due 111960, wait 11 more
+Jun 26 17:01:50 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:50 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:50 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:50 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:50 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:50 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:50 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111960
+Jun 26 17:01:50 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111950), inserting
+Jun 26 17:01:50 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 11
+Jun 26 17:01:50 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:50 node1 ceph-osd.sh: 2023-06-26 17:01:50.836484 7fed38caa080 2252287 36 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:50 node1 ceph-osd.sh: 2023-06-26 17:01:50.836533 7fed38caa080 2252287 36 ERROR -1  Processor -- bind was unable to bind after 3 attempts: (99) Cannot assign requested address
+Jun 26 17:01:50 node1 ceph-osd.sh: 2023-06-26 17:01:50.836863 7fed38caa080 2252287 36 ERROR -1  exit and create flag ms_cluster flag_restart_t: 1687770110836621 fn: 16
+Jun 26 17:01:50 node1 systemd: ceph-osd@2.service: main process exited, code=exited, status=1/FAILURE
+Jun 26 17:01:50 node1 systemd: Unit ceph-osd@2.service entered failed state.
+Jun 26 17:01:50 node1 systemd: ceph-osd@2.service failed.
+Jun 26 17:01:50 node1 ceph-osd.sh: 2023-06-26 17:01:50.920824 7f92e2d4a080 2252316 31 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:50 node1 ceph-osd.sh: 2023-06-26 17:01:50.920879 7f92e2d4a080 2252316 31 ERROR -1  Processor -- bind was unable to bind after 3 attempts: (99) Cannot assign requested address
+Jun 26 17:01:50 node1 ceph-osd.sh: 2023-06-26 17:01:50.921212 7f92e2d4a080 2252316 31 ERROR -1  exit and create flag ms_cluster flag_restart_t: 1687770110920962 fn: 16
+Jun 26 17:01:50 node1 systemd: ceph-osd@11.service: main process exited, code=exited, status=1/FAILURE
+Jun 26 17:01:50 node1 systemd: Unit ceph-osd@11.service entered failed state.
+Jun 26 17:01:50 node1 systemd: ceph-osd@11.service failed.
+Jun 26 17:01:51 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:51 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:51 node1 iscsid: iscsid: current time 111950
+Jun 26 17:01:51 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111950, curtime 111950 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:51 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:51 node1 iscsid: iscsid: thread 561bdc5833e8 due 111960, wait 10 more
+Jun 26 17:01:51 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:51 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:51 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:51 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:51 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:51 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:51 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111960
+Jun 26 17:01:51 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111951), inserting
+Jun 26 17:01:51 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 10
+Jun 26 17:01:51 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:52 node1 systemd: Started Session c87775 of user root.
+Jun 26 17:01:52 node1 auditd[2109]: Audit daemon rotating log files
+Jun 26 17:01:52 node1 systemd: Started Session c87776 of user root.
+Jun 26 17:01:52 node1 dse: 2023-06-26 17:01:52.325386 7f81f1a60700 11811 53 ERROR -1  Processor -- bind unable to bind to 182.200.136.131:7300/0 on any port in range 6800-7300: (99) Cannot assign requested address
+Jun 26 17:01:52 node1 dse: 2023-06-26 17:01:52.325446 7f81f1a60700 11811 53 ERROR -1  Processor -- bind was unable to bind. Trying again in 5 seconds
+Jun 26 17:01:52 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:52 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:52 node1 iscsid: iscsid: current time 111951
+Jun 26 17:01:52 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111951, curtime 111951 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:52 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:52 node1 iscsid: iscsid: thread 561bdc5833e8 due 111960, wait 9 more
+Jun 26 17:01:52 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:52 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:52 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:52 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:52 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:52 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:52 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111960
+Jun 26 17:01:52 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111952), inserting
+Jun 26 17:01:52 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 9
+Jun 26 17:01:52 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:53 node1 systemd: Started Session c87777 of user root.
+Jun 26 17:01:53 node1 systemd: Started Session c87778 of user root.
+Jun 26 17:01:53 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:53 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:53 node1 iscsid: iscsid: current time 111952
+Jun 26 17:01:53 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111952, curtime 111952 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:53 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+Jun 26 17:01:53 node1 iscsid: iscsid: thread 561bdc5833e8 due 111960, wait 8 more
+Jun 26 17:01:53 node1 iscsid: iscsid: exec thread 561bdc587f80 callback
+Jun 26 17:01:53 node1 iscsid: iscsid: put ev context 0x561bdc587f80
+Jun 26 17:01:53 node1 iscsid: iscsid: poll not connected 0
+Jun 26 17:01:53 node1 iscsid: iscsid: get ev context 0x561bdc587f80
+Jun 26 17:01:53 node1 iscsid: iscsid: sched conn context 0x561bdc587f80 event 2, tmo 1
+Jun 26 17:01:53 node1 iscsid: iscsid: thread 0x561bdc587f80 schedule: delay 1 state 3
+Jun 26 17:01:53 node1 iscsid: iscsid: next thread 0x561bdc5833e8 due 111960
+Jun 26 17:01:53 node1 iscsid: iscsid: new thread 0x561bdc587f80 is before (111953), inserting
+Jun 26 17:01:53 node1 iscsid: iscsid: new alarm set for 1 seconds, old alarm 8
+Jun 26 17:01:53 node1 iscsid: iscsid: thread 561bdc587f80 done
+Jun 26 17:01:54 node1 iscsid: iscsid: poll result 1
+Jun 26 17:01:54 node1 iscsid: iscsid: Poll was woken by an alarm
+Jun 26 17:01:54 node1 iscsid: iscsid: current time 111953
+Jun 26 17:01:54 node1 iscsid: iscsid: thread 561bdc587f80 was scheduled for 111953, curtime 111953 q_forw 0x561bdc5833e8 &pend_list 0x561bda5ac0a0
+Jun 26 17:01:54 node1 iscsid: iscsid: thread 561bdc587f80 now in ready_list
+...
