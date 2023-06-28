@@ -384,9 +384,19 @@ static int iscsi_sched_ev_context
 case EV_CONN_ERROR
   actor_init(&ev_context->actor, session_conn_error -> static void session_conn_error(void *data) -> 设置回调 -> 收到内核事件 -> Kernel reported iSCSI connection 27:0 error (1022 - ISCSI_ERR_NOP_TIMEDOUT: A NOP has timed out) state (3)
     cat /var/log/messages|grep 'Kernel reported' -> Jun 26 17:00:59 node1 iscsid: iscsid: Kernel reported iSCSI connection 1:0 error (1022 - ISCSI_ERR_NOP_TIMEDOUT: A NOP has timed out) state (3) -> multipathd: checker failed path 8:16 in map mpatha
-    iscsi_ev_context_put
+    iscsi_ev_context_put(ev_context)
     __conn_error_handle
-      session_conn_shutdown
+      session_conn_shutdown -> no
+      case ISCSI_CONN_STATE_LOGGED_IN
+      session_conn_reopen
+        __session_conn_reopen
+          iscsi_flush_context_pool(session)
+          conn->session->t->template->ep_disconnect(conn)
+          ...
+          iscsi_conn_connect
+          ...
+  
+
 
 
 
@@ -406,6 +416,7 @@ void iscsi_conn_error_event
   ...
 static int ctldev_handle
   case ISCSI_KEVENT_CONN_ERROR
+  session = session_find_by_sid(sid)
   ipc_ev_clbk->sched_ev_context EV_CONN_ERROR -> iscsi_sched_ev_context -> static int iscsi_sched_ev_context
     case EV_CONN_ERROR
     ...
@@ -446,4 +457,6 @@ iscsi_sched_ev_context
 
 
 超 WRITE 10
+
+gdb attach `pidof /sbin/iscsid`
 
