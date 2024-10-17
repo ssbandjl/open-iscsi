@@ -123,8 +123,8 @@ static void *enable_nic_thread(void *data)
 	nic_t *nic = (nic_t *) data;
 
 	prepare_nic_thread(nic);
-	LOG_INFO(PFX "%s: started NIC enable thread state: 0x%x",
-		 nic->log_name, nic->state)
+	ILOG_INFO(PFX "%s: started NIC enable thread state: 0x%x",
+		 nic->log_name, nic->state);
 
 	/*  Enable the NIC */
 	nic_enable(nic);
@@ -139,7 +139,8 @@ static int decode_cidr(char *in_ipaddr_str, struct iface_rec_decode *ird)
 	int rc = 0, i;
 	char *tmp, *tok;
 	char ipaddr_str[NI_MAXHOST];
-	char str[INET6_ADDRSTRLEN];
+	char str_ipv6[INET6_ADDRSTRLEN];
+	char str_ipv4[INET_ADDRSTRLEN];
 	unsigned long keepbits = 0;
 	struct in_addr ia;
 	struct in6_addr ia6;
@@ -152,7 +153,7 @@ static int decode_cidr(char *in_ipaddr_str, struct iface_rec_decode *ird)
 		/* CIDR found, now decode, tmpbuf = ip, tmp = netmask */
 		tmp = ipaddr_str;
 		tok = strsep(&tmp, "/");
-		LOG_INFO(PFX "in cidr: bitmask '%s' ip '%s'", tmp, tok);
+		ILOG_INFO(PFX "in cidr: bitmask '%s' ip '%s'", tmp, tok);
 		keepbits = strtoull(tmp, NULL, 10);
 	}
 
@@ -163,13 +164,13 @@ static int decode_cidr(char *in_ipaddr_str, struct iface_rec_decode *ird)
 		/* Test to determine if the addres is an IPv6 address */
 		rc = inet_pton(AF_INET6, ipaddr_str, &ird->ipv6_addr);
 		if (rc == 0) {
-			LOG_ERR(PFX "Could not parse IP address: '%s'",
+			ILOG_ERR(PFX "Could not parse IP address: '%s'",
 				ipaddr_str);
 			goto out;
 		}
 		ird->ip_type = AF_INET6;
 		if (keepbits > 128) {
-			LOG_ERR(PFX "CIDR netmask > 128 for IPv6: %d(%s)",
+			ILOG_ERR(PFX "CIDR netmask > 128 for IPv6: %d(%s)",
 				keepbits, tmp);
 			goto out;
 		}
@@ -195,21 +196,22 @@ static int decode_cidr(char *in_ipaddr_str, struct iface_rec_decode *ird)
 			keepbits -= 32;
 		}
 		ird->ipv6_subnet_mask = ia6;
-		if (inet_ntop(AF_INET6, &ia6, str, sizeof(str)))
-			LOG_INFO(PFX "Using netmask: %s", str);
+		if (inet_ntop(AF_INET6, &ia6, str_ipv6, sizeof(str_ipv6)))
+			ILOG_INFO(PFX "Using netmask: %s", str_ipv6);
 	} else {
 		ird->ip_type = AF_INET;
 		rc = inet_pton(AF_INET, ipaddr_str, &ird->ipv4_addr);
 
 		if (keepbits > 32) {
-			LOG_ERR(PFX "CIDR netmask > 32 for IPv4: %d(%s)",
+			ILOG_ERR(PFX "CIDR netmask > 32 for IPv4: %d(%s)",
 				keepbits, tmp);
 			goto out;
 		}
 		ia.s_addr = keepbits > 0 ? 0x00 - (1 << (32 - keepbits)) : 0;
 		ird->ipv4_subnet_mask.s_addr = htonl(ia.s_addr);
-		LOG_INFO(PFX "Using netmask: %s",
-			 inet_ntoa(ird->ipv4_subnet_mask));
+		ILOG_INFO(PFX "Using netmask: %s",
+			 inet_ntop(AF_INET, &ird->ipv4_subnet_mask,
+				 str_ipv4, sizeof(str_ipv4)));
 	}
 out:
 	return rc;
@@ -226,7 +228,7 @@ static int decode_iface(struct iface_rec_decode *ird, struct iface_rec *rec)
 	/*  Detect for CIDR notation and strip off the netmask if present */
 	rc = decode_cidr(rec->ipaddress, ird);
 	if (rc && !ird->ip_type) {
-		LOG_ERR(PFX "cidr decode err: rc=%d, ip_type=%d",
+		ILOG_ERR(PFX "cidr decode err: rc=%d, ip_type=%d",
 			rc, ird->ip_type);
 		/* Can't decode address, just exit */
 		return rc;
@@ -326,7 +328,7 @@ static void *perform_ping(void *arg)
 	data = (iscsid_uip_broadcast_t *)png_c->data;
 	datalen = data->u.ping_rec.datalen;
 	if ((datalen > STD_MTU_SIZE) || (datalen < 0)) {
-		LOG_ERR(PFX "Ping datalen invalid: %d", datalen);
+		ILOG_ERR(PFX "Ping datalen invalid: %d", datalen);
 		rc = -EINVAL;
 		goto ping_done;
 	}
@@ -349,9 +351,9 @@ static void *perform_ping(void *arg)
 		rc = pthread_cond_timedwait(&nic->enable_done_cond,
 					    &nic->nic_mutex, &ts);
 		if ((rc == 0) && (nic->state == NIC_RUNNING)) {
-			LOG_DEBUG(PFX "%s: nic running", nic->log_name);
+			ILOG_DEBUG(PFX "%s: nic running", nic->log_name);
 		} else if (rc) {
-			LOG_DEBUG(PFX "%s: err %d", nic->log_name, rc);
+			ILOG_DEBUG(PFX "%s: err %d", nic->log_name, rc);
 			rc = -EAGAIN;
 		}
 		pthread_mutex_unlock(&nic->nic_mutex);
@@ -369,21 +371,23 @@ static void *perform_ping(void *arg)
 		png_c->state = rc;
 
 ping_done:
-	LOG_INFO(PFX "ping thread end");
+	ILOG_INFO(PFX "ping thread end");
 	nic->ping_thread = INVALID_THREAD;
 	pthread_exit(NULL);
 }
 
 static int parse_iface(void *arg, int do_ping)
 {
-	int rc, i;
+	int rc, i, oldcancelstate;
 	nic_t *nic = NULL;
 	nic_interface_t *nic_iface;
 	char *transport_name;
 	size_t transport_name_size;
 	nic_lib_handle_t *handle;
 	iscsid_uip_broadcast_t *data;
-	char ipv6_buf_str[INET6_ADDRSTRLEN];
+	char ipv6_addr_buf_str[INET6_ADDRSTRLEN];
+	char ipv4_addr_buf_str[INET_ADDRSTRLEN];
+	char ipv4_subnet_buf_str[INET_ADDRSTRLEN];
 	int request_type = 0;
 	struct iface_rec *rec;
 	struct iface_rec_decode ird;
@@ -397,20 +401,25 @@ static int parse_iface(void *arg, int do_ping)
 	else
 		rec = &data->u.iface_rec.rec;
 
-	LOG_INFO(PFX "Received request for '%s' to set IP address: '%s' "
-		 "VLAN: '%d'",
+	ILOG_INFO(PFX "Received request for '%s' to set IP address: '%s' VLAN: '%d'",
 		 rec->netdev,
 		 rec->ipaddress,
 		 rec->vlan_id);
 
 	rc = decode_iface(&ird, rec);
 	if (ird.vlan_id && valid_vlan(ird.vlan_id) == 0) {
-		LOG_ERR(PFX "Invalid VLAN tag: %d", ird.vlan_id);
+		ILOG_ERR(PFX "Invalid VLAN tag: %d", ird.vlan_id);
 		rc = -EIO;
 		goto early_exit;
 	}
 	if (rc && !ird.ip_type) {
-		LOG_ERR(PFX "iface err: rc=%d, ip_type=%d", rc, ird.ip_type);
+		ILOG_ERR(PFX "iface err: rc=%d, ip_type=%d", rc, ird.ip_type);
+		goto early_exit;
+	}
+
+	/* don't allow thread to be canceled while holding nic_list_mutex */
+	if (pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &oldcancelstate)) {
+		ILOG_ERR(PFX "Could not set thread to CANCEL_DISABLE");
 		goto early_exit;
 	}
 
@@ -426,7 +435,7 @@ static int parse_iface(void *arg, int do_ping)
 	}
 
 	if (i >= 10) {
-		LOG_WARN(PFX "Could not acquire nic_list_mutex lock");
+		ILOG_WARN(PFX "Could not acquire nic_list_mutex lock");
 		rc = -EIO;
 		goto early_exit;
 	}
@@ -438,12 +447,12 @@ static int parse_iface(void *arg, int do_ping)
 	rc = from_netdev_name_find_nic(rec->netdev, &nic);
 
 	if (rc != 0) {
-		LOG_WARN(PFX "Couldn't find NIC: %s, creating an instance",
+		ILOG_WARN(PFX "Couldn't find NIC: %s, creating an instance",
 			 rec->netdev);
 
 		nic = nic_init();
 		if (nic == NULL) {
-			LOG_ERR(PFX "Couldn't allocate space for NIC %s",
+			ILOG_ERR(PFX "Couldn't allocate space for NIC %s",
 				rec->netdev);
 
 			rc = -ENOMEM;
@@ -464,7 +473,7 @@ static int parse_iface(void *arg, int do_ping)
 
 		nic_add(nic);
 	} else {
-		LOG_INFO(PFX " %s, using existing NIC",
+		ILOG_INFO(PFX " %s, using existing NIC",
 			 rec->netdev);
 	}
 
@@ -472,7 +481,7 @@ static int parse_iface(void *arg, int do_ping)
 	if (nic->flags & NIC_GOING_DOWN) {
 		pthread_mutex_unlock(&nic->nic_mutex);
 		rc = -EIO;
-		LOG_INFO(PFX "nic->flags GOING DOWN");
+		ILOG_INFO(PFX "nic->flags GOING DOWN");
 		goto done;
 	}
 
@@ -482,7 +491,7 @@ static int parse_iface(void *arg, int do_ping)
 		nic->flags &= ~NIC_ENABLED_PENDING;
 		pthread_mutex_unlock(&nic->nic_mutex);
 
-		LOG_WARN(PFX "%s: pending count exceeded 1000", nic->log_name);
+		ILOG_WARN(PFX "%s: pending count exceeded 1000", nic->log_name);
 
 		rc = 0;
 		goto done;
@@ -502,7 +511,7 @@ static int parse_iface(void *arg, int do_ping)
 		if (!(nic->flags & NIC_ENABLED) ||
 		    nic->state != NIC_RUNNING) {
 			pthread_mutex_unlock(&nic->nic_mutex);
-			LOG_INFO(PFX "%s: enabled pending", nic->log_name);
+			ILOG_INFO(PFX "%s: enabled pending", nic->log_name);
 			rc = -EAGAIN;
 			goto done;
 		}
@@ -520,31 +529,30 @@ static int parse_iface(void *arg, int do_ping)
 		if (strncmp(transport_name,
 			    rec->transport_name,
 			    transport_name_size) != 0) {
-			LOG_ERR(PFX "%s Transport name is not equal "
-				"expected: %s got: %s",
+			ILOG_ERR(PFX "%s Transport name is not equal expected: %s got: %s",
 				nic->log_name,
 				rec->transport_name,
 				transport_name);
 		}
 	} else {
-		LOG_ERR(PFX "%s Couldn't find nic library ", nic->log_name);
+		ILOG_ERR(PFX "%s Couldn't find nic library ", nic->log_name);
 		rc = -EIO;
 		goto done;
 	}
 
-	LOG_INFO(PFX "%s library set using transport_name %s",
+	ILOG_INFO(PFX "%s library set using transport_name %s",
 		 nic->log_name, transport_name);
 
 	/*  Determine how to configure the IP address */
 	if (ird.ip_type == AF_INET) {
 		if (memcmp(&ird.ipv4_addr,
 			   all_zeroes_addr4, sizeof(uip_ip4addr_t)) == 0) {
-			LOG_INFO(PFX "%s: requesting configuration using DHCP",
+			ILOG_INFO(PFX "%s: requesting configuration using DHCP",
 				 nic->log_name);
 			request_type = IPV4_CONFIG_DHCP;
 		} else {
-			LOG_INFO(PFX "%s: requesting configuration using "
-				 "static IP address", nic->log_name);
+			ILOG_INFO(PFX "%s: requesting configuration using static IP address",
+				  nic->log_name);
 			request_type = IPV4_CONFIG_STATIC;
 		}
 	} else if (ird.ip_type == AF_INET6) {
@@ -570,7 +578,7 @@ static int parse_iface(void *arg, int do_ping)
 				request_type = IPV6_CONFIG_STATIC;
 		}
 	} else {
-		LOG_ERR(PFX "%s: unknown ip_type to configure: 0x%x",
+		ILOG_ERR(PFX "%s: unknown ip_type to configure: 0x%x",
 			nic->log_name, ird.ip_type);
 
 		rc = -EIO;
@@ -603,15 +611,15 @@ static int parse_iface(void *arg, int do_ping)
 				sleep_req.tv_nsec = 100000;
 				nanosleep(&sleep_req, &sleep_rem);
 				/* Somebody else is waiting for PATH_REQ */
-				LOG_INFO(PFX "%s: path req pending cnt=%d",
+				ILOG_INFO(PFX "%s: path req pending cnt=%d",
 					 nic->log_name,
 					 nic->pathreq_pending_count);
 				rc = -EAGAIN;
 				goto done;
 			} else {
 				nic->pathreq_pending_count = 0;
-				LOG_DEBUG(PFX "%s: path req pending cnt "
-					  "exceeded!", nic->log_name);
+				ILOG_DEBUG(PFX "%s: path req pending cnt exceeded!",
+					   nic->log_name);
 				/* Allow to fall thru */
 			}
 		}
@@ -621,15 +629,13 @@ static int parse_iface(void *arg, int do_ping)
 
 	/* Create the network interface if it doesn't exist */
 	if (nic_iface == NULL) {
-		LOG_DEBUG(PFX "%s couldn't find interface with "
-			  "ip_type: 0x%x creating it",
+		ILOG_DEBUG(PFX "%s couldn't find interface with ip_type: 0x%x creating it",
 			  nic->log_name, ird.ip_type);
 		nic_iface = nic_iface_init();
 
 		if (nic_iface == NULL) {
 			pthread_mutex_unlock(&nic->nic_mutex);
-			LOG_ERR(PFX "%s Couldn't allocate "
-				"interface with ip_type: 0x%x",
+			ILOG_ERR(PFX "%s Couldn't allocate interface with ip_type: 0x%x",
 				nic->log_name, ird.ip_type);
 			goto done;
 		}
@@ -644,12 +650,12 @@ static int parse_iface(void *arg, int do_ping)
 
 		persist_all_nic_iface(nic);
 
-		LOG_INFO(PFX "%s: created network interface",
+		ILOG_INFO(PFX "%s: created network interface",
 			 nic->log_name);
 	} else {
 		/* Move the nic_iface to the front */
 		set_nic_iface(nic, nic_iface);
-		LOG_INFO(PFX "%s: using existing network interface",
+		ILOG_INFO(PFX "%s: using existing network interface",
 			 nic->log_name);
 	}
 
@@ -660,8 +666,7 @@ static int parse_iface(void *arg, int do_ping)
 		rc = pthread_create(&nic->nl_process_thread, &attr,
 				    nl_process_handle_thread, nic);
 		if (rc != 0) {
-			LOG_ERR(PFX "%s: Could not create NIC NL "
-				"processing thread [%s]", nic->log_name,
+			ILOG_ERR(PFX "%s: Could not create NIC NL processing thread [%s]", nic->log_name,
 				strerror(rc));
 			nic->nl_process_thread = INVALID_THREAD;
 			/* Reset both WAIT flags */
@@ -684,14 +689,14 @@ static int parse_iface(void *arg, int do_ping)
 				goto reacquire;
 			else
 				inet_ntop(AF_INET6, &ird.ipv6_addr,
-					  ipv6_buf_str,
-					  sizeof(ipv6_buf_str));
+					  ipv6_addr_buf_str,
+					  sizeof(ipv6_addr_buf_str));
 		}
-		LOG_INFO(PFX "%s: IP configuration didn't change using 0x%x",
+		ILOG_INFO(PFX "%s: IP configuration didn't change using 0x%x",
 			 nic->log_name, nic_iface->ustack.ip_config);
 		/* No need to acquire the IP address */
-		inet_ntop(AF_INET6, &ird.ipv6_addr, ipv6_buf_str,
-			  sizeof(ipv6_buf_str));
+		inet_ntop(AF_INET6, &ird.ipv6_addr, ipv6_addr_buf_str,
+			  sizeof(ipv6_addr_buf_str));
 
 		goto enable_nic;
 	}
@@ -714,21 +719,24 @@ reacquire:
 	switch (request_type) {
 	case IPV4_CONFIG_DHCP:
 		memset(nic_iface->ustack.hostaddr, 0, sizeof(struct in_addr));
-		LOG_INFO(PFX "%s: configuring using DHCP", nic->log_name);
+		ILOG_INFO(PFX "%s: configuring using DHCP", nic->log_name);
 		nic_iface->ustack.ip_config = IPV4_CONFIG_DHCP;
 		break;
 
 	case IPV4_CONFIG_STATIC:
 		memcpy(nic_iface->ustack.hostaddr, &ird.ipv4_addr,
 		       sizeof(struct in_addr));
-		LOG_INFO(PFX "%s: configuring using static IP "
-			 "IPv4 address :%s ",
-			 nic->log_name, inet_ntoa(ird.ipv4_addr));
+		ILOG_INFO(PFX "%s: configuring using static IP IPv4 address :%s ",
+			 nic->log_name,
+			 inet_ntop(AF_INET, &ird.ipv4_addr, ipv4_addr_buf_str,
+				sizeof(ipv4_addr_buf_str)));
 
 		if (ird.ipv4_subnet_mask.s_addr)
 			memcpy(nic_iface->ustack.netmask,
 			       &ird.ipv4_subnet_mask, sizeof(struct in_addr));
-		LOG_INFO(PFX " netmask: %s", inet_ntoa(ird.ipv4_subnet_mask));
+		ILOG_INFO(PFX " netmask: %s",
+			inet_ntop(AF_INET, &ird.ipv4_subnet_mask, ipv4_subnet_buf_str,
+				sizeof(ipv4_subnet_buf_str)));
 
 		/* Default route */
 		if (ird.ipv4_gateway.s_addr) {
@@ -763,10 +771,10 @@ reacquire:
 		if (ird.router_autocfg == IPV6_RTR_AUTOCFG_OFF)
 			memcpy(nic_iface->ustack.default_route_addr6,
 			       &ird.ipv6_router, sizeof(struct in6_addr));
-		inet_ntop(AF_INET6, &ird.ipv6_addr, ipv6_buf_str,
-			  sizeof(ipv6_buf_str));
-		LOG_INFO(PFX "%s: configuring using DHCPv6",
-			 nic->log_name);
+		inet_ntop(AF_INET6, &ird.ipv6_addr, ipv6_addr_buf_str,
+			  sizeof(ipv6_addr_buf_str));
+		ILOG_INFO(PFX "%s: configuring using DHCPv6 Address: %s",
+			 nic->log_name, ipv6_addr_buf_str);
 		nic_iface->ustack.ip_config = IPV6_CONFIG_DHCP;
 		break;
 
@@ -789,16 +797,16 @@ reacquire:
 			memcpy(nic_iface->ustack.default_route_addr6,
 			       &ird.ipv6_router, sizeof(struct in6_addr));
 
-		inet_ntop(AF_INET6, &ird.ipv6_addr, ipv6_buf_str,
-			  sizeof(ipv6_buf_str));
-		LOG_INFO(PFX "%s: configuring using static IP "
-			 "IPv6 address: '%s'", nic->log_name, ipv6_buf_str);
+		inet_ntop(AF_INET6, &ird.ipv6_addr, ipv6_addr_buf_str,
+			  sizeof(ipv6_addr_buf_str));
+		ILOG_INFO(PFX "%s: configuring using static IP IPv6 address: '%s'",
+			  nic->log_name, ipv6_addr_buf_str);
 
 		nic_iface->ustack.ip_config = IPV6_CONFIG_STATIC;
 		break;
 
 	default:
-		LOG_INFO(PFX "%s: Unknown request type: 0x%x",
+		ILOG_INFO(PFX "%s: Unknown request type: 0x%x",
 			 nic->log_name, request_type);
 
 	}
@@ -810,8 +818,8 @@ enable_nic:
 		if (nic->enable_thread != INVALID_THREAD) {
 			rc = pthread_cancel(nic->enable_thread);
 			if (rc != 0) {
-				LOG_INFO(PFX "%s: failed to cancel enable NIC "
-					 "thread\n", nic->log_name);
+				ILOG_INFO(PFX "%s: failed to cancel enable NIC thread",
+					  nic->log_name);
 				goto eagain;
 			}
 		}
@@ -820,37 +828,34 @@ enable_nic:
 		rc = pthread_create(&nic->enable_thread, &attr,
 				    enable_nic_thread, (void *)nic);
 		if (rc != 0)
-			LOG_WARN(PFX "%s: failed starting enable NIC thread\n",
+			ILOG_WARN(PFX "%s: failed starting enable NIC thread",
 				 nic->log_name);
 eagain:
 		rc = -EAGAIN;
 		break;
 
 	case NIC_RUNNING:
-		LOG_INFO(PFX "%s: NIC already enabled "
-			 "flags: 0x%x state: 0x%x\n",
+		ILOG_INFO(PFX "%s: NIC already enabled flags: 0x%x state: 0x%x",
 			 nic->log_name, nic->flags, nic->state);
 		rc = 0;
 		break;
 	default:
-		LOG_INFO(PFX "%s: NIC enable still in progress "
-			 "flags: 0x%x state: 0x%x\n",
+		ILOG_INFO(PFX "%s: NIC enable still in progress flags: 0x%x state: 0x%x",
 			 nic->log_name, nic->flags, nic->state);
 		rc = -EAGAIN;
 	}
 
-	LOG_INFO(PFX "ISCSID_UIP_IPC_GET_IFACE: command: %x "
-		 "name: %s, netdev: %s ipaddr: %s vlan: %d transport_name:%s",
-		 data->header.command, rec->name, rec->netdev,
-		 (ird.ip_type == AF_INET) ? inet_ntoa(ird.ipv4_addr) :
-					     ipv6_buf_str,
-		 ird.vlan_id, rec->transport_name);
+	ILOG_INFO(
+	    PFX "ISCSID_UIP_IPC_GET_IFACE: command: %x name: %s, netdev: %s ipaddr: %s vlan: %d transport_name:%s",
+	    data->header.command, rec->name, rec->netdev,
+	    (ird.ip_type == AF_INET) ? ipv4_addr_buf_str : ipv6_addr_buf_str,
+	    ird.vlan_id, rec->transport_name);
 
 	if (do_ping) {
 		if (nic->ping_thread != INVALID_THREAD) {
 			rc = pthread_cancel(nic->ping_thread);
 			if (rc != 0) {
-				LOG_INFO(PFX "%s: failed to cancel ping thread",
+				ILOG_INFO(PFX "%s: failed to cancel ping thread",
 					 nic->log_name);
 				rc = -EAGAIN;
 				goto done;
@@ -859,7 +864,7 @@ eagain:
 
 		png_c = malloc(sizeof(struct ping_conf));
 		if (!png_c) {
-			LOG_ERR(PFX "Memory alloc failed for ping conf");
+			ILOG_ERR(PFX "Memory alloc failed for ping conf");
 			rc = -ENOMEM;
 			goto done;
 		}
@@ -875,7 +880,7 @@ eagain:
 		rc = pthread_create(&nic->ping_thread, NULL,
 				    perform_ping, (void *)png_c);
 		if (rc != 0) {
-			LOG_WARN(PFX "%s: failed starting ping thread\n",
+			ILOG_WARN(PFX "%s: failed starting ping thread",
 				 nic->log_name);
 		} else {
 			pthread_join(nic->ping_thread, NULL);
@@ -889,6 +894,8 @@ eagain:
 
 done:
 	pthread_mutex_unlock(&nic_list_mutex);
+	if (pthread_setcancelstate(oldcancelstate, NULL))
+		ILOG_ERR(PFX "Could not set thread to CANCEL_DISABLE");
 
 early_exit:
 	return rc;
@@ -913,7 +920,7 @@ int process_iscsid_broadcast(int s2)
 
 	fd = fdopen(s2, "r+");
 	if (fd == NULL) {
-		LOG_ERR(PFX "Couldn't open file descriptor: %d(%s)",
+		ILOG_ERR(PFX "Couldn't open file descriptor: %d(%s)",
 			errno, strerror(errno));
 		close(s2);
 		return -EIO;
@@ -922,7 +929,7 @@ int process_iscsid_broadcast(int s2)
 	/*  This will be freed by parse_iface_thread() */
 	data = (iscsid_uip_broadcast_t *) calloc(1, sizeof(*data));
 	if (data == NULL) {
-		LOG_ERR(PFX "Couldn't allocate memory for iface data");
+		ILOG_ERR(PFX "Couldn't allocate memory for iface data");
 		rc = -ENOMEM;
 		goto error;
 	}
@@ -930,7 +937,7 @@ int process_iscsid_broadcast(int s2)
 
 	size = fread(data, sizeof(iscsid_uip_broadcast_header_t), 1, fd);
 	if (!size) {
-		LOG_ERR(PFX "Could not read request: %d(%s)",
+		ILOG_ERR(PFX "Could not read request: %d(%s)",
 			errno, strerror(errno));
 		rc = ferror(fd);
 		goto error;
@@ -939,13 +946,13 @@ int process_iscsid_broadcast(int s2)
 	cmd = data->header.command;
 	payload_len = data->header.payload_len;
 	if (payload_len > sizeof(data->u)) {
-		LOG_ERR(PFX "Data payload length too large (%d). Corrupt payload?",
+		ILOG_ERR(PFX "Data payload length too large (%d). Corrupt payload?",
 				payload_len);
 		rc = -EINVAL;
 		goto error;
 	}
 
-	LOG_DEBUG(PFX "recv iscsid request: cmd: %d, payload_len: %d",
+	ILOG_DEBUG(PFX "recv iscsid request: cmd: %d, payload_len: %d",
 		  cmd, payload_len);
 
 	memset(&rsp, 0, sizeof(rsp));
@@ -954,7 +961,7 @@ int process_iscsid_broadcast(int s2)
 	case ISCSID_UIP_IPC_GET_IFACE:
 		size = fread(&data->u.iface_rec, payload_len, 1, fd);
 		if (!size) {
-			LOG_ERR(PFX "Could not read data: %d(%s)",
+			ILOG_ERR(PFX "Could not read data: %d(%s)",
 				errno, strerror(errno));
 			goto error;
 		}
@@ -978,7 +985,7 @@ int process_iscsid_broadcast(int s2)
 	case ISCSID_UIP_IPC_PING:
 		size = fread(&data->u.ping_rec, payload_len, 1, fd);
 		if (!size) {
-			LOG_ERR(PFX "Could not read data: %d(%s)",
+			ILOG_ERR(PFX "Could not read data: %d(%s)",
 				errno, strerror(errno));
 			goto error;
 		}
@@ -1000,7 +1007,7 @@ int process_iscsid_broadcast(int s2)
 
 		break;
 	default:
-		LOG_WARN(PFX "Unknown iscsid broadcast command: %x",
+		ILOG_WARN(PFX "Unknown iscsid broadcast command: %x",
 			 data->header.command);
 
 		/*  Send a response back to iscsid to tell it the
@@ -1012,7 +1019,7 @@ int process_iscsid_broadcast(int s2)
 
 	size = fwrite(&rsp, sizeof(rsp), 1, fd);
 	if (size == -1) {
-		LOG_ERR(PFX "Could not send response: %d(%s)",
+		ILOG_ERR(PFX "Could not send response: %d(%s)",
 			errno, strerror(errno));
 		rc = ferror(fd);
 	}
@@ -1029,7 +1036,7 @@ static void iscsid_loop_close(void *arg)
 {
 	close(iscsid_opts.fd);
 
-	LOG_INFO(PFX "iSCSI daemon socket closed");
+	ILOG_INFO(PFX "iSCSI daemon socket closed");
 }
 
 /*
@@ -1051,13 +1058,13 @@ mgmt_peeruser(int sock, char *user)
 	if (getsockopt(sock, SOL_SOCKET, SO_PEERCRED, &peercred,
 		&so_len) != 0 || so_len != sizeof(peercred)) {
 		/* We didn't get a valid credentials struct. */
-		LOG_ERR(PFX "peeruser_unux: error receiving credentials: %m");
+		ILOG_ERR(PFX "peeruser_unux: error receiving credentials: %m");
 		return 0;
 	}
 
 	pass = getpwuid(peercred.uid);
 	if (pass == NULL) {
-		LOG_ERR(PFX "peeruser_unix: unknown local user with uid %d",
+		ILOG_ERR(PFX "peeruser_unix: unknown local user with uid %d",
 				(int) peercred.uid);
 		return 0;
 	}
@@ -1082,42 +1089,40 @@ static void *iscsid_loop(void *arg)
 	sigfillset(&set);
 	rc = pthread_sigmask(SIG_BLOCK, &set, NULL);
 	if (rc != 0) {
-		LOG_ERR(PFX
-			"Couldn't set signal mask for the iscisd listening "
-			"thread");
+		ILOG_ERR(PFX "Couldn't set signal mask for the iscisd listening thread");
 	}
 
-	LOG_DEBUG(PFX "Started iscsid listening thread");
+	ILOG_DEBUG(PFX "Started iscsid listening thread");
 
 	while (1) {
 		struct sockaddr_un remote;
 		socklen_t sock_len;
 		int s2;
 
-		LOG_DEBUG(PFX "Waiting for iscsid command");
+		ILOG_DEBUG(PFX "Waiting for iscsid command");
 
 		sock_len = sizeof(remote);
 		s2 = accept(iscsid_opts.fd,
 			    (struct sockaddr *)&remote, &sock_len);
 		if (s2 == -1) {
 			if (errno == EAGAIN) {
-				LOG_DEBUG("Got EAGAIN from accept");
+				ILOG_DEBUG("Got EAGAIN from accept");
 				sleep(1);
 				continue;
 			} else if (errno == EINTR) {
-				LOG_DEBUG("Got EINTR from accept");
+				ILOG_DEBUG("Got EINTR from accept");
 				/*  The program is terminating, time to exit */
 				break;
 			}
 
-			LOG_ERR(PFX "Could not accept: %d(%s)",
+			ILOG_ERR(PFX "Could not accept: %d(%s)",
 				s2, strerror(errno));
 			continue;
 		}
 
 		if (!mgmt_peeruser(iscsid_opts.fd, user) || strncmp(user, "root", PEERUSER_MAX)) {
 			close(s2);
-			LOG_ERR(PFX "Access error: non-administrative connection rejected");
+			ILOG_ERR(PFX "Access error: non-administrative connection rejected");
 			break;
 		}
 
@@ -1127,7 +1132,7 @@ static void *iscsid_loop(void *arg)
 
 	pthread_cleanup_pop(0);
 
-	LOG_ERR(PFX "exit iscsid listening thread");
+	ILOG_ERR(PFX "exit iscsid listening thread");
 
 	pthread_exit(NULL);
 }
@@ -1149,7 +1154,7 @@ static int ipc_systemd(void)
 		return -EINVAL;
 
 	if (strtoul(env, NULL, 10) != 1) {
-		LOG_ERR("Did not receive exactly one IPC socket from systemd");
+		ILOG_ERR("Did not receive exactly one IPC socket from systemd");
 		return -EINVAL;
 	}
 
@@ -1175,7 +1180,7 @@ int iscsid_init()
 
 	iscsid_opts.fd = socket(AF_LOCAL, SOCK_STREAM, 0);
 	if (iscsid_opts.fd < 0) {
-		LOG_ERR(PFX "Can not create IPC socket");
+		ILOG_ERR(PFX "Can not create IPC socket");
 		return iscsid_opts.fd;
 	}
 
@@ -1188,13 +1193,13 @@ int iscsid_init()
 
 	rc = bind(iscsid_opts.fd, (struct sockaddr *)&addr, addr_len);
 	if (rc < 0) {
-		LOG_ERR(PFX "Can not bind IPC socket: %s", strerror(errno));
+		ILOG_ERR(PFX "Can not bind IPC socket: %s", strerror(errno));
 		goto error;
 	}
 
 	rc = listen(iscsid_opts.fd, 32);
 	if (rc < 0) {
-		LOG_ERR(PFX "Can not listen IPC socket: %s", strerror(errno));
+		ILOG_ERR(PFX "Can not listen IPC socket: %s", strerror(errno));
 		goto error;
 	}
 
@@ -1220,7 +1225,7 @@ int iscsid_start()
 	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
 	rc = pthread_create(&iscsid_opts.thread, &attr, iscsid_loop, NULL);
 	if (rc != 0) {
-		LOG_ERR(PFX "Could not start iscsid listening thread rc=%d",
+		ILOG_ERR(PFX "Could not start iscsid listening thread rc=%d",
 			rc);
 		goto error;
 	}
@@ -1246,10 +1251,10 @@ void iscsid_cleanup()
 	    iscsid_opts.thread != INVALID_THREAD) {
 		rc = pthread_cancel(iscsid_opts.thread);
 		if (rc != 0) {
-			LOG_ERR("Could not cancel iscsid listening thread: %s",
+			ILOG_ERR("Could not cancel iscsid listening thread: %s",
 				strerror(rc));
 		}
 	}
 
-	LOG_INFO(PFX "iscsid listening thread has shutdown");
+	ILOG_INFO(PFX "iscsid listening thread has shutdown");
 }

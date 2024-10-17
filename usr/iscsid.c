@@ -38,6 +38,7 @@
 #include <systemd/sd-daemon.h>
 #endif
 
+#include "iface.h"
 #include "iscsid.h"
 #include "mgmt_ipc.h"
 #include "event_poll.h"
@@ -49,7 +50,6 @@
 #include "idbm.h"
 #include "version.h"
 #include "iscsi_sysfs.h"
-#include "iface.h"
 #include "session_info.h"
 #include "sysdeps.h"
 #include "discoveryd.h"
@@ -221,7 +221,9 @@ static int sync_session(__attribute__((unused))void *data,
 				  iscsi_err_to_str(err));
 			return 0;
 		}
-		iscsi_sysfs_scan_host(host_no, 0, idbm_session_autoscan(NULL));
+
+		if (idbm_session_autoscan(NULL))
+			iscsi_sysfs_scan_host(host_no, info->sid, 0, false);
 		return 0;
 	}
 

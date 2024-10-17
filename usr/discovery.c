@@ -32,6 +32,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#include "iface.h"
 #include "local_strings.h"
 #include "types.h"
 #include "iscsi_proto.h"
@@ -46,7 +47,6 @@
 #include "transport.h"
 #include "iscsi_sysfs.h"
 #include "iscsi_ipc.h"
-#include "iface.h"
 #include "iscsi_timer.h"
 #include "iscsi_err.h"
 #if ISNS_SUPPORTED
@@ -682,7 +682,7 @@ add_target_record(char *name, char *end, discovery_rec_t *drec,
 	return 1;
 }
 
-static int
+static void
 process_sendtargets_response(struct str_buffer *sendtargets,
 			     int final, discovery_rec_t *drec,
 			     struct list_head *rec_list)
@@ -692,11 +692,10 @@ process_sendtargets_response(struct str_buffer *sendtargets,
 	char *end = text + str_data_length(sendtargets);
 	char *nul = end - 1;
 	char *record = NULL;
-	int num_targets = 0;
 
 	if (start == end) {
 		/* no SendTargets data */
-		goto done;
+		return;
 	}
 
 	/* scan backwards to find the last NUL in the data, to ensure we
@@ -711,7 +710,7 @@ process_sendtargets_response(struct str_buffer *sendtargets,
 		/* couldn't find anything we can process now,
 		 * it's one big partial string
 		 */
-		goto done;
+		return;
 	}
 
 	/* find the boundaries between target records (TargetName or final PDU)
@@ -739,9 +738,8 @@ process_sendtargets_response(struct str_buffer *sendtargets,
 							drec, rec_list)) {
 					log_error("failed to add target record");
 					str_truncate_buffer(sendtargets, 0);
-					goto done;
+					return;
 				}
-				num_targets++;
 			}
 			record = text;
 		}
@@ -763,13 +761,12 @@ process_sendtargets_response(struct str_buffer *sendtargets,
 				 record, record);
 			if (add_target_record(record + 11, text,
 					      drec, rec_list)) {
-				num_targets++;
 				record = NULL;
 				str_truncate_buffer(sendtargets, 0);
 			} else {
 				log_error("failed to add target record");
 				str_truncate_buffer(sendtargets, 0);
-				goto done;
+				return;
 			}
 		} else {
 			/* remove the parts of the sendtargets buffer we've
@@ -785,10 +782,6 @@ process_sendtargets_response(struct str_buffer *sendtargets,
 					   record - str_buffer_data(sendtargets));
 		}
 	}
-
-done:
-
-	return 1;
 }
 
 static void iscsi_free_session(struct iscsi_session *session)

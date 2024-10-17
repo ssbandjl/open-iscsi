@@ -787,41 +787,49 @@ static int print_nodes_config(struct iscsi_context *ctx, bool show_secret,
 			      const char *target_name, const char *address,
 			      int32_t port, const char *iface_name)
 {
-	int rc = 0;
+	int rc = ISCSI_SUCCESS;
 	struct iscsi_node **nodes = NULL;
 	struct iscsi_node *node = NULL;
 	uint32_t node_count = 0;
 	uint32_t i = 0;
-	bool match = false;
 	bool has_match = false;
 
 	rc = iscsi_nodes_get(ctx, &nodes, &node_count);
 	if (rc != LIBISCSI_OK)
 		return rc;
 
+	log_debug(7, "%s(target_name=%s, address=%s): found %d node(s) to scan ...",
+		  __FUNCTION__, target_name, address, node_count);
+
 	for (i = 0; i < node_count; ++i) {
 		node = nodes[i];
-		match = true;
+		/*
+		 * node matches *unless* one of the following conditions
+		 * is true
+		 */
 		if ((target_name != NULL) &&
 		    (strlen(target_name) != 0) &&
 		    (strcmp(target_name,
 			    iscsi_node_target_name_get(node)) != 0))
-			match = false;
+			continue;	/* target name mismatch */
+
 		if ((address != NULL) &&
 		    (strlen(address) != 0) &&
-		    (strcmp(address, iscsi_node_conn_address_get(node)) != 0))
-			match = false;
-		if ((port != -1) && (port != (int32_t)iscsi_node_conn_port_get(node)))
-			match = false;
+		    (iscsi_addr_match(address,
+				      iscsi_node_conn_address_get(node)) != 1))
+			continue;	/* address/name mismatch */
+
+		if ((port != -1) &&
+		    (port != (int32_t)iscsi_node_conn_port_get(node)))
+			continue;	/* port number mismatch */
+
 		if ((iface_name != NULL) &&
 		    (strlen(iface_name) != 0) &&
 		    (strcmp(iface_name, iscsi_node_iface_name_get(node)) != 0))
-			match = false;
+			continue;	/* iface mismatch */
 
-		if (match == true) {
-			iscsi_node_print_config(node, show_secret);
-			has_match = true;
-		}
+		iscsi_node_print_config(node, show_secret);
+		has_match = true;
 	}
 
 	iscsi_nodes_free(nodes, node_count);
@@ -874,7 +882,7 @@ static int rescan_portal(void *data, struct session_info *info)
 	iscsi_sysfs_for_each_device(NULL, host_no, info->sid,
 				    iscsi_sysfs_rescan_device);
 	/* now scan for new devices */
-	iscsi_sysfs_scan_host(host_no, 0, 1);
+	iscsi_sysfs_scan_host(host_no, info->sid, 0, false);
 	return 0;
 }
 
@@ -2026,6 +2034,7 @@ exit_logout:
 static int iscsi_check_session_use_count(uint32_t sid) {
 	char *config_file;
 	char *safe_logout;
+	int rc = 0;
 
 	config_file = get_config_file();
 	if (!config_file) {
@@ -2034,10 +2043,11 @@ static int iscsi_check_session_use_count(uint32_t sid) {
 	}
 
 	safe_logout = cfg_get_string_param(config_file, "iscsid.safe_logout");
-	if (!safe_logout || strcmp(safe_logout, "Yes"))
-		return 0;
+	if (safe_logout && !strcmp(safe_logout, "Yes"))
+		rc = session_in_use(sid);
+	free(safe_logout);
 
-	return session_in_use(sid);
+	return rc;
 }
 
 int iscsi_logout_flashnode_sid(struct iscsi_transport *t, uint32_t host_no,

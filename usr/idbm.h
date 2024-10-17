@@ -51,6 +51,14 @@
 #define NAME_MAXVAL	128   /* the maximum length of key name */
 #define VALUE_MAXVAL	256   /* the maximum length of 223 bytes in the RFC. */
 #define OPTS_MAXVAL	8
+
+/*
+ * wait up to DB_LOCK_USECS_WAIT * DB_LOCK_RETRIES to a cquire
+ * the DB lock, before giving up
+ */
+#define DB_LOCK_USECS_WAIT		10000	/* per-loop waiting for lock */
+#define	DB_LOCK_RETRIES			3000	/* number of retries */
+
 typedef struct recinfo {
 	int		type;
 	char		name[NAME_MAXVAL];
@@ -167,6 +175,12 @@ extern int idbm_rec_update_param(recinfo_t *info, char *name, char *value,
 				 int line_number);
 extern void idbm_recinfo_node(node_rec_t *r, recinfo_t *ri);
 
+/* from libopeniscsiusr/idbm.h */
+enum iscsi_auth_method {
+	ISCSI_AUTH_METHOD_NONE,
+	ISCSI_AUTH_METHOD_CHAP,
+};
+
 enum {
 	IDBM_PRINT_TYPE_DISCOVERY,
 	IDBM_PRINT_TYPE_NODE,
@@ -175,7 +189,7 @@ enum {
 	IDBM_PRINT_TYPE_FLASHNODE
 };
 
-extern void idbm_print(int type, void *rec, int show, FILE *f);
+extern int idbm_print(int type, void *rec, int show, FILE *f);
 
 struct boot_context;
 extern struct node_rec *idbm_create_rec(char *targetname, int tpgt,

@@ -33,6 +33,7 @@
 #include <sys/file.h>
 #include <inttypes.h>
 
+#include "iface.h"
 #include "idbm.h"
 #include "idbm_fields.h"
 #include "log.h"
@@ -40,10 +41,14 @@
 #include "iscsi_settings.h"
 #include "transport.h"
 #include "iscsi_sysfs.h"
-#include "iface.h"
 #include "sysdeps.h"
 #include "fw_context.h"
 #include "iscsi_err.h"
+
+// GLOB_ONLYDIR is not defined under musl
+#ifndef GLOB_ONLYDIR
+#define GLOB_ONLYDIR	0x100
+#endif
 
 #define IDBM_HIDE	0    /* Hide parameter when print. */
 #define IDBM_SHOW	1    /* Show parameter when print. */
@@ -893,14 +898,17 @@ recinfo_t *idbm_recinfo_alloc(int max_keys)
 	return info;
 }
 
-void idbm_print(int type, void *rec, int show, FILE *f)
+int idbm_print(int type, void *rec, int show, FILE *f)
 {
 	int i;
 	recinfo_t *info;
 
 	info = idbm_recinfo_alloc(MAX_KEYS);
-	if (!info)
-		return;
+	if (!info) {
+		log_error("Out of Memory.");
+		return ISCSI_ERR_NOMEM;
+    }
+
 
 	switch (type) {
 	case IDBM_PRINT_TYPE_DISCOVERY:
@@ -940,6 +948,7 @@ void idbm_print(int type, void *rec, int show, FILE *f)
 	fprintf(f, "%s\n", ISCSI_END_REC);
 
 	free(info);
+	return 0;
 }
 
 static void
@@ -1336,29 +1345,36 @@ void idbm_node_setup_from_conf(node_rec_t *rec)
 
 int idbm_print_discovery_info(discovery_rec_t *rec, int show)
 {
-	idbm_print(IDBM_PRINT_TYPE_DISCOVERY, rec, show, stdout);
-	return 1;
+	int rc;
+
+	rc = idbm_print(IDBM_PRINT_TYPE_DISCOVERY, rec, show, stdout);
+	return !rc;
 }
 
 int idbm_print_node_info(void *data, node_rec_t *rec)
 {
 	int show = *((int *)data);
+	int rc;
 
-	idbm_print(IDBM_PRINT_TYPE_NODE, rec, show, stdout);
-	return 0;
+	rc = idbm_print(IDBM_PRINT_TYPE_NODE, rec, show, stdout);
+	return rc;
 }
 
 int idbm_print_host_chap_info(struct iscsi_chap_rec *chap)
 {
+	int rc;
+
 	/* User only calls this to print chap so always print */
-	idbm_print(IDBM_PRINT_TYPE_HOST_CHAP, chap, 1, stdout);
-	return 0;
+	rc = idbm_print(IDBM_PRINT_TYPE_HOST_CHAP, chap, 1, stdout);
+	return rc;
 }
 
 int idbm_print_flashnode_info(struct flashnode_rec *fnode)
 {
-	idbm_print(IDBM_PRINT_TYPE_FLASHNODE, fnode, 1, stdout);
-	return 0;
+	int rc;
+
+	rc = idbm_print(IDBM_PRINT_TYPE_FLASHNODE, fnode, 1, stdout);
+	return rc;
 }
 
 int idbm_print_node_flat(__attribute__((unused))void *data, node_rec_t *rec)
@@ -1430,43 +1446,79 @@ get_params_from_disc_link(char *link, char **target, char **tpgt,
 	return 0;
 }
 
+/*
+ * lock the DB, ensuring we are the only user,
+ * waiting as needed (for quite a while)
+ *
+ * uses global "db" (pointer to the DB instance)
+ */
 int idbm_lock(void)
 {
 	int fd, i, ret;
+	int errno_save = 0;
 
+	/* if DB is already being used just increment count and return */
 	if (db->refs > 0) {
 		db->refs++;
 		return 0;
 	}
 
+	/* DB is not being used -- ensure there is a lock dir */
 	if (access(LOCK_DIR, F_OK) != 0) {
-		if (mkdir(LOCK_DIR, 0770) != 0) {
-			log_error("Could not open %s: %s", LOCK_DIR,
-				  strerror(errno));
+		if ((mkdir(LOCK_DIR, 0770) != 0) && (errno != EEXIST)) {
+			log_error("Could not open %s: %d: %s", LOCK_DIR,
+				  errno, strerror(errno));
 			return ISCSI_ERR_IDBM;
 		}
 	}
 
+	/* create the lock file, if needed */
 	fd = open(LOCK_FILE, O_RDWR | O_CREAT, 0666);
-	if (fd >= 0)
-		close(fd);
+	if (fd < 0) {
+		log_error("Could not open/create lock file: %s",
+				LOCK_FILE);
+		return ISCSI_ERR_IDBM;
+	}
+	close(fd);
 
-	for (i = 0; i < 3000; i++) {
+	/*
+	 * try to create a link from the lock file to the
+	 * lock "write" file, retrying everying 10 miliseconds
+	 * for up to 30 seconds!
+	 *
+	 * XXX: very long -- should be configurable?
+	 */
+	for (i = 0; i < DB_LOCK_RETRIES; i++) {
 		ret = link(LOCK_FILE, LOCK_WRITE_FILE);
 		if (ret == 0)
-			break;
+			break;		/* success */
+
+		errno_save = errno;
 
 		if (errno != EEXIST) {
 			log_error("Maybe you are not root?");
 			log_error("Could not lock discovery DB: %s: %s",
 					LOCK_WRITE_FILE, strerror(errno));
 			return ISCSI_ERR_IDBM;
-		} else if (i == 0)
+		}
+
+		/* print info the first time through this loop */
+		if (i == 0)
 			log_debug(2, "Waiting for discovery DB lock");
 
-		usleep(10000);
+		usleep(DB_LOCK_USECS_WAIT);	/* wait 10 ms */
 	}
 
+	if (ret != 0) {
+		log_error("Timeout on acquiring lock on DB: %s: %d: %s",
+			  LOCK_WRITE_FILE, errno_save, strerror(errno_save));
+		return ISCSI_ERR_IDBM;
+	}
+
+	/*
+	 * if we get here, we were able to "own" the DB by creating
+	 * a link, so we are now the only DB user
+	 */
 	db->refs = 1;
 	return 0;
 }
@@ -1486,6 +1538,8 @@ void idbm_unlock(void)
  * Backwards Compat:
  * If the portal is a file then we are doing the old style default
  * session behavior (svn pre 780).
+ *
+ * XXX can't we remove this now?
  */
 static FILE *idbm_open_rec_r(char *portal, char *config)
 {
@@ -2202,7 +2256,7 @@ mkdir_portal:
 		goto free_portal;
 	}
 
-	idbm_print(IDBM_PRINT_TYPE_NODE, rec, 1, f);
+	rc = idbm_print(IDBM_PRINT_TYPE_NODE, rec, 1, f);
 	fclose(f);
 free_portal:
 	free(portal);
@@ -2266,7 +2320,7 @@ static int idbm_rec_write_old(node_rec_t *rec)
 		rc = ISCSI_ERR_IDBM;
 		goto free_portal;
 	}
-	idbm_print(IDBM_PRINT_TYPE_NODE, rec, 1, f);
+	rc = idbm_print(IDBM_PRINT_TYPE_NODE, rec, 1, f);
 	fclose(f);
 free_portal:
 	free(portal);
@@ -2371,7 +2425,7 @@ idbm_discovery_write(discovery_rec_t *rec)
 		goto unlock;
 	}
 
-	idbm_print(IDBM_PRINT_TYPE_DISCOVERY, rec, 1, f);
+	rc = idbm_print(IDBM_PRINT_TYPE_DISCOVERY, rec, 1, f);
 	fclose(f);
 unlock:
 	idbm_unlock();
@@ -2515,16 +2569,16 @@ int idbm_add_node(node_rec_t *newrec, discovery_rec_t *drec, int overwrite)
 		if (rc)
 			goto unlock;
 
-		if (drec->type == DISCOVERY_TYPE_FW) {
-			log_debug(8, "setting firmware node 'startup' to 'onboot'");
-			newrec->startup = ISCSI_STARTUP_ONBOOT;
-			newrec->conn[0].startup = ISCSI_STARTUP_ONBOOT;
-		}
 		log_debug(7, "overwriting existing record");
 	} else
 		log_debug(7, "adding new DB record");
 
 	if (drec) {
+		if (drec->type == DISCOVERY_TYPE_FW) {
+			log_debug(8, "setting firmware node 'startup' to 'onboot'");
+			newrec->startup = ISCSI_STARTUP_ONBOOT;
+			newrec->conn[0].startup = ISCSI_STARTUP_ONBOOT;
+		}
 		newrec->disc_type = drec->type;
 		newrec->disc_port = drec->port;
 		strcpy(newrec->disc_address, drec->address);
@@ -3226,7 +3280,7 @@ void idbm_node_setup_defaults(node_rec_t *rec)
 	rec->disc_type = DISCOVERY_TYPE_STATIC;
 	rec->leading_login = 0;
 	rec->session.cmds_max = CMDS_MAX;
-	rec->session.xmit_thread_priority = XMIT_THREAD_PRIORITY;
+	rec->session.xmit_thread_priority = DEFAULT_XMIT_THREAD_PRIORITY;
 	rec->session.initial_cmdsn = 0;
 	rec->session.queue_depth = QUEUE_DEPTH;
 	rec->session.nr_sessions = 1;
