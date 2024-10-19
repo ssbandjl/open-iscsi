@@ -1,0 +1,128 @@
+源码分析: https://groups.google.com/g/open-iscsi/c/Z0FMQUxalcU
+iscsid: https://blog.csdn.net/kjtt_kjtt/article/details/38661329
+upstream: https://github.com/open-iscsi/open-iscsi.git
+
+
+连接tgt: iscsiadm -m node -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260 -l
+usr/iscsiadm.c -> main
+  MODE_NODE
+  case 'l'
+  do_login = 1
+  exec_node_op -> static int exec_node_op
+    login_portals(rec, wait) -> static int login_portals
+      iscsi_login_portals iscsi_login_portal
+        list_for_each_entry -> int iscsi_login_portal -> __iscsi_login_portal
+          MGMT_IPC_SESSION_LOGIN
+          iscsid_request
+            iscsid_connect(fd, start_iscsid)
+            write(*fd, req, sizeof(*req))
+
+命令映射方法:
+static mgmt_ipc_fn_t *	mgmt_ipc_functions[__MGMT_IPC_MAX_COMMAND] = {
+[MGMT_IPC_SESSION_LOGIN]	= mgmt_ipc_session_login,
+
+
+[root@node1 ~]# iscsiadm -m node -T iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755 -p 172.17.136.132:3260 -l
+Logging in to [iface: default, target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] (multiple) <- __iscsi_login_portal
+Login to [iface: default, target: iqn.2018-01.com.h3c.onestor:f2a23531433249f7bf2a6d01760fe755, portal: 172.17.136.132,3260] successful.
+
+
+
+debug: debuginfo-install iscsi-initiator-utils-6.2.0.874-22.el7_9.x86_64
+iscsi_login_portals
+login_portals
+
+
+indra jeet的个人资料照片
+indra jeet
+未读，
+2021年4月29日 01:19:09
+收件人 open-iscsi
+Hi Everyone,
+
+I am trying to understand open-iscsi implementation. 
+
+discovery
+login/logout
+1. Discovery
+In this code path, we usually call to 
+discovery_sendtarget
+--> request_target
+     --> iscsi_io_send_pdu,  which basically writes on a socket opened by iscsiadm, and reads from the socket by "iscsi_io_rev_pdu".
+
+2. login/logout
+In this code path, it get usually triggers to 
+mgmt_ipc_session_login
+   -> __session_login_task
+        -> iscsi_conn_connect
+                --> iscsi_sched_ev_context
+                        --> session_conn_poll 
+                                --> iscsi_login_req
+                                  iscsi_make_login_pdu
+                                    login_hdr->opcode = ISCSI_OP_LOGIN | ISCSI_OP_IMMEDIATE
+                                      --> iscsi_io_send_pdu -> send a PDU to the target -> iscsi_io_send_pdu(iscsi_conn_t *conn
+                                        case ISCSI_OP_LOGIN
+                                        login_hdr->flags & ISCSI_FLAG_LOGIN_TRANSIT
+In my understanding, discovery, login/logout does not involve iscsi kernel and send pdu over open by userspace socket.
+
+
+
+
+yum install libmount-devel -y
+mkdir -p builddir
+meson -Disns_supported=false builddir
+
+
+head -2 /etc/os-release
+find /usr/include/ -name "*.h" | xargs grep -w reallocarray
+
+#!/bin/sh
+
+tfile=$(mktemp /tmp/test_reallocarray_XXXXXXXX.c)
+ofile=${tfile%.c}.o
+
+cat > $tfile <<EOL
+#define _GNU_SOURCE
+#include <stdlib.h>
+int main(void)
+{
+	return !!reallocarray(NULL, 1, 1);
+}
+EOL
+
+gcc $tfile -o $ofile >/dev/null 2>&1
+if [ $? -ne 0 ]; then echo "FAIL"; fi
+/bin/rm -f $tfile $ofile
+
+	assert(!(sizeof(struct iscsi_session *) &&
+		 *session_count > UINT_MAX / sizeof(struct iscsi_session *)));
+	*sessions =
+	    realloc(*sessions, *session_count * sizeof(struct iscsi_session *));
+
+/usr/include/openssl/evp.h
+
+netlink.c
+static struct iscsi_ipc nl_ipc
+ev.type =
+handler = mgmt_ipc_functions[command]
+
+iscsiadm -> main.c
+MODE_DISCOVERY
+exec_disc_op
+do_target_discovery
+sendtargets
+do_software_sendtargets
+discovery_sendtargets
+iscsi_create_session
+iscsi_create_leading_conn
+create_conn -> kcreate_conn
+  ev.type = ISCSI_UEVENT_CREATE_CONN
+  rc = __kipc_call(iov, 2) -> driver -> kernel -> drivers/scsi/scsi_transport_iscsi.c -> iscsi_if_recv_msg
+  	case ISCSI_UEVENT_CREATE_CONN:
+		err = iscsi_if_create_conn(transport, ev);
+
+
+
+
+/etc/iscsi/iscsid.conf
+

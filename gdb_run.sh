@@ -1,0 +1,1 @@
+gdb --args ./usr/iscsiadm -m discovery -t sendtargets -p 10.13.4.15:3261
